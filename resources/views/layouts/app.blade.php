@@ -112,6 +112,14 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('sanction')}}" >
+                <i class="fas fa-fw fa-user-tie"></i>
+                    <span>Sanction Payment</span>
+                </a>
+                
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('quotation')}}" >
                 <i class="fas fa-fw fa-user-tie"></i>
                     <span>Quotations</span>

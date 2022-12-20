@@ -154,7 +154,23 @@ Route::middleware('auth')
        Route::post('quotation/update', 'update')->name('quotation.update');
        Route::get('quotation/delete/{key}', 'destroy')->name('quotation.delete');
     });
+
    
+
+     /**-------------    Route for sanction
+     * ========================================================*/
+    
+    
+    Route::controller(App\Http\Controllers\sanctionController::class)
+    ->group(function(){
+       Route::get('sanction-list','show')->name('sanction');
+       Route::get('sanction/create', 'create')->name('sanction.create');
+       Route::post('sanction/store', 'store')->name('sanction.store');
+       Route::get('sanction/{key}', 'edit')->name('sanction.edit');
+       Route::post('sanction/update', 'update')->name('sanction.update');
+       Route::get('sanction/delete/{key}', 'destroy')->name('sanction.delete');
+    });
+
 
 
     /**-------------    Route for departments
