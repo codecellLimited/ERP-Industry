@@ -73,7 +73,6 @@ class sanctionController extends Controller
             'amount' => 'required',
             'sanction_date' => 'required'
         ]);
-
         
         $data = $request->all();
 

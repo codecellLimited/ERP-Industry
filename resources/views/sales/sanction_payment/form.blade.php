@@ -45,7 +45,6 @@
                                     @enderror
                                 </div>
 
-                                
                                 <div class="col-md">
                                     <label for=""><b>Purpose *</b></label>
                                     <input type="text" name="purpose" 

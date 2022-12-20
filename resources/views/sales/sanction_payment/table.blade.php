@@ -27,6 +27,7 @@
                 </tr>
             </thead>
 
+            
             <tbody>
                 @forelse($sanction as $key =>$item)
                 <tr>
