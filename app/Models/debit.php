@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class debit extends Model
+{
+    use HasFactory;
+    protected $fillable=[
+        'date',
+        'credit_from',
+        'received',
+        'amount',
+        'account',
+        'remark',
+        'image'
+    ];
+}
