@@ -70,8 +70,6 @@ Route::middleware('auth')
 
     /**-------------    Route for party-order
      * ========================================================*/
-    
-    
     Route::controller(App\Http\Controllers\orderController::class)
     ->group(function(){
        Route::get('order-list','show')->name('order');
@@ -80,13 +78,12 @@ Route::middleware('auth')
        Route::get('order/{key}', 'edit')->name('order.edit');
        Route::post('order/update', 'update')->name('order.update');
        Route::get('order/delete/{key}', 'destroy')->name('order.delete');
-       Route::get('order/completed', 'orderStatus')->name('order.status');
+       Route::get('order/status/{key}/{status}', 'orderStatus')->name('order.status');
     });
 
 
     /**-------------    Route for Brands
      * ========================================================*/
-    
     
     Route::controller(App\Http\Controllers\BrandController::class)
     ->group(function(){
@@ -101,7 +98,6 @@ Route::middleware('auth')
     /**-------------    Route for Unit
      * ========================================================*/
     
-    
     Route::controller(App\Http\Controllers\UnitController::class)
     ->group(function(){
        Route::get('Unit-list','show')->name('Unit');
@@ -114,7 +110,6 @@ Route::middleware('auth')
         
     /**-------------    Route for catagory
      * ========================================================*/
-    
     
     Route::controller(App\Http\Controllers\CatagoryController::class)
     ->group(function(){
@@ -129,7 +124,6 @@ Route::middleware('auth')
      /**-------------    Route for products
      * ========================================================*/
     
-    
     Route::controller(App\Http\Controllers\ProductController::class)
     ->group(function(){
        Route::get('product-list','show')->name('product');
@@ -143,7 +137,6 @@ Route::middleware('auth')
 
      /**-------------    Route for Quotation
      * ========================================================*/
-    
     
     Route::controller(App\Http\Controllers\quotationController::class)
     ->group(function(){
@@ -160,61 +153,56 @@ Route::middleware('auth')
     /**-------------    Route for departments
      * ========================================================*/
     
-    
-    Route::controller(App\Http\Controllers\departmentController::class)
-    ->group(function(){
-       Route::get('department-list','show')->name('department');
-       Route::get('department/create', 'create')->name('department.create');
-       Route::post('department/store', 'store')->name('department.store');
-       Route::get('department/{key}', 'edit')->name('department.edit');
-       Route::post('department/update', 'update')->name('department.update');
-       Route::get('department/delete/{key}', 'destroy')->name('department.delete');
-    });
+   Route::controller(App\Http\Controllers\departmentController::class)
+   ->group(function(){
+      Route::get('department-list','show')->name('department');
+      Route::get('department/create', 'create')->name('department.create');
+      Route::post('department/store', 'store')->name('department.store');
+      Route::get('department/{key}', 'edit')->name('department.edit');
+      Route::post('department/update', 'update')->name('department.update');
+      Route::get('department/delete/{key}', 'destroy')->name('department.delete');
+   });
 
     
-    /**-------------    Route for designations
-     * ========================================================*/
-    
-    
-    Route::controller(App\Http\Controllers\designationController::class)
-    ->group(function(){
-       Route::get('designation-list','show')->name('designation');
-       Route::get('designation/create', 'create')->name('designation.create');
-       Route::post('designation/store', 'store')->name('designation.store');
-       Route::get('designation/{key}', 'edit')->name('designation.edit');
-       Route::post('designation/update', 'update')->name('designation.update');
-       Route::get('designation/delete/{key}', 'destroy')->name('designation.delete');
-    });
+   /**-------------    Route for designations
+    * ========================================================*/
+   
+   Route::controller(App\Http\Controllers\designationController::class)
+   ->group(function(){
+      Route::get('designation-list','show')->name('designation');
+      Route::get('designation/create', 'create')->name('designation.create');
+      Route::post('designation/store', 'store')->name('designation.store');
+      Route::get('designation/{key}', 'edit')->name('designation.edit');
+      Route::post('designation/update', 'update')->name('designation.update');
+      Route::get('designation/delete/{key}', 'destroy')->name('designation.delete');
+   });
 
-    /**-------------    Route for employees
-     * ========================================================*/
-    
-    
-    Route::controller(App\Http\Controllers\employeeController::class)
-    ->group(function(){
-       Route::get('employee-list','show')->name('employee');
-       Route::get('employee/create', 'create')->name('employee.create');
-       Route::post('employee/store', 'store')->name('employee.store');
-       Route::get('employee/{key}', 'edit')->name('employee.edit');
-       Route::post('employee/update', 'update')->name('employee.update');
-       Route::get('employee/delete/{key}', 'destroy')->name('employee.delete');
-    });
+   /**-------------    Route for employees
+    * ========================================================*/
+   
+   Route::controller(App\Http\Controllers\employeeController::class)
+   ->group(function(){
+      Route::get('employee-list','show')->name('employee');
+      Route::get('employee/create', 'create')->name('employee.create');
+      Route::post('employee/store', 'store')->name('employee.store');
+      Route::get('employee/{key}', 'edit')->name('employee.edit');
+      Route::post('employee/update', 'update')->name('employee.update');
+      Route::get('employee/delete/{key}', 'destroy')->name('employee.delete');
+   });
 
 
-    /**-------------    Route for employees Salary
-     * ========================================================*/
-    
+   /**-------------    Route for employees Salarys
+    * ========================================================*/    
 
-    Route::controller(App\Http\Controllers\salaryController::class)
-    ->group(function(){
-      Route::get('Salary-list','show')->name('salary');
+   Route::controller(App\Http\Controllers\salaryController::class)
+   ->group(function(){
+   Route::get('Salary-list','show')->name('salary');
 
-    });
+   });
 
 
       /**-------------    Route for employees Attendance
-     * ========================================================*/
-    
+     * ========================================================*/    
     
     Route::controller(App\Http\Controllers\attendanceController::class)
     ->group(function(){
@@ -228,8 +216,7 @@ Route::middleware('auth')
 
 
     /**-------------    Route for bank add
-     * ========================================================*/
-    
+     * ========================================================*/    
     
     Route::controller(App\Http\Controllers\bankaddController::class)
     ->group(function(){
@@ -242,8 +229,7 @@ Route::middleware('auth')
     });
 
     /**-------------    Route for debit bank
-     * ========================================================*/
-    
+     * ========================================================*/    
     
     Route::controller(App\Http\Controllers\debitController::class)
     ->group(function(){
@@ -257,8 +243,7 @@ Route::middleware('auth')
 
 
     /**-------------    Route for credit bank
-     * ========================================================*/
-    
+     * ========================================================*/   
     
     Route::controller(App\Http\Controllers\creditController::class)
     ->group(function(){
@@ -273,8 +258,7 @@ Route::middleware('auth')
 
 
    /**-------------    Route for Bank Transection
-     * ========================================================*/
-    
+     * ========================================================*/    
 
      Route::controller(App\Http\Controllers\transectionController::class)
      ->group(function(){
@@ -285,8 +269,7 @@ Route::middleware('auth')
 
 
     /**-------------    Route for expense 
-     * ========================================================*/
-    
+     * ========================================================*/    
     
     Route::controller(App\Http\Controllers\expenseController::class)
     ->group(function(){
@@ -301,8 +284,7 @@ Route::middleware('auth')
 
 
     /**-------------    Route for partyreceive
-     * ========================================================*/
-    
+     * ========================================================*/    
     
     Route::controller(App\Http\Controllers\partyreceiveController::class)
     ->group(function(){
@@ -315,8 +297,7 @@ Route::middleware('auth')
     });
 
     /**-------------    Route for supplierpayment
-     * ========================================================*/
-    
+     * ========================================================*/    
     
     Route::controller(App\Http\Controllers\supplierpaymentController::class)
     ->group(function(){
@@ -329,17 +310,16 @@ Route::middleware('auth')
     });
 
     /**-------------    Route for lc
-     * ========================================================*/
-    
+     * ========================================================*/    
     
     Route::controller(App\Http\Controllers\LcController::class)
     ->group(function(){
-        Route::get('lc-list','show')->name('lc');
-        Route::get('lc/create', 'create')->name('lc.create');
-       Route::post('lc/store', 'store')->name('lc.store');
-       Route::get('lc/{key}', 'edit')->name('lc.edit');
-       Route::post('lc/update', 'update')->name('lc.update');
-       Route::get('lc/delete/{key}', 'destroy')->name('lc.delete');
+         Route::get('lc-list','show')->name('lc');
+         Route::get('lc/create', 'create')->name('lc.create');
+         Route::post('lc/store', 'store')->name('lc.store');
+         Route::get('lc/{key}', 'edit')->name('lc.edit');
+         Route::post('lc/update', 'update')->name('lc.update');
+         Route::get('lc/delete/{key}', 'destroy')->name('lc.delete');
     });
 
     
@@ -449,8 +429,7 @@ Route::middleware('auth')
     
     /**-------------    Route for materialForSupplier
      * ========================================================*/
-    
-    
+
     Route::controller(App\Http\Controllers\materialForSupplierController::class)
     ->group(function(){
        Route::get('materialForSupplier-list','show')->name('materialForSupplier');
