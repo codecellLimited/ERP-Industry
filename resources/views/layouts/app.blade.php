@@ -113,8 +113,16 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('sanction')}}" >
-                <i class="fas fa-fw fa-user-tie"></i>
+                <i class="far fa-money-bill-alt	"></i>
                     <span>Sanction Payment</span>
+                </a>
+                
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('completed')}}" >
+                <i class="fas fa-fw fa-briefcase"></i>
+                    <span>Completed Orders</span>
                 </a>
                 
             </li>
