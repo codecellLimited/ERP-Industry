@@ -21,6 +21,7 @@
                     <th>Material Name</th>
                     <th>Material id</th>
                     <th>Quantity</th>
+                    <th>Remaining Quantity</th>
                     <th>Quality</th>
                     <th>Supplier</th>
                     <th>Action</th>
@@ -34,6 +35,7 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->id}}</td>
                     <td>{{$item->quantity}} {{$item->unit}} </td>
+                    <td>{{$item->quantity - \App\Models\MaterialProduction:: where('material_id', $item->id)->sum('quantity')}} {{$item->unit}}</td>
                     <td>{{$item->quality}}</td>
                     <td>{{\App\Models\Supplier:: find($item->supplier_id)-> name}}</td>
                     <td>

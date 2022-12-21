@@ -71,14 +71,14 @@
                             
                             <h6 class="mt-3">Material Name: <b>{{ $materialid->name }}</b></h6>
                             <h6>Quality: <b>{{ $materialid->quality }}</b></h6>
-                            <h6>Quantity: <b>{{ $materialid->quantity }}</b></h6>
+                            <h6>Remaining Item: <b>{{$materialid->quantity - \App\Models\MaterialProduction:: where('material_id', $materialid->id)->sum('quantity')}} {{$materialid->unit}}</b></h6>
                         </div>
 
                         <div class="col-md-8">
                             <form action="{{ route('MaterialProduction.store') }}" method="post" enctype="multipart/form-data">
             
                                 @csrf
-                                <input type="hidden" name="MaterialPurchase_id" value="{{ $materialid->id }}">
+                                <input type="hidden" name="material_id" value="{{ $materialid->id }}">
 
                                 <div class="form-group">
                                 <label for=""><b>name</b></label>
@@ -230,9 +230,9 @@
 
                         <div class="col-md-4">
                             
-                            <h6 class="mt-3">Material Name: <b>{{ $Materialedit->name }}</b></h6>
+                            <h6 class="mt-3">Material Name: <b>{{ \App\Models\material::find($Materialedit->material_id)->name }}</b></h6>
                             <h6>Quality: <b>{{ $Materialedit->quality }}</b></h6>
-                            <h6>Quantity: <b>{{ $Materialedit->quantity }}</b></h6>
+                            <h6>Remaining Item: <b>{{\App\Models\Material::where('id',$Materialedit->material_id)->first()->quantity - \App\Models\MaterialProduction:: where('material_id', $Materialedit->material_id)->sum('quantity') + $Materialedit->quantity}} {{$Materialedit->unit}}</b></h6>
                         </div>
 
                         <div class="col-md-8">
@@ -246,7 +246,7 @@
                                     <input type="text" name="name" 
                                         class="form-control @error('name') is-invalid @enderror"
                                         @if(isset($Materialedit))
-                                        value="{{ $Materialedit->name }}"
+                                        value="{{ \App\Models\material::find($Materialedit->material_id)->name }}"
                                         @else
                                         value="{{ old('name') }}"
                                         @endif>
