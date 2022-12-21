@@ -13,7 +13,7 @@
 
 <!-- page contain  -->
 <div class="card shadow">
-    <div class="card-body card-responsive">
+    <div class="card-body table-responsive">
         <table class="table table-striped table-hover" style="color:black;">
             <thead>
                 <tr>
@@ -29,7 +29,6 @@
                     <th>Total Paid</th>
                     <th>Total Due</th>
                     <th>Status</th>
-                    
                     <th>Action</th>
 
                 </tr>
@@ -49,18 +48,82 @@
                     <td>{{$item->total_paid}}</td>
                     <td>{{$item->total_due}}</td>
                     <td>
-                        <input onchange="changeStatus('{{$item->id}}')" id="toggle-class-{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="On Production" data-off="Done" {{ $item->status ? 'checked' : '' }}>
-                     </td>
-                    <td class="text-nowrap">
-                            <a href="{{ route('order.edit', $item->id) }}" class="btn btn-sm btn-primary">
-                                <i class="fas fa-pen"></i>
-                            </a>
-
-                            <button class="btn btn-sm btn-primary"
-                                onclick="if(confirm('Are you sure? you are going to delete this record')){ location.replace('order/delete/{{$item->id}}'); }">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                        @if ($item->status == 1)
+                        <span class="badge bg-warning">On Processing</span>
+                        @elseif($item->status == 2)
+                        <span class="badge bg-success text-light">Completed</span>
+                        @elseif($item->status == 0)
+                        <span class="badge bg-danger text-light">Rejected</span>
+                        @endif
                     </td>
+                    <td>
+                        <div class="d-inline-block dropdown">
+                            <button type="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" class="dropdown-toggle btn btn-sm btn-info text-nowrap">
+                                Action
+                            </button>
+                            <div tabindex="-1" role="menu" aria-hidden="true"
+                                class="dropdown-menu dropdown-menu-right">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('order.edit', $item->id) }}">
+                                            <i class="nav-link-icon fa fa-pen"></i>
+                                            <span> Edit</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript::" onclick="if(confirm('Are you sure? you are going to delete this record')){ location.replace('order/delete/{{$item->id}}'); }">
+                                            <i class="nav-link-icon fa fa-trash"></i>
+                                            <span> Delete</span>
+                                        </a>
+                                    </li>
+
+                                    @if($item->status !== 1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript::"
+                                            onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('order.status', [$item->id, 1])}}'); }"
+                                        >
+                                            <i class="nav-link-icon fa fa-handshake"></i>
+                                            <span>On Processing</span>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    
+                                    @if($item->status !== 2)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript::"
+                                            onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('order.status', [$item->id, 2])}}'); }"
+                                        >
+                                            <i class="nav-link-icon fa fa-handshake"></i>
+                                            <span>Completed</span>
+                                        </a>
+                                    </li>
+                                    @endif
+
+                                    @if($item->status !== 0)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript::"
+                                            onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('order.status', [$item->id, 0])}}'); }"
+                                            >
+                                            <i class="nav-link-icon fa fa-ban"></i>
+                                            <span>Rejected</span>
+                                        </a>
+                                    </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    {{-- <td class="text-nowrap">
+                        <a href="{{ route('order.edit', $item->id) }}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-pen"></i>
+                        </a>
+
+                        <button class="btn btn-sm btn-primary"
+                            onclick="if(confirm('Are you sure? you are going to delete this record')){ location.replace('order/delete/{{$item->id}}'); }">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td> --}}
                 </tr>
                 @empty
                 <div class="col-12 py-5 text-center">
@@ -71,33 +134,8 @@
                 @endforelse
             </tbody>
         </table>
-
     </div>
 
 </div>
 
 @endsection
-
-@push('js')
-
-<script>
-    function changeStatus(oid){
-        var status = $("#toggle-class-"+oid).prop('checked') == true ? 1 : 2;
-        
-        $.ajax({
-            type: "GET",
-            url: 'order/completed',
-            data: {'status': status, 'oid': oid},
-            success: function(data){
-              console.log(data)
-            },
-            error: function(err){
-                consol.log(err);
-            }
-        });
-    }    
-</script>
-
-
-
-@endpush
