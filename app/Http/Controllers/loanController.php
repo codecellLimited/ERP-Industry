@@ -35,7 +35,7 @@ class loanController extends Controller
         $request->validate([
            
             'date'  => 'required',
-            'amount'  => 'required',
+            'amount'  => 'required|integer',
             'note'  => 'required',
             'name'  => 'required',
             'employee_id' => 'required'

@@ -35,7 +35,7 @@ class creditController extends Controller
         $request->validate([
            
             'debit_by'  => 'required',
-            'amount'  => 'required',
+            'amount'  => 'required|integer',
             'pay_via'  => 'required',
            
         ]);
@@ -84,7 +84,7 @@ class creditController extends Controller
 
         $request->validate([
             'debit_by'  => 'required',
-            'amount'  => 'required',
+            'amount'  => 'required|integer',
             'pay_via'  => 'required',
             
         ]);

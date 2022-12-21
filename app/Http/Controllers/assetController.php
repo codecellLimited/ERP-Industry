@@ -34,7 +34,7 @@ class assetController extends Controller
     {
         $request->validate([
             'name'  => 'required',
-            'quantity'=> 'required',
+            'quantity'=> 'required|integer',
             'quality'=> 'required',
             'image' => 'nullable | mimes: jpg,jpeg,png,webp'
         ]);
@@ -84,7 +84,7 @@ class assetController extends Controller
         $request->validate([
             'name'  => 'required',
             'image' => 'nullable | mimes: jpg,jpeg,png,webp',
-            'quantity'=> 'required',
+            'quantity'=> 'required|integer',
             'quality'=> 'required',
         ]);
 
