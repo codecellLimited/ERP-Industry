@@ -122,7 +122,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('completed')}}" >
                 <i class="fas fa-fw fa-briefcase"></i>
-                    <span>Completed Orders</span>
+                    <span>Delivered Orders</span>
                 </a>
                 
             </li>
