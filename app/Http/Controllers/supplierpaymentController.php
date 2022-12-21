@@ -35,7 +35,7 @@ class supplierpaymentController extends Controller
         $request->validate([
            
             'date'  => 'required',
-            'amount'  => 'required',
+            'amount'  => 'required | integer',
             'name'  => 'required',
             'method' => 'required'
 
@@ -69,15 +69,15 @@ class supplierpaymentController extends Controller
     public function update(Request $request)
     {
         $key = $request->key;
+        $request->validate([
+           
+            'date'  => 'required',
+            'amount'  => 'required | integer',
+            'name'  => 'required',
+            'method' => 'required'
 
-        // $request->validate([
-        //     'name'  => 'required|unique:supplierpayments,name,'. $key .',id',
-        //     'email'  => 'required|email|unique:supplierpayments,email,'. $key .',id',
-        //     'phone'  => 'required|unique:supplierpayments,phone,'. $key .',id',
-        //     'image' => 'nullable|mimes:jpg,jpeg,png'
-        // ]);
-
-        
+           
+        ]);
         $data = $request->all();
 
         $supplierpayment = supplierpayment::find($key)->update($data);

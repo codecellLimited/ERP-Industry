@@ -20,6 +20,7 @@ class transectionController extends Controller
         $expense = expense::where('status', true)->orderBy('created_at', 'desc')->get();
         
         $partyreceive = partyreceive::where('status', true)->orderBy('created_at', 'desc')->get();
+        
         $supplierpayment = supplierpayment::where('status', true)->orderBy('created_at', 'desc')->get();
 
         

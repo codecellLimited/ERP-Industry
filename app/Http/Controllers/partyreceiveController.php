@@ -35,7 +35,7 @@ class partyreceiveController extends Controller
         $request->validate([
            
             'date'  => 'required',
-            'amount'  => 'required',
+            'amount'  => 'required | integer',
             'party'  => 'required',
             'method' => 'required'
 
@@ -70,12 +70,15 @@ class partyreceiveController extends Controller
     {
         $key = $request->key;
 
-        // $request->validate([
-        //     'name'  => 'required|unique:partyreceives,name,'. $key .',id',
-        //     'email'  => 'required|email|unique:partyreceives,email,'. $key .',id',
-        //     'phone'  => 'required|unique:partyreceives,phone,'. $key .',id',
-        //     'image' => 'nullable|mimes:jpg,jpeg,png'
-        // ]);
+        $request->validate([
+           
+            'date'  => 'required',
+            'amount'  => 'required | integer',
+            'party'  => 'required',
+            'method' => 'required'
+
+           
+        ]);
 
         
         $data = $request->all();

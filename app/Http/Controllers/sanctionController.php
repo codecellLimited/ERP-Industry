@@ -70,7 +70,7 @@ class sanctionController extends Controller
         $request->validate([
 
             'purpose'  => 'required',
-            'amount' => 'required',
+            'amount' => 'required | integer',
             'sanction_date' => 'required'
         ]);
         

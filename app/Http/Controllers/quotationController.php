@@ -37,14 +37,14 @@ class quotationController extends Controller
             'party_id'  => 'required',
             'product_id'  => 'required',
             'quotation_date'  => 'required',
-            'quantity'  => 'required',
+            'quantity'  => 'required | integer',
             'unit_id'  => 'required',
-            'unit_price'  => 'required',
-            'discount'  => 'required',
-            'total_discount'  => 'required',
-            'grand_total'  => 'required',
-            'total' => 'required',
-            'tax' => 'required'
+            'unit_price'  => 'required | integer',
+            'discount'  => 'required | integer',
+            'total_discount'  => 'required | integer',
+            'grand_total'  => 'required | integer',
+            'total' => 'required | integer',
+            'tax' => 'required | integer'
         ]);
 
         $data = $request->all();
@@ -80,14 +80,14 @@ class quotationController extends Controller
             'party_id'  => 'required',
             'product_id'  => 'required',
             'quotation_date'  => 'required',
-            'quantity'  => 'required',
+            'quantity'  => 'required | integer',
             'unit_id'  => 'required',
-            'unit_price'  => 'required',
-            'discount'  => 'required',
-            'total_discount'  => 'required',
-            'grand_total'  => 'required',
-            'total' => 'required',
-            'tax' => 'required'
+            'unit_price'  => 'required | integer',
+            'discount'  => 'required | integer',
+            'total_discount'  => 'required | integer',
+            'grand_total'  => 'required | integer',
+            'total' => 'required | integer',
+            'tax' => 'required | integer'
         ]);
 
         
