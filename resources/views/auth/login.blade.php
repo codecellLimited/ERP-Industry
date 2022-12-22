@@ -26,12 +26,12 @@
                                 <div class="form-group">
                                     <select name="role" id="" class="form-control @error('role') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        <option value="1">Managing Director</option>
+                                        <option value="1">Owner</option>
                                         <option value="2">GM</option>
                                         <option value="3">Sales</option>
                                         <option value="4">HR</option>
                                         <option value="5">Account</option>
-                                        <option value="6">Stock</option>
+                                        
                                     </select>
 
                                     @error('role')

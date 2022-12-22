@@ -18,8 +18,7 @@ class sanctionController extends Controller
         return view('sales.sanction_payment.table')->with(compact('sanction'));
     }
 
-
-    /** --------------- sanction(Accounts) data table
+    /** --------------- sanction data table
      * =============================================*/
     public function showaccount()
     {
@@ -27,7 +26,6 @@ class sanctionController extends Controller
 
         return view('account.sanction_payment.table')->with(compact('sanction'));
     }
-
 
 
     /** --------------- sanction data table
@@ -105,6 +103,7 @@ class sanctionController extends Controller
         return to_route('sanction')->with('success', 'Record deleted successfully');
     }
 
+
     /** --------------- Change Status
      * =============================================*/
 
@@ -117,5 +116,6 @@ class sanctionController extends Controller
    
          return back();
      }
+
 
 }

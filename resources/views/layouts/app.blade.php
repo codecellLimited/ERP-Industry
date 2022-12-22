@@ -50,6 +50,7 @@
                     <span>Dashboard</span></a>
             </li>
 
+            @if(auth()->user()->role == 3 || auth()->user()->role == 1 || auth()->user()->role == 2)
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -112,22 +113,6 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('sanction')}}" >
-                <i class="far fa-money-bill-alt	"></i>
-                    <span>Sanction Payment</span>
-                </a>
-                
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('completed')}}" >
-                <i class="fas fa-fw fa-briefcase"></i>
-                    <span>Delivered Orders</span>
-                </a>
-                
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('quotation')}}" >
                 <i class="fas fa-fw fa-user-tie"></i>
                     <span>Quotations</span>
@@ -135,7 +120,26 @@
                 
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('sanction')}}" >
+                <i class="fas fa-fw fa-user-tie"></i>
+                    <span>Sanction Payment</span>
+                </a>
+                
+            </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('completed')}}" >
+                <i class="fas fa-fw fa-user-tie"></i>
+                    <span>Delivered order</span>
+                </a>
+                
+            </li>
+
+            @endif
+
+
+            @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -194,8 +198,10 @@
                 </a>
                 
             </li>
-            
+            @endif
 
+
+            @if(auth()->user()->role == 5 || auth()->user()->role == 1 || auth()->user()->role == 2)
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -223,7 +229,6 @@
                     </div>
                 </div>
             </li>
-            
 
             <!-- Nav Item - Financial Collapse Menu -->
             <li class="nav-item">
@@ -244,14 +249,19 @@
                     </div>
                 </div>
             </li>
+
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('sanctionaccount')}}" >
-                <i class="far fa-money-bill-alt	"></i>
+                <i class="fas fa-fw fa-user-tie"></i>
                     <span>Sanction Payment</span>
                 </a>
                 
             </li>
 
+            @endif
+
+            @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2  )
             <!-- devider -->
             <hr class="sidebar-devider">
 
@@ -299,9 +309,11 @@
                     <span>Production Per Order</span>
                 </a>
             </li>
-
-          <br><br><br>
+            @endif
             
+
+            <br><br><br>
+
         </ul>
         <!-- End of Sidebar -->
 
@@ -314,9 +326,13 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
                     <div class="mr-auto w-100 text-center" style="color:#142983;">
-                        <h2 class="m-0"><b>ERP For Garments Management</b></h2>
+                        <h2 class="m-0"><b>Codecell ERP Solution For Industry</b></h2>
                     </div>
 
                     <!-- Topbar Navbar -->
@@ -340,7 +356,7 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="{{route('logout')}}">
+                                <a class="dropdown-item" href="{{Route('logout')}}">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
