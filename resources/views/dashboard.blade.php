@@ -24,8 +24,10 @@
         </div>
     </div>
     @endif
-
     
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3)
     <div class=".col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:#7B9DE2;border-radius:20px;">
             <div class="card-body">
@@ -37,7 +39,11 @@
             </div>
         </div>
     </div>
+    @endif
 
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
     <div class=".col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:#F2A510;border-radius:20px;">
             <div class="card-body">
@@ -49,7 +55,11 @@
             </div>
         </div>
     </div>
+    @endif
 
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
     <div class=".col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:green;border-radius:20px;">
             <div class="card-body">
@@ -61,13 +71,11 @@
             </div>
         </div>
     </div>
+    @endif
 
-</div>
+    <br>
 
-<br>
-
-<div class="row">
-    
+    @if(auth()->user()->role == 1 )
     <div class="col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:#FD0202; border-radius:20px;">
             <div class="card-body">
@@ -78,7 +86,11 @@
             </div>
         </div>
     </div>
+    @endif
 
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
     <div class="col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:#075326;border-radius:20px;">
             <div class="card-body">
@@ -89,7 +101,11 @@
             </div>
         </div>
     </div>
+    @endif
 
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3)
     <div class="col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:#2749B8;border-radius:20px;">
             <div class="card-body">
@@ -102,9 +118,11 @@
             </div>
         </div>
     </div>
+    @endif
 
-    
+    <br>
 
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 5)
     <div class=".col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:#228C22;border-radius:20px;">
             <div class="card-body">
@@ -117,15 +135,11 @@
             </div>
         </div>
     </div>
+    @endif
 
+    <br>
 
-</div>
-
-<br>
-
-
-<div class="row">
-    
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
     <div class=".col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:green;border-radius:20px;">
             <div class="card-body">
@@ -138,7 +152,11 @@
             </div>
         </div>
     </div>
+    @endif
 
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 5)
     <div class=".col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:#F2A510;border-radius:20px;">
             <div class="card-body">
@@ -151,7 +169,11 @@
             </div>
         </div>
     </div>
+    @endif
 
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
     <div class=".col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:blue;border-radius:20px;">
             <div class="card-body">
@@ -163,8 +185,11 @@
             </div>
         </div>
     </div>
+    @endif
 
+    <br>
 
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
     <div class="col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:#D43939; border-radius:20px;">
             <div class="card-body">
@@ -176,8 +201,7 @@
             </div>
         </div>
     </div>
-
-    
+    @endif
 </div>
 
 @endsection
