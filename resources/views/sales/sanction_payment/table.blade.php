@@ -43,7 +43,7 @@
                         @elseif($item->status == 2)
                         <span class="badge bg-success text-light">Send</span>
                         @elseif($item->status == 3)
-                        <span class="badge bg-success text-light">Accepted</span>
+                        <span class="badge bg-primary text-light">Accepted</span>
                         @elseif($item->status == 0)
                         <span class="badge bg-danger text-light">Rejected</span>
                         @endif

@@ -38,7 +38,7 @@
                         @if ($item->status == 2)
                         <span class="badge bg-warning">Stand by</span>
                         @elseif($item->status == 3)
-                        <span class="badge bg-danger text-light">Accept</span>
+                        <span class="badge bg-primary text-light">Accept</span>
                         @elseif($item->status == 0)
                         <span class="badge bg-danger text-light">Rejected</span>
                         @endif
