@@ -243,6 +243,13 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('sanctionaccount')}}" >
+                <i class="far fa-money-bill-alt	"></i>
+                    <span>Sanction Payment</span>
+                </a>
+                
+            </li>
 
             <!-- devider -->
             <hr class="sidebar-devider">
