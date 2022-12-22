@@ -70,7 +70,7 @@
                                         </a>
                                     </li>
 
-                                    @if($item->status !== 1)
+                                    @if($item->status !== 1 && $item-> status != 3 && $item-> status != 0)
                                     <li class="nav-item">
                                         <a class="nav-link" href="javascript::"
                                             onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('sanction.status', [$item->id, 1])}}'); }"
@@ -81,7 +81,7 @@
                                     </li>
                                     @endif
                                     
-                                    @if($item->status !== 2)
+                                    @if($item->status !== 2 && $item-> status != 3)
                                     <li class="nav-item">
                                         <a class="nav-link" href="javascript::"
                                             onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('sanction.status', [$item->id, 2])}}'); }"

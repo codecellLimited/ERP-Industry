@@ -3,7 +3,7 @@
 
 <!-- page heading  -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="mb-0 text-gray-800 "> Sanction List from Sales</h1>
+    <h1 class="mb-0 text-gray-800 "> Sanction List from accounts</h1>
     
 
 </div>
@@ -70,7 +70,7 @@
                                     @if($item->status !== 0)
                                     <li class="nav-item">
                                         <a class="nav-link" href="javascript::"
-                                            onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('sanction.status', [$item->id, 1])}}'); }"
+                                            onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('sanction.status', [$item->id, 0])}}'); }"
                                         >
                                             <i class="nav-link-icon fa fa-handshake"></i>
                                             <span>Rejected</span>
