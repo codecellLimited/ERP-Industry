@@ -41,7 +41,7 @@
                 <div class="my-3 text-center" style="color:white;">
                     <h4><b>Total Employee</b></h4>
                     
-                    <h4>{{\App\Models\employee::count();}}</h4>
+                    <h4>{{\App\Models\employee::where('status', true)->count();}}</h4>
                 </div>
             </div>
         </div>

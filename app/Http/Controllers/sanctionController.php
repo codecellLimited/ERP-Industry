@@ -13,10 +13,21 @@ class sanctionController extends Controller
      * =============================================*/
     public function show()
     {
-        $sanction = sanction::where('status', true)->latest()->get();
+        $sanction = sanction::latest()->get();
 
         return view('sales.sanction_payment.table')->with(compact('sanction'));
     }
+
+
+    /** --------------- sanction(Accounts) data table
+     * =============================================*/
+    public function showaccount()
+    {
+        $sanction = sanction::where('status','>',1)->latest()->get();
+
+        return view('account.sanction_payment.table')->with(compact('sanction'));
+    }
+
 
 
     /** --------------- sanction data table
@@ -93,5 +104,18 @@ class sanctionController extends Controller
 
         return to_route('sanction')->with('success', 'Record deleted successfully');
     }
+
+    /** --------------- Change Status
+     * =============================================*/
+
+
+     public function sanctionStatus(Request $request)
+     {
+         $user = sanction::find($request->key);
+         $user->status = $request->status;
+         $user->save();
+   
+         return back();
+     }
 
 }

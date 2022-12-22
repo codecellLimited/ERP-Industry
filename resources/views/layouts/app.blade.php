@@ -223,6 +223,7 @@
                     </div>
                 </div>
             </li>
+            
 
             <!-- Nav Item - Financial Collapse Menu -->
             <li class="nav-item">
@@ -242,6 +243,13 @@
                         <a class="collapse-item" href="{{ route('loan') }}">Loan Applocation</a>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{route('sanctionaccount')}}" >
+                <i class="far fa-money-bill-alt	"></i>
+                    <span>Sanction Payment</span>
+                </a>
+                
             </li>
 
             <!-- devider -->
@@ -291,8 +299,9 @@
                     <span>Production Per Order</span>
                 </a>
             </li>
-<br><br><br><br><br>
 
+          <br><br><br>
+            
         </ul>
         <!-- End of Sidebar -->
 
@@ -305,24 +314,6 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    {{-- <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> --}}
 
                     <div class="mr-auto w-100 text-center" style="color:#142983;">
                         <h2 class="m-0"><b>ERP For Garments Management</b></h2>
@@ -331,8 +322,6 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
                        
-
-                        
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -351,7 +340,7 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{route('logout')}}">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
