@@ -123,12 +123,7 @@
                         <div class="form-group">
                             <label for="">Address</label>
                             <textarea type="text" name="address"
-                                class="form-control @error('address') is-invalid @enderror"
-                            > @if(isset($parties))
-                                 {{ $parties->address }} 
-                                @else {{ old('address') }}
-                              @endif 
-                            </textarea>
+                                class="form-control @error('address') is-invalid @enderror">@if(isset($parties)){{ $parties->address }}@else {{ old('address') }}@endif</textarea>
 
                             @error('address')
                                 <span class="invalid-feedback">

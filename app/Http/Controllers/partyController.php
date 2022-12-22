@@ -81,9 +81,9 @@ class partyController extends Controller
         $key = $request->key;
 
         $request->validate([
-            'name'  => 'required|unique:parties,name,'. $key .',id',
-            'email'  => 'required|email|unique:parties,email,'. $key .',id',
-            'phone'  => 'required|unique:parties,phone,'. $key .',id',
+            'name'  => 'required',
+            'email'  => 'required',
+            'phone'  => 'required',
             'image' => 'nullable|mimes:jpg,jpeg,png'
         ]);
 

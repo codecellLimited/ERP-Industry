@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-6">
         <div class="card shadow">
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-striped table-hover" style="color:black;">
                 <thead>
                     <tr>
