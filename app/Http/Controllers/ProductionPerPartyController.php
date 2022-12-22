@@ -16,9 +16,6 @@ class ProductionPerPartyController extends Controller
     {
        $orderid = order::where('status', true)->latest()->get();
         
-        
-        
-
         return view('inventory.ProductionPerParty.table')->with(compact('orderid'));
     }
 

@@ -34,7 +34,7 @@ class MaterialProductionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'quantity'  => 'required',
+            'quantity'  => 'required | integer',
             'receiver'  => 'required',
             'unit'  => 'required',
         ]);
@@ -66,6 +66,13 @@ class MaterialProductionController extends Controller
     public function update(Request $request)
     {
         $key = $request->MaterialPurchase_id;
+
+        
+        $request->validate([
+            'quantity'  => 'required | integer',
+            'receiver'  => 'required',
+            'unit'  => 'required',
+        ]);
         
         $data = $request->all();
 

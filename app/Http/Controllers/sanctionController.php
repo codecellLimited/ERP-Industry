@@ -18,16 +18,6 @@ class sanctionController extends Controller
         return view('sales.sanction_payment.table')->with(compact('sanction'));
     }
 
-/** --------------- account sanction data table
-     * =============================================*/
-    public function showaccount()
-    {
-        $sanction = sanction::where('status','>',1)->latest()->get();
-
-        return view('account.sanction_payment.table')->with(compact('sanction'));
-    }
-
-    
 
     /** --------------- sanction data table
      * =============================================*/
@@ -80,7 +70,7 @@ class sanctionController extends Controller
         $request->validate([
 
             'purpose'  => 'required',
-            'amount' => 'required',
+            'amount' => 'required | integer',
             'sanction_date' => 'required'
         ]);
         
@@ -103,18 +93,5 @@ class sanctionController extends Controller
 
         return to_route('sanction')->with('success', 'Record deleted successfully');
     }
-
-    /** --------------- Change Status
-     * =============================================*/
-
-
-     public function sanctionStatus(Request $request)
-     {
-         $user = order::find($request->oid);
-         $user->status = $request->status;
-         $user->save();
-   
-         return "Hello";
-     }
 
 }

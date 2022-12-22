@@ -8,7 +8,7 @@ use App\Models\order;
 
 class completedController extends Controller
 {
-    /** --------------- Order data table
+    /** --------------- Completed Order data table
      * =============================================*/
     public function show()
     {

@@ -36,6 +36,19 @@ class ProductController extends Controller
 
         $data = $request->all();
 
+        $request->validate([
+        
+
+
+            'name'  => 'required',
+            'catagory_id' => 'required',
+            'brand_id' => 'required',
+            'price' => 'required | integer',
+            'unit_id' => 'required',
+            'image' => 'nullable|memes:jpg,png,jpeg'
+
+        ]);
+
         if($request->hasFile('image'))
         {
             $FileName = $request->image->hashName(); // Generate a unique, random name...
@@ -82,7 +95,7 @@ class ProductController extends Controller
             'name'  => 'required',
             'catagory_id' => 'required',
             'brand_id' => 'required',
-            'price' => 'required',
+            'price' => 'required | integer',
             'unit_id' => 'required',
             'image' => 'nullable|memes:jpg,png,jpeg'
 

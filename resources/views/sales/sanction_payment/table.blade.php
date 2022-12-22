@@ -22,6 +22,7 @@
                     <th>Purpose</th>
                     <th>Amount</th>
                     <th>Remark</th>
+                    <th>Status</th>
                     <th>Action</th>
 
                 </tr>
@@ -36,15 +37,65 @@
                     <td>{{$item->purpose}}</td>
                     <td>{{$item->amount}}</td>
                     <td>{{$item->sanction_note}}</td>
-                    <td class="text-nowrap">
-                            <a href="{{ route('sanction.edit', $item->id) }}" class="btn btn-sm btn-primary">
-                                <i class="fas fa-pen"></i>
-                            </a>
-
-                            <button class="btn btn-sm btn-primary"
-                                onclick="if(confirm('Are you sure? you are going to delete this record')){ location.replace('sanction/delete/{{$item->id}}'); }">
-                                <i class="fas fa-trash"></i>
+                    <td>
+                        @if($item->status == 1)
+                        <span class="badge bg-warning">Stand by</span>
+                        @elseif($item->status == 2)
+                        <span class="badge bg-success text-light">Send</span>
+                        @elseif($item->status == 3)
+                        <span class="badge bg-primary text-light">Accepted</span>
+                        @elseif($item->status == 0)
+                        <span class="badge bg-danger text-light">Rejected</span>
+                        @endif
+                    </td>
+                    <td>
+                        <div class="d-inline-block dropdown">
+                            <button type="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" class="dropdown-toggle btn btn-sm btn-info text-nowrap">
+                                Action
                             </button>
+                            <div tabindex="-1" role="menu" aria-hidden="true"
+                                class="dropdown-menu dropdown-menu-right">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('sanction.edit', $item->id) }}">
+                                            <i class="nav-link-icon fa fa-pen"></i>
+                                            <span> Edit</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript::" onclick="if(confirm('Are you sure? you are going to delete this record')){ location.replace('sanction/delete/{{$item->id}}'); }">
+                                            <i class="nav-link-icon fa fa-trash"></i>
+                                            <span> Delete</span>
+                                        </a>
+                                    </li>
+
+                                    @if($item->status !== 1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript::"
+                                            onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('sanction.status', [$item->id, 1])}}'); }"
+                                        >
+                                            <i class="nav-link-icon fa fa-handshake"></i>
+                                            <span>Stand by</span>
+                                        </a>
+                                    </li>
+                                    @endif
+                                    
+                                    @if($item->status !== 2)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript::"
+                                            onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('sanction.status', [$item->id, 2])}}'); }"
+                                        >
+                                            <i class="nav-link-icon fa fa-handshake"></i>
+                                            <span>Send</span>
+                                        </a>
+                                    </li>
+                                    @endif
+
+                                    
+                                </ul>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 @empty

@@ -12,7 +12,7 @@ class orderController extends Controller
      * =============================================*/
     public function show()
     {
-        $order = order::where('status', true)->latest()->get();
+        $order = order::latest()->get();
 
         return view('party.order.table')->with(compact('order'));
     }
@@ -151,11 +151,11 @@ class orderController extends Controller
 
     public function orderStatus(Request $request)
     {
-        $user = order::find($request->oid);
+        $user = order::find($request->key);
         $user->status = $request->status;
         $user->save();
   
-        return "Hello";
+        return back();
     }
 
 }
