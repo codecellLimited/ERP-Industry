@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('page_title', 'Quotations')
+   
 @section('web-content')
 
 <!-- page heading  -->

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Assets')
+   
 @section('web-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -11,7 +13,8 @@
 
     <div class="card shadow col-md-8">
         <div class="card-body table-responsive">
-            <table class="table table-striped table-hover" style="color:black;">
+            <table class="table table-striped table-hover data-table" style="color:black;">
+            @section('page_title', 'Company Asset list')
                 <thead>
                     <tr>
                         <th scope="col">#</th>

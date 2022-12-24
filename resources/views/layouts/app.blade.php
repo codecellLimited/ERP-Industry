@@ -9,13 +9,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>MN Packaging & Printing Accessories</title>
+    <title> @yield('page_title', 'Add New Record') </title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+
+    {{-- Data Tables --}}
+    <link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -37,7 +41,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin Panel</div>
+                <div class="sidebar-brand-text mx-3">{{ auth()->user()->name }} Panel</div>
             </a>
 
             <!-- Divider -->
@@ -411,12 +415,34 @@
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script> --}}
 
-    <!-- Page level custom scripts -->
+    {{-- <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
+    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script> --}}
 
+    {{-- Data Table plugin --}}
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/datatables.bootstrap4.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('.data-table').DataTable( {
+                dom: 'Bfrtip',
+                ordering: false,
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+    </script>
 
     @stack('js')
 

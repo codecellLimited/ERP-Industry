@@ -35,12 +35,6 @@
                             </div>
                         </div>
 
-
-                        <tr>
-                            
-                            
-                            
-                        </tr>
                     </thead>
                     <tbody>
                         @forelse($employee as $key => $item)
