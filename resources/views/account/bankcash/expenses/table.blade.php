@@ -31,9 +31,13 @@
                     @forelse($expense as $key => $item)
                     <tr style="color:black;">
                         <th scope="row" >{{++$key}}</th>
-                        <td>{{$item->datee}}</td>
+                        <td>{{date('d-m-Y',strtotime($item->datee))}}</td>
                         <td>{{$item->purpose}}</td>
-                        <td>{{$item->payment_method}}</td>
+                        <td>@if( $item->payment_method == 1) Hand Cash
+                            @elseif( $item->payment_method == 2) Bank Transiction 
+                            @else 
+                            @endif
+                        </td>
                         <td>{{$item->amount}}</td>
                         <td>{{ \App\Models\bankadd::find($item->account)->account_number ?? "Hand Cash"}}</td>
                         <td>{{$item->remark}}</td>
