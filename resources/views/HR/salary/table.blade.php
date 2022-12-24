@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Employee Salary')
+   
 @push('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @endpush
@@ -80,8 +82,9 @@
             
         </div>
 
-        <table class="table table-striped table-hover table-bordered" style="color:black;">
-            <thead>
+        <table class="table table-striped table-hover table-bordered data-table" style="color:black;">
+        @section('page_title', 'Employee Salary')    
+        <thead>
                 <tr>
                     
                     <th width="10%">ID</th>

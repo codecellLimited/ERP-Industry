@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Credit Balance')
+   
 @section('web-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">

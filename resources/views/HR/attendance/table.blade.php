@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Attendance')
+   
 @push('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @endpush
@@ -154,30 +156,18 @@
 @if(isset($attendancemonth))
 
 <div class="card shadow">
-    <div class="card-body table-responsive">
+    <div class="card-body table-responsive ">
 
         <div class="d-sm-flex align-items-center justify-content-between mb-4" >
             <h1 class="h3 mb-0 text-gray-800" style="color:black;" ><b> Employee Attendance List for 
-                @if($searchmonth==1)January
-                @elseif($searchmonth==2) February
-                @elseif($searchmonth==3) March
-                @elseif($searchmonth==4) April
-                @elseif($searchmonth==5) May
-                @elseif($searchmonth==6) June
-                @elseif($searchmonth==7) July
-                @elseif($searchmonth==8) August
-                @elseif($searchmonth==9) September
-                @elseif($searchmonth==10) October
-                @elseif($searchmonth==11) November
-                @elseif($searchmonth==12)December
-               
-                @endif
+                {{ $monthName = \DateTime::createFromFormat('!m', $searchmonth)->format('F') }}
                 </b></h1>
             
         </div>
 
 
-        <table class="table table-striped table-hover table-bordered" style="color:black;">
+        <table class="table table-striped table-hover table-bordered data-table" style="color:black;">
+        @section('page_title', 'Employee Attendance List for '.$monthName)
             <thead>
                 <tr>
                     

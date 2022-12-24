@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Deshboard')
+   
 @section('web-content')
 
 <!-- Page Heading -->
