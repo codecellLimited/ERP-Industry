@@ -14,7 +14,7 @@
         <div class="col-12">
             <div class="card shadow">
 
-                <div class="card-body">
+                <div class="card-body" style="color: black;">
                     @if (isset($purchase))
                     <form action="{{ route('purchase.update') }}" method="post" enctype="multipart/form-data">
                     @else
@@ -26,7 +26,7 @@
                         <input type="hidden" name="key" value="{{ $purchase->id }}">
                         @endisset
                         
-                        <div class="form-group">
+                        <div class="form-group" >
                             <div class="row">
                                 <div class="col-md">
                                     <label for="">Purchase Date</label>
@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
-                                    <label for=""><b>Material Name</b></label>
+                                    <label for="">Material Name</label>
                                     <select name="material_id" id="" class="form-control @error('material_id') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\materialForSupplier::get() as $item)

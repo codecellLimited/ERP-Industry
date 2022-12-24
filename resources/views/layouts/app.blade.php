@@ -55,14 +55,19 @@
             </li>
 
             @if(auth()->user()->role == 3 || auth()->user()->role == 1 || auth()->user()->role == 2)
+            
+            
             <!-- Divider -->
             <hr class="sidebar-divider">
+
+            
+            @if(auth()->user()->role !=3)
 
             <!-- Heading -->
             <div class="sidebar-heading">
                 Sales
             </div>
-
+            @endif
             <!-- Nav Item - Suppliers Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#supplier"
@@ -143,70 +148,85 @@
             @endif
 
 
-            @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+            @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 5)
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                @if(auth()->user()->role !=4)
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    HR
+                </div>
+                @endif
 
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                HR
-            </div>
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <!-- Nav Item - Suppliers Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('department')}}" >
+                    <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Departments</span>
+                    </a>
+                    
+                </li>
+                @endif
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('designation')}}" >
+                    <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Designations</span>
+                    </a>
+                    
+                </li>
+                @endif
 
-            <!-- Nav Item - Suppliers Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('department')}}" >
-                <i class="fas fa-fw fa-briefcase"></i>
-                    <span>Departments</span>
-                </a>
-                
-            </li>
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('employee') }}" >
+                    <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Employee Management</span>
+                    </a>
+                    
+                </li>
+                @endif
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('designation')}}" >
-                <i class="fas fa-fw fa-briefcase"></i>
-                    <span>Designations</span>
-                </a>
-                
-            </li>
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 5)
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('employee') }}" >
-                <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Employee Management</span>
-                </a>
-                
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('salary') }}" >
+                    <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Employee Salary</span>
+                    </a>
+                    
+                </li>
+                @endif
 
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('attendance') }}" >
+                    <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Employee Attendance</span>
+                    </a>
+                    
+                </li>
+                @endif
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('salary') }}" >
-                <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Employee Salary</span>
-                </a>
-                
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('attendance') }}" >
-                <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Employee Attendance</span>
-                </a>
-                
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('leave') }}" >
-                <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Leave Management</span>
-                </a>
-                
-            </li>
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('leave') }}" >
+                    <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Leave Management</span>
+                    </a>
+                    
+                </li>
+                @endif
             @endif
 
 
             @if(auth()->user()->role == 5 || auth()->user()->role == 1 || auth()->user()->role == 2)
             <!-- Divider -->
+            
+            @if(auth()->user()->role !=5)
             <hr class="sidebar-divider">
 
             
@@ -214,7 +234,7 @@
             <div class="sidebar-heading">
                 Accounts
             </div>
-
+            @endif
             <!-- Nav Item - bank/cash Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bank"
@@ -266,12 +286,15 @@
             @endif
 
             @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2  )
+            
+            @if(auth()->user()->role != 4)
             <!-- devider -->
             <hr class="sidebar-devider">
-
+            
             <div class="sidebar-heading">
                 Stock & Inventories
             </div>
+            @endif
 
             <!-- Nav Item For Stock & Inventories  -->
             <li class="nav-item">
