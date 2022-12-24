@@ -11,7 +11,7 @@
 
 <div class="row">
     
-    @if(auth()->user()->role == 1 || (auth()->user()->role == 2 || (auth()->user()->role == 3) 
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3) 
     <div class=".col-lg-3 col-md-3 col-sm-6">
         <div class="card" style="background-color:blue;border-radius:20px;">
             <div class="card-body">
