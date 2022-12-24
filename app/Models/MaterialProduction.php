@@ -11,10 +11,11 @@ class MaterialProduction extends Model
 
     protected $fillable=[
         'receiver',
-        'name',
+        'material_id',
         'quality',
         'quantity',
         'unit',
-        'code'
+        'code',
+        'remark'
     ];
 }

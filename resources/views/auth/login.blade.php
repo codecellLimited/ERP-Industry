@@ -26,12 +26,12 @@
                                 <div class="form-group">
                                     <select name="role" id="" class="form-control @error('role') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        {{-- <option value="1">Managing Director</option> --}}
+                                        <option value="1">Managing Director</option>
                                         <option value="2">GM</option>
                                         <option value="3">Sales</option>
                                         <option value="4">HR</option>
                                         <option value="5">Account</option>
-                                        <option value="6">Stock</option>
+                                        
                                     </select>
 
                                     @error('role')
@@ -50,7 +50,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
+                           {{-- <div class="form-group">
                                     <div class="custom-control custom-checkbox small">
                                         <input type="checkbox" class="custom-control-input" id="customCheck">
                                         <label class="custom-control-label" for="customCheck">Remember

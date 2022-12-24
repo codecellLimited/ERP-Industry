@@ -35,7 +35,7 @@ class MaterialController extends Controller
         $request->validate([
            
             'name'  => 'required',
-            'quantity'  => 'required',
+            'quantity'  => 'required|integer',
             'quality'  => 'required',
             'unit'  => 'required',
             'supplier_id' => 'required'
@@ -70,6 +70,17 @@ class MaterialController extends Controller
     public function update(Request $request)
     {
         $key = $request->key;
+
+        $request->validate([
+           
+            'name'  => 'required',
+            'quantity'  => 'required|integer',
+            'quality'  => 'required',
+            'unit'  => 'required',
+            'supplier_id' => 'required'
+
+           
+        ]);
         
         $data = $request->all();
 

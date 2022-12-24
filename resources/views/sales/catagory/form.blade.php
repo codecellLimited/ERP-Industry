@@ -3,8 +3,8 @@
 @section('web-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Add a New catagory</h1>
-        <a href="{{ route('catagory.create') }}" class="btn btn-sm btn-primary shadow-sm">
+        <h1 class="h3 mb-0 text-gray-800">Add a New Catagory</h1>
+        <a href="{{ route('catagory') }}" class="btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-arrow-left fa-sm text-white-50"></i> Back
         </a>
     </div>
@@ -28,7 +28,7 @@
 
                         <div class="form-group">
                             <div class="col-md-4">
-                                <label for="">catagory Name</label>
+                                <label for="">Catagory Name</label>
                                 <input type="text" name="name" autofocus
                                     class="form-control @error('name') is-invalid @enderror"
                                     @if(isset($catagory))

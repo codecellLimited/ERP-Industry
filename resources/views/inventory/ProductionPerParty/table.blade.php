@@ -13,7 +13,7 @@
    <div class="row">
         @forelse ($orderid as $item)
         <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card shadow" style="Width:220px;height:400px">
+            <div class="card shadow">
                 <div class="card-body" style="color:black;">
                     <div class="my-3 text-center">
                         <img src="{{ asset($item->image) }}" alt="" class="img-fluid  m-auto d-block" style="width: 150px; height:100px;">

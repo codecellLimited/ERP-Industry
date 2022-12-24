@@ -134,6 +134,34 @@ Route::middleware('auth')
        Route::get('product/delete/{key}', 'destroy')->name('product.delete');
     });
 
+     /**-------------    Route for sanction
+     * ========================================================*/
+    
+    
+     Route::controller(App\Http\Controllers\sanctionController::class)
+     ->group(function(){
+        Route::get('sanction-list','show')->name('sanction');
+        Route::get('account-sanction-list','showaccount')->name('sanctionaccount');
+        Route::get('sanction/create', 'create')->name('sanction.create');
+        Route::post('sanction/store', 'store')->name('sanction.store');
+        Route::get('sanction/{key}', 'edit')->name('sanction.edit');
+        Route::post('sanction/update', 'update')->name('sanction.update');
+        Route::get('sanction/delete/{key}', 'destroy')->name('sanction.delete');
+        Route::get('sanction/status/{key}/{status}', 'sanctionStatus')->name('sanction.status');
+     });
+
+     
+     
+     /**-------------    Route for completed Order
+     * ========================================================*/
+    
+    
+    Route::controller(App\Http\Controllers\completedController::class)
+    ->group(function(){
+       Route::get('Completed Order-list','show')->name('completed');
+       Route::get('completed/delete/{key}', 'destroy')->name('completed.delete');
+    });
+
 
      /**-------------    Route for Quotation
      * ========================================================*/
@@ -147,7 +175,6 @@ Route::middleware('auth')
        Route::post('quotation/update', 'update')->name('quotation.update');
        Route::get('quotation/delete/{key}', 'destroy')->name('quotation.delete');
     });
-   
 
 
     /**-------------    Route for departments

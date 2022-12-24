@@ -36,7 +36,7 @@ class debitController extends Controller
            
             'credit_from'  => 'required',
             'account'  => 'required',
-            'amount'  => 'required',
+            'amount'  => 'required|integer',
             'received'  => 'required',
            
         ]);
@@ -69,12 +69,14 @@ class debitController extends Controller
     {
         $key = $request->key;
 
-        // $request->validate([
-        //     'name'  => 'required|unique:debit,name,'. $key .',id',
-        //     'email'  => 'required|email|unique:debit,email,'. $key .',id',
-        //     'phone'  => 'required|unique:debit,phone,'. $key .',id',
-        //     'image' => 'nullable|mimes:jpg,jpeg,png'
-        // ]);
+        $request->validate([
+           
+            'credit_from'  => 'required',
+            'account'  => 'required',
+            'amount'  => 'required|integer',
+            'received'  => 'required',
+           
+        ]);
 
         
         $data = $request->all();
