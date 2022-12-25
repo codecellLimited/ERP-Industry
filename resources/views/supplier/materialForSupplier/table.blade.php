@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Materials for Supplier')
+   
 @section('web-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">

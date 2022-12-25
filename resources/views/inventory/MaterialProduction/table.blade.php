@@ -1,9 +1,12 @@
 @extends('layouts.app')
+
+@section('page_title', 'Material For Production')
+   
 @section('web-content')
 
 <!-- page heading  -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="mb-0 text-gray-800 "> Materials for Production</h1>
+    <h1 class="mb-0 text-gray-800 "> Materials taken for Production</h1>
     <a href="{{route('MaterialProduction.create')}}" class="btn btn-primary shadow-sm">
         <i class="fas fa-plus fa-sm text-white-50"></i>
         <span>Add new Record</span>
@@ -14,7 +17,8 @@
 <!-- page contain  -->
 <div class="card shadow">
     <div class="card-body table-responsive">
-        <table class="table table-striped table-hover" style="color:black;">
+        <table class="table table-striped table-hover data-table" style="color:black;">
+        @section('page_title', 'Material Taken for Production list')
             <thead>
                 <tr>
                     <th>#</th>

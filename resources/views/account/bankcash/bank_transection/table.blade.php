@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Bank Transection')
+   
 @section('web-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -9,7 +11,8 @@
 
     <div class="card shadow">
         <div class="card-body table-responsive">
-            <table class="table table-striped table-hover" style="color:black;">
+            <table class="table table-striped table-hover data-table" style="color:black;">
+            @section('page_title', 'Bank Trancetion list')
                 <thead>
                     <tr style="color:black;">
                         <th scope="col">#</th>

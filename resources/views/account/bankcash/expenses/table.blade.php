@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('page_title', 'Expenses')
+   
 @section('web-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -11,7 +13,8 @@
 
     <div class="card shadow">
         <div class="card-body  table-responsive">
-            <table class="table table-striped table-hover" style="color:black;">
+            <table class="table table-striped table-hover data-table" style="color:black;">
+            @section('page_title', 'Expense list')
                 <thead>
                     <tr style="color:black;">
                         <th scope="col">#</th>
@@ -28,9 +31,13 @@
                     @forelse($expense as $key => $item)
                     <tr style="color:black;">
                         <th scope="row" >{{++$key}}</th>
-                        <td>{{$item->datee}}</td>
+                        <td>{{date('d-m-Y',strtotime($item->datee))}}</td>
                         <td>{{$item->purpose}}</td>
-                        <td>{{$item->payment_method}}</td>
+                        <td>@if( $item->payment_method == 1) Hand Cash
+                            @elseif( $item->payment_method == 2) Bank Transiction 
+                            @else 
+                            @endif
+                        </td>
                         <td>{{$item->amount}}</td>
                         <td>{{ \App\Models\bankadd::find($item->account)->account_number ?? "Hand Cash"}}</td>
                         <td>{{$item->remark}}</td>

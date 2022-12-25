@@ -14,7 +14,13 @@
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+
+    {{-- Data Tables --}}
+    <link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+
 
     {{-- Data Tables --}}
     <link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}">
@@ -42,6 +48,7 @@
                     <i class="fas fa-laugh-wink"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">{{ auth()->user()->name }} Panel</div>
+                <div class="sidebar-brand-text mx-3">{{ auth()->user()->name }} Panel</div>
             </a>
 
             <!-- Divider -->
@@ -55,14 +62,19 @@
             </li>
 
             @if(auth()->user()->role == 3 || auth()->user()->role == 1 || auth()->user()->role == 2)
+            
+            
             <!-- Divider -->
             <hr class="sidebar-divider">
+
+            
+            @if(auth()->user()->role !=3)
 
             <!-- Heading -->
             <div class="sidebar-heading">
                 Sales
             </div>
-
+            @endif
             <!-- Nav Item - Suppliers Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#supplier"
@@ -143,70 +155,85 @@
             @endif
 
 
-            @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+            @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 5)
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                @if(auth()->user()->role !=4)
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    HR
+                </div>
+                @endif
 
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                HR
-            </div>
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <!-- Nav Item - Suppliers Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('department')}}" >
+                    <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Departments</span>
+                    </a>
+                    
+                </li>
+                @endif
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('designation')}}" >
+                    <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Designations</span>
+                    </a>
+                    
+                </li>
+                @endif
 
-            <!-- Nav Item - Suppliers Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('department')}}" >
-                <i class="fas fa-fw fa-briefcase"></i>
-                    <span>Departments</span>
-                </a>
-                
-            </li>
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('employee') }}" >
+                    <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Employee Management</span>
+                    </a>
+                    
+                </li>
+                @endif
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('designation')}}" >
-                <i class="fas fa-fw fa-briefcase"></i>
-                    <span>Designations</span>
-                </a>
-                
-            </li>
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 5)
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('employee') }}" >
-                <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Employee Management</span>
-                </a>
-                
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('salary') }}" >
+                    <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Employee Salary</span>
+                    </a>
+                    
+                </li>
+                @endif
 
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('attendance') }}" >
+                    <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Employee Attendance</span>
+                    </a>
+                    
+                </li>
+                @endif
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('salary') }}" >
-                <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Employee Salary</span>
-                </a>
-                
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('attendance') }}" >
-                <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Employee Attendance</span>
-                </a>
-                
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('leave') }}" >
-                <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Leave Management</span>
-                </a>
-                
-            </li>
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('leave') }}" >
+                    <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Leave Management</span>
+                    </a>
+                    
+                </li>
+                @endif
             @endif
 
 
             @if(auth()->user()->role == 5 || auth()->user()->role == 1 || auth()->user()->role == 2)
             <!-- Divider -->
+            
+            @if(auth()->user()->role !=5)
             <hr class="sidebar-divider">
 
             
@@ -214,7 +241,7 @@
             <div class="sidebar-heading">
                 Accounts
             </div>
-
+            @endif
             <!-- Nav Item - bank/cash Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#bank"
@@ -266,12 +293,15 @@
             @endif
 
             @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2  )
+            
+            @if(auth()->user()->role != 4)
             <!-- devider -->
             <hr class="sidebar-devider">
-
+            
             <div class="sidebar-heading">
                 Stock & Inventories
             </div>
+            @endif
 
             <!-- Nav Item For Stock & Inventories  -->
             <li class="nav-item">
@@ -431,17 +461,6 @@
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
 
-
-    <script>
-        $(document).ready(function() {
-            $('.data-table').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel', 'pdf', 'print'
-                ]
-            } );
-        } );
-    </script>
 
     @stack('js')
 

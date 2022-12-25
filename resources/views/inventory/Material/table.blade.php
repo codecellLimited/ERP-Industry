@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('page_title', 'Materials')
+   
 @section('web-content')
 
 <!-- page heading  -->
@@ -14,7 +17,8 @@
 <!-- page contain  -->
 <div class="card shadow">
     <div class="card-body table-responsive">
-        <table class="table table-striped table-hover" style="color:black;">
+        <table class="table table-striped table-hover data-table" style="color:black;">
+        @section('page_title', 'Stack list')
             <thead>
                 <tr>
                     <th>#</th>

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('page_title', 'Order List')
+   
 @section('web-content')
 
 <!-- page heading  -->
@@ -14,12 +17,14 @@
 <!-- page contain  -->
 <div class="card shadow">
     <div class="card-body table-responsive">
-        <table class="table table-striped table-hover" style="color:black;">
+        <table class="table table-striped table-hover data-table" style="color:black;">
+        @section('page_title', 'Client Order List')
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Order Image</th>
                     <th>Order Name</th>
+                    <th>Order ID</th>
                     <th>Party Name</th>
                     <th>Quantity</th>
                     <th>Unit Price</th>
@@ -39,6 +44,7 @@
                     <th scope="row" >{{++$key}}</th>
                     <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded-circle m-auto d-block" width="50"></td>
                     <td>{{\App\Models\Product::find($item->product_id)->name}}</td>
+                    <td>{{$item->id}}</td>
                     <td>{{Str::upper( \App\Models\party::find($item->party_id)->name)}}</td>
                     <td>{{$item->quantity}} {{\App\Models\Unit::find($item->unit_id)->name}}</td>
                     <td>{{$item->unit_price}}</td>
