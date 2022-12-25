@@ -81,7 +81,7 @@
                         <a class="collapse-item" href="{{ route('suppliers') }}">Profile</a>
                         <a class="collapse-item" href="{{ route('materialForSupplier') }}">Materials</a>
                         <a class="collapse-item" href="{{ route('purchase') }}">Material Purchase</a>
-                        <a class="collapse-item" href="javascript::">Requisition</a>
+                        
                     </div>
                 </div>
             </li>
@@ -121,13 +121,13 @@
                 </div>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('quotation')}}" >
                 <i class="fas fa-fw fa-user-tie"></i>
                     <span>Quotations</span>
                 </a>
                 
-            </li>
+            </li> -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('sanction')}}" >
