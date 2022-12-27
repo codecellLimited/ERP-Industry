@@ -34,6 +34,10 @@ class salaryController extends Controller
         return view('HR.salary.form')->with(compact('employee','searchmonth',''));
     }
 
+    
+    /** --------------- salary search by month
+     * =============================================*/
+
     public function calculateSalary(Request $request)
     {
         $month = $request->searchmonth;
