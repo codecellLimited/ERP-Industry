@@ -24,7 +24,7 @@
                     <th>Date</th>
                     <th>Party Name</th>
                     <th>Total Bill</th>
-                    <th>Status</th>
+                    <!-- <th>Status</th> -->
                     <th>Action</th>
 
                 </tr>
@@ -36,10 +36,10 @@
                     <th>{{$item->quotation_date}}</th>
                     <td>{{Str::upper( \App\Models\party::find($item->party_id)->name)}}</td>
                     <td>{{$item->grand_total}}</td>
-                    <td>@if($item->quotation_status == 1) <span class="badge bg-warning">Sending</span>
+                    <!-- <td>@if($item->quotation_status == 1) <span class="badge bg-warning">Sending</span>
                         @elseif($item->quotation_status == 2) <span class="badge bg-primary">Pending</span>
                         @endif
-                    </td>
+                    </td> -->
                     <td class="text-nowrap">
                             <a href="{{ route('quotation.edit', $item->id) }}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-pen"></i>

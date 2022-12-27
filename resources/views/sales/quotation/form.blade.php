@@ -194,11 +194,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md" >
-                                    <label for=""><b>Add more item</b></label>
-                                    <br>
-                                    <button type="button" class="btn btn-primary" style="justify-contant:center;">+</button>
-                                </div>
+                                
 
                                 
                             </div>

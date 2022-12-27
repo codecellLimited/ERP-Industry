@@ -17,7 +17,7 @@
 <!-- page contain  -->
 <div class="card shadow">
     <div class="card-body table-responsive">
-        <table class="table table-striped table-hover data-table" style="color:black;">
+        <table class="table table-striped table-hover data-table-print" style="color:black;">
         @section('page_title', 'Sanction list from sales')
             <thead>
                 <tr>
@@ -117,3 +117,26 @@
 </div>
 
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.data-table-print').DataTable( {
+                dom: 'Bfrtip',
+                ordering: false,
+                buttons: [
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            stripHtml : false,
+                            columns: [1, 2, 3, 4, 5] 
+                            //specify which column you want to print
+    
+                        }
+                    },
+                    'excel', 'pdf',
+                ]
+            } );
+        } );
+    </script>
+@endpush

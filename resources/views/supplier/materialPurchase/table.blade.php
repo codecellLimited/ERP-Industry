@@ -1,6 +1,4 @@
 @extends('layouts.app')
-
-@section('page_title', 'Materials')
    
 @section('page_title', 'Material Purchase List')
 
@@ -18,7 +16,9 @@
 <!-- page contain  -->
 <div class="card shadow">
     <div class="card-body table-responsive">
-        <table class="table table-striped table-hover data-table"style="color:black;">
+    
+
+        <table class="table table-striped table-hover data-table-print" style="color:black;">
             <thead>
                 <tr>
                     <th>#</th>
@@ -70,40 +70,28 @@
 
 </div>
 
-<!-- 
-   <div class="row">
-        @forelse ($purchase as $item)
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="my-3 text-center">
-                        <img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded-circle m-auto d-block" width="150">
-                        <br>
-                        <h5>{{ $item->product_name}}</h5>
-                        <h6>Supplier: {{\App\Models\supplier::find($item->supplierID)->name}}</h6>
-                        <h6>Quantity: {{ $item->quantity}}</h6>
-                        <h6>Total Bill: {{ $item->grand_total}}</h6>
-                        <h6>total Paid: {{ $item->total_paid}}</h6>
-                        <h6>Total Due: {{ $item->total_due}}</h6>
-
-                        <a href="{{ route('purchase.edit', $item->id) }}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-pen"></i>
-                        </a>
-
-                        <button class="btn btn-sm btn-primary"
-                        onclick="if(confirm('Are you sure? you are going to delete this record')){ location.replace('purchase/delete/{{$item->id}}'); }">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @empty
-        <div class="col-12 py-5 text-center">
-            <h4 class="text-muted"><b>No Purchases Yet</b></h4>
-        </div>
-        @endforelse
-   </div> -->
-
-
 @endsection
+
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.data-table-print').DataTable( {
+                dom: 'Bfrtip',
+                ordering: false,
+                buttons: [
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            stripHtml : false,
+                            columns: [1, 2, 3, 4, 5, 6, 7] 
+                            //specify which column you want to print
+    
+                        }
+                    },
+                    'excel', 'pdf',
+                ]
+            } );
+        } );
+    </script>
+@endpush
