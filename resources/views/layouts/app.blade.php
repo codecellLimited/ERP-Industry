@@ -287,13 +287,13 @@
 
             @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3 )
             
-            @if(auth()->user()->role != 4)
-            <!-- devider -->
-            <hr class="sidebar-devider">
-            
-            <div class="sidebar-heading">
-                Stock & Inventories
-            </div>
+            @if(auth()->user()->role != 4 || auth()->user()->role != 3)
+                <!-- devider -->
+                <hr class="sidebar-devider">
+                
+                <div class="sidebar-heading">
+                    Stock & Inventories
+                </div>
             @endif
             @if(auth()->user()->role != 3)
             <!-- Nav Item For Stock & Inventories  -->
