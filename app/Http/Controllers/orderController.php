@@ -117,6 +117,21 @@ class OrderController extends Controller
     }
 
 
+/**--view profile-- */
+public function view(Request $request){
+    $key = $request->key;
+
+    $companyId = auth()->user()->company_id;
+    $parties = Party::where('company_id', $companyId)->get();
+    $record = order::where('company_id', $companyId)->find($key);
+
+
+    $party = party:: where($request->party_id)->first();
+    $records = order:: find($key);
+
+    return view('party.order.vieworder')->with(compact('party','records','parties','record'));
+}
+
     
     /** --------------- show edit form
      * =============================================*/
