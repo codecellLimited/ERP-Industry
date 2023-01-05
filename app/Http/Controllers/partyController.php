@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 /** Models */
 use App\Models\party;
+use App\Models\order;
 
 class partyController extends Controller
 {
@@ -71,7 +72,15 @@ class partyController extends Controller
         return view('party.party.form')->with(compact('parties'));
     }
 
+    /**--view profile-- */
+    public function profile(Request $request){
+        $key = $request->key;
+        $parties = party:: find($key);
 
+        $records = order:: where('party_id',$key)->get();
+
+        return view('party.party.profile')->with(compact('parties','records'));
+    }
 
 
     /** --------------- Update party
