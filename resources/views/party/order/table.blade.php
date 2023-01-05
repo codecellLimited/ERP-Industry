@@ -26,10 +26,6 @@
                     <th>Order Name</th>
                     <th>Order ID</th>
                     <th>Party Name</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Transport Cost</th>
-                    <th>Total Discount</th>
                     <th>Total Bill</th>
                     <th>Total Paid</th>
                     <th>Total Due</th>
@@ -39,20 +35,16 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($order as $key =>$item)
+                @forelse($records as $key =>$item)
                 <tr>
                     <th scope="row" >{{++$key}}</th>
                     <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded-circle m-auto d-block" width="50"></td>
                     <td>{{\App\Models\Product::find($item->product_id)->name}}</td>
                     <td>{{$item->id}}</td>
                     <td>{{Str::upper( \App\Models\party::find($item->party_id)->name)}}</td>
-                    <td>{{$item->quantity}} {{\App\Models\Unit::find($item->unit_id)->name}}</td>
-                    <td>{{$item->unit_price}}</td>
-                    <td>{{$item->transport_cost	}}</td>
-                    <td>{{$item->total_discount}}</td>
-                    <td>{{$item->grand_total}}</td>
+                    <td>{{$item->total_price}}</td>
                     <td>{{$item->total_paid}}</td>
-                    <td>{{$item->total_due}}</td>
+                    <td>{{$item->due}}</td>
                     <td>
                         @if ($item->status == 1)
                         <span class="badge bg-warning">On Processing</span>

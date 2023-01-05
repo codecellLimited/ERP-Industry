@@ -9,23 +9,18 @@ class order extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
-        'order_date',
-        'order_delivery_date',
         'party_id',
-        'product_id',
-        'quantity',
-        'unit_id',
-        'unit_price',
-        'discount',
-        'total_discount',
+        'order_date',
+        'order_delivary_date',
+        'data',
+        'total_price',
         'transport_cost',
-        'grand_total',
         'total_paid',
-        'total_due',
+        'due',
         'payment_method',
-        'order_note',
+        'note',
         'image'
-        
     ];
 }

@@ -3,7 +3,13 @@
 @section('web-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Add a new Order</h1>
+        <h1 class="h3 mb-0 text-gray-800">
+            @if (isset($record))
+                Update record
+            @else
+                New Order
+            @endif
+        </h1>
         <a href="{{ route('order') }}" class="btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-arrow-left fa-sm text-white-50"></i> Back
         </a>
@@ -14,26 +20,26 @@
         <div class="col-12">
             <div class="card shadow">
 
-                <div class="card-body card-responsive">
-                    @if (isset($order))
+                <div class="card-body text-dark">
+                    @if (isset($record))
                     <form action="{{ route('order.update') }}" method="post" enctype="multipart/form-data">
                     @else
                     <form action="{{ route('order.store') }}" method="post" enctype="multipart/form-data">
                     @endif
                         @csrf
 
-                        @isset($order)
-                        <input type="hidden" name="key" value="{{ $order->id }}">
+                        @isset($record)
+                        <input type="hidden" name="key" value="{{ $record->id }}">
                         @endisset
                         
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
-                                    <label for="">Order Date</label>
+                                    <label for="">Order Date*</label>
                                     <input type="date" name="order_date" 
                                         class="form-control @error('order_date') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->order_date }}"
+                                        @if(isset($record))
+                                        value="{{ date('Y-M-d', strtotime($record->order_date)) }}"
                                         @else
                                         value="{{ old('order_date') }}"
                                         @endif>
@@ -46,11 +52,11 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Order Delivery Date</label>
+                                    <label for="">Order Delivery Date*</label>
                                     <input type="date" name="order_delivery_date" 
                                         class="form-control @error('order_delivery_date') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->order_delivery_date }}"
+                                        @if(isset($record))
+                                        value="{{ date('Y-M-d', strtotime($record->order_delivery_date)) }}"
                                         @else
                                         value="{{ old('order_delivery_date') }}"
                                         @endif>
@@ -63,19 +69,13 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for=""><b>Party</b></label>
-                                    <select name="party_id" id="" class="form-control @error('party_id') is-invalid @enderror">
+                                    <label for="">Parties*</label>
+                                    <select name="party_id" class="form-control @error('party_id') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-
-                                        @foreach(\App\Models\party::get() as $item)
+                                        @foreach ($parties as $item)
                                         <option value="{{ $item->id }}"
-                                            @if(isset($order))
-                                                {{($order->party_id == $item->id) ? 'selected' : ''}}
-                                            @else{{(old('party_id')== $item->id) ? 'selected' : ''}}
-
-                                            @endif> 
-                                       
-                                        {{$item->name}}</option>
+                                            @if(isset($record)) {{ ($item->id == $record->party_id) ? 'selected' : '' }} @endif>
+                                            {{ $item->company }}</option>
                                         @endforeach
                                         
                                     </select>
@@ -89,64 +89,147 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                            <div class="col-md">
-                                    <label for=""><b>Order Title</b></label>
-                                    <select name="product_id" id="" class="form-control @error('product_id') is-invalid @enderror">
+
+                        <div class="form-group" id="product_item">
+                            @if (isset($record))
+                                @foreach (json_decode($record->data) as $key => $item)
+                                <div class="row" id="material-row-{{$key}}">
+                                    
+                                    <div class="col-md">
+                                        <label for="">Product name*</label>
+                                        <select name="name[]" class="form-control @error('name') is-invalid @enderror" required>
+                                            <option value="" selected disabled>Select One</option>
+                                            @foreach (\App\Models\product::get() as $item)
+                                            <option value="{{ $item->id }}"
+                                                @if(isset($record)) {{ ($item->id == $record->name) ? 'selected' : '' }} @endif>
+                                                {{ $item->company }}</option>
+                                            @endforeach
+                                            
+                                        </select>
+
+                                        @error('name')
+                                            <span class="invalid-feedback">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                
+                                    
+
+                                    <div class="col-md">
+                                        <label for=""><b>Quantity*</b></label>
+                                        <input type="text" name="quantity[]" id="quantity-{{$key}}"
+                                            class="quantity form-control"
+                                            onchange="calculator('{{$key}}')" value="{{ $item->quantity }}">
+                                    </div>
+
+                                    <div class="col-md">
+                                    <label for="">Unit*</label>
+                                    <select name="unit[]" id="" class="form-control @error('unit_id') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
+                                        @foreach(\App\Models\Unit::get() as $item)
+                                            <option value="{{ $item->id }}"
+                                                @if(isset($record))
+                                                    {{($record->unit_id == $item->id) ? 'selected' : ''}}
+                                                @else{{(old('unit_id')== $item->id) ? 'selected' : ''}}
 
-                                        @foreach(\App\Models\Product::get() as $item)
-                                        <option value="{{ $item->id }}"
-                                            @if(isset($order))
-                                                {{($order->product_id == $item->id) ? 'selected' : ''}}
-                                            @else{{(old('product_id')== $item->id) ? 'selected' : ''}}
-
-                                            @endif> 
-                                       
-                                        {{$item->name}}</option>
+                                                @endif> 
+                                        
+                                            {{$item->name}}</option>
                                         @endforeach
                                         
                                     </select>
 
-                                    @error('product_id')
+                                    @error('unit_id')
                                         <span class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
 
-                                <div class="col-md">
-                                    <label for="">Quantity</label>
-                                    <input type="text" name="quantity" 
-                                        class="form-control @error('quantity') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->quantity }}"
-                                        @else
-                                        value="{{ old('quantity') }}"
-                                        @endif>
+                                    <div class="col-md">
+                                        <label for=""><b>Unit Price*</b></label>
 
-                                    @error('quantity')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                        <input type="text" name="unit_price[]" id="unit_price-{{$key}}" 
+                                            class="unit_price form-control" value="{{ $item->unit_price }}"
+                                            onchange="calculator('{{$key}}')">
+                                    </div>
+
+                                    <div class="col-md">
+                                        <label for=""><b>Discount(%)*</b></label>
+                                        <input type="text" name="discount[]" id="discount-{{$key}}"
+                                            class="discount form-control" value="{{ $item->discount }}"
+                                            onkeyup="calculator('{{$key}}')">
+                                    </div>
+
+                                    <div class="col-md">
+                                        <label><b>Sub Total</b></label>
+                                        <input type="text" name="sub_total[]" class="form-control" readonly
+                                            id="single-total-{{$key}}" value="{{ $item->sub_total }}">
+                                    </div>
+
+                                    @if ($key == 0)
+                                    <div class="col-md p-2 ">
+                                        <div class="btn btn-primary mt-4" id="add_product_item"> <i class="fas fa-plus"></i> </div>
+                                    </div>
+                                    @else
+                                    <div class="col-md p-2 ">
+                                        <div class="btn btn-danger mt-4" id="remove_product_item" onclick="deleteRow('{{$key}}')">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    
                                 </div>
+                                @endforeach
+                            @else
+                            <div class="row" id="material-row-0">
 
-                                <div class="col-md">
-                                    <label for=""><b>Unit</b></label>
-                                    <select name="unit_id" id="" class="form-control @error('unit_id') is-invalid @enderror">
+                                <div class="col-md-3">
+                                    <label for="">Product Name*</label>
+                                    <select name="name[]" id="" class="form-control @error('name') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-
-                                        @foreach(\App\Models\Unit::get() as $item)
+                                        @foreach(\App\Models\product::get() as $item)
                                         <option value="{{ $item->id }}"
-                                            @if(isset($order))
-                                                {{($order->unit_id == $item->id) ? 'selected' : ''}}
-                                            @else{{(old('unit_id')== $item->id) ? 'selected' : ''}}
-
-                                            @endif> 
-                                       
+                                            @if(isset($record))
+                                                {{($record->name == $item->id)? 'selected':''}}
+                                            @else{{(old('name')?'selected':'')}}  
+                                            @endif  >
                                         {{$item->name}}</option>
+                                        @endforeach
+                                        
+                                    
+                                    </select>
+
+                                    @error('name')
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            
+
+                                <div class="col-md">
+                                    <label for=""><b>Quantity*</b></label>
+                                    <input type="text" name="quantity[]" id="quantity-0"
+                                        class="quantity form-control"
+                                        onchange="calculator('0')">
+                                </div>
+
+
+                                <div class="col-md">
+                                    <label for="">Unit*</label>
+                                    <select name="unit[]" id="" class="form-control @error('unit_id') is-invalid @enderror" required>
+                                        <option value="" selected disabled>Select One</option>
+                                        @foreach(\App\Models\Unit::get() as $item)
+                                            <option value="{{ $item->id }}"
+                                                @if(isset($record))
+                                                    {{($record->unit_id == $item->id) ? 'selected' : ''}}
+                                                @else{{(old('unit_id')== $item->id) ? 'selected' : ''}}
+
+                                                @endif> 
+                                        
+                                            {{$item->name}}</option>
                                         @endforeach
                                         
                                     </select>
@@ -159,66 +242,41 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Unit Price</label>
-                                    <input type="text" name="unit_price" 
-                                        class="form-control @error('unit_price') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->unit_price }}"
-                                        @else
-                                        value="{{ old('unit_price') }}"
-                                        @endif>
+                                    <label for=""><b>Unit Price*</b></label>
 
-                                    @error('unit_price')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="text" name="unit_price[]" id="unit_price-0" 
+                                        class="unit_price form-control"
+                                        onchange="calculator('0')">
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Discount(%)</label>
-                                    <input type="text" name="discount" 
-                                        class="form-control @error('discount') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->discount }}"
-                                        @else
-                                        value="{{ old('discount') }}"
-                                        @endif>
-
-                                    @error('discount')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <label for=""><b>Discount(%)*</b></label>
+                                    <input type="text" name="discount[]" id="discount-0"
+                                        class="discount form-control"
+                                        onkeyup="calculator('0')">
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Total Discount</label>
-                                    <input type="test" name="total_discount" 
-                                        class="form-control @error('total_discount') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->total_discount }}"
-                                        @else
-                                        value="{{ old('total_discount') }}"
-                                        @endif>
+                                    <label><b>Sub Total</b></label>
+                                    <input type="text" name="sub_total[]" class="form-control" id="single-total-0" readonly>
+                                </div>
 
-                                    @error('total_discount')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <div class="col-md p-2 ">
+                                    <div class="btn btn-primary mt-4" id="add_product_item"> <i class="fas fa-plus"></i> </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
 
                         <div class="form-group">
                             <div class="row">
-                            <div class="col-md">
-                                    <label for="">Transport Cost</label>
-                                    <input type="text" name="transport_cost" 
+                                <div class="col-md">
+                                    <label for=""><b>Transport Cost*</b></label>
+                                    <input type="text" name="transport_cost" id="transport_cost"
                                         class="form-control @error('transport_cost') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->transport_cost }}"
+                                        onkeyup="totalCount()"
+                                        @if(isset($record))
+                                        value="{{ $record->transport_cost }}"
                                         @else
                                         value="{{ old('transport_cost') }}"
                                         @endif>
@@ -229,17 +287,18 @@
                                         </span>
                                     @enderror
                                 </div>
+
                                 <div class="col-md">
-                                    <label for="">Grand Total</label>
-                                    <input type="text" name="grand_total" 
-                                        class="form-control @error('grand_total') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->grand_total }}"
+                                    <label for=""><b>Total Bill</b></label>
+                                    <input type="text" name="total_price" id="total_bill" readonly
+                                        class="form-control @error('total_price') is-invalid @enderror"
+                                        @if(isset($record))
+                                        value="{{ $record->total_price }}"
                                         @else
-                                        value="{{ old('grand_total') }}"
+                                        value="{{ old('total_price') }}"
                                         @endif>
 
-                                    @error('grand_total')
+                                    @error('total_price')
                                         <span class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -247,11 +306,12 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Total Paid</label>
-                                    <input type="text" name="total_paid" 
+                                    <label for=""><b>Total Paid*</b></label>
+                                    <input type="text" name="total_paid" id="total_paid"
                                         class="form-control @error('total_paid') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->total_paid }}"
+                                        onkeyup="totalCount()"
+                                        @if(isset($record))
+                                        value="{{ $record->total_paid }}"
                                         @else
                                         value="{{ old('total_paid') }}"
                                         @endif>
@@ -262,66 +322,73 @@
                                         </span>
                                     @enderror
                                 </div>
+
+
                                 <div class="col-md">
-                                    <label for="">Total Due</label>
-                                    <input type="text" name="total_due" 
-                                        class="form-control @error('total_due') is-invalid @enderror"
-                                        @if(isset($order))
-                                        value="{{ $order->total_due }}"
+                                    <label for=""><b>Due</b></label>
+                                    <input type="text" name="due" id="due" readonly
+                                        class="form-control @error('due') is-invalid @enderror"
+                                        @if(isset($record))
+                                        value="{{ $record->due }}"
                                         @else
-                                        value="{{ old('total_due') }}"
+                                        value="{{ old('due') }}"
                                         @endif>
 
-                                    @error('total_due')
+                                    @error('due')
                                         <span class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
+
+                                
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class="col-md">
+                                <label for=""><b>Payment Method*</b></label>
+                                <select name="payment_method" class="form-control @error('supplierID') is-invalid @enderror" required>
+                                    <option value="" selected disabled>Select One</option>
+                                    <option value="1" 
+                                        @if(isset($record)) {{ ($record->payment_method == "Bank Payment") ? 'selected' : '' }} @endif >
+                                        Bank Payment
+                                    </option>
+                                    <option value="2" 
+                                        @if(isset($record)) {{ ($record->payment_method == "Cash Payment") ? 'selected' : '' }} @endif>Cash Payment</option>
+                                    <option value="3" 
+                                        @if(isset($record)) {{ ($record->payment_method == "Online Transaction") ? 'selected' : '' }} @endif>Online Transaction</option>
+                                </select>
+
+                                @error('payment_method')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-md">
+                                <label for=""><b>Choose Image</b></label>
+                                @if(isset($record))
+                                <br>  <img src="{{ asset($record->image) }}" alt="image" width="200" class="img-fluid">
+                                @endif
+                                <input type="file" name="image" 
+                                    class="form-control @error('image') is-invalid @enderror">
+
+                                @error('image')
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="row">
+                            <label for=""><b>Purchase note*</b></label>
+                            <textarea type="text" name="note" class="form-control @error('note') is-invalid @enderror"
+                            >@if(isset($record)) {{ $record->note }} @else {{ old('note') }} @endif</textarea>
 
-                                <div class="col-md">
-                                    <label for="">Payment Method</label>
-                                    <select name="payment_method" id="" class="form-control @error('supplierID') is-invalid @enderror" required>
-                                        <option value="" selected disabled>Select One</option>
-                                        <option value="1" @if(isset($order)) @if($order->payment_method == 1){{'selected'}} @endif @endif)>Cash</option>
-                                        <option value="2" @if(isset($order)) @if($order->payment_method == 2){{'selected'}} @endif @endif>check</option>
-            
-                                    </select>
-
-                                    @error('payment_method')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-md">
-                                <label for=""><b>Product Image</b></label>
-                                <br>
-                                @if(isset($order))
-                                    <img src="{{asset($order->image)}}" alt=""weight="100px" height="100px">
-                                @endif    
-                                <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
-                                        
-                                    @error('image')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                            </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="">Order Note</label>
-                            <textarea type="text" name="order_note" class="form-control @error('order_note') is-invalid @enderror">@if(isset($order)){{ $order->order_note}}
-                             @else {{ old('order_note') }}@endif</textarea>
-
-                            @error('order_note')
+                            @error('note')
                                 <span class="invalid-feedback">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -333,9 +400,148 @@
                         <button class="btn btn-primary">Save</button>
                     </form>
                 </div>
+
             </div>
         </div>
    </div>
 
 
 @endsection
+
+@push('js')
+    
+    <script>
+
+        @if (isset($record))
+        let x = {{ count(json_decode($record->data)) - 1 }};
+        @else
+        let x = 0;
+        @endif
+        $("#add_product_item").click(function(){
+            x++;
+            var html = '<div class="row" id="material-row-'+ x +'">\
+                                <div class="col-md-3">\
+                                    <label for="">Product Name*</label>\
+                                    <select name="name[]" id="" class="form-control @error('name') is-invalid @enderror" required>\
+                                        <option value="" selected disabled>Select One</option>\
+                                        @foreach(\App\Models\product::get() as $item)\
+                                        <option value="{{ $item->id }}"\
+                                            @if(isset($record))\
+                                                {{($record->name == $item->id)? 'selected':''}}\
+                                            @else{{(old('name')?'selected':'')}}  \
+                                            @endif  >\
+                                        {{$item->name}}</option>\
+                                        @endforeach\
+                                    </select>\
+                                    @error('name')\
+                                        <span class="invalid-feedback">\
+                                            <strong>{{ $message }}</strong>\
+                                        </span>\
+                                    @enderror\
+                                </div>\
+                                <div class="col-md">\
+                                <label for=""><b>Quantity</b></label>\
+                                <input type="text" name="quantity[]" id="quantity-'+x+'"\
+                                    class="form-control"\
+                                    onchange="calculator('+ x +')">\
+                            </div>\
+                            <div class="col-md">\
+                                    <label for="">Unit*</label>\
+                                    <select name="unit[]" id="" class="form-control @error('unit_id') is-invalid @enderror" required>\
+                                        <option value="" selected disabled>Select One</option>\
+                                        @foreach(\App\Models\Unit::get() as $item)\
+                                            <option value="{{ $item->id }}"\
+                                                @if(isset($record))\
+                                                    {{($record->unit_id == $item->id) ? 'selected' : ''}}\
+                                                @else{{(old('unit_id')== $item->id) ? 'selected' : ''}}\
+                                                @endif> \
+                                            {{$item->name}}</option>\
+                                        @endforeach\
+                                    </select>\
+                                    @error('unit_id')\
+                                        <span class="invalid-feedback">\
+                                            <strong>{{ $message }}</strong>\
+                                        </span>\
+                                    @enderror\
+                                </div>\
+                            <div class="col-md">\
+                                <label for=""><b>Unit Price</b></label>\
+                                <input type="text" name="unit_price[]" id="unit_price-'+x+'"\
+                                    class="form-control"\
+                                    onchange="calculator('+x+')">\
+                            </div>\
+                            <div class="col-md">\
+                                <label for=""><b>Discount(%)</b></label>\
+                                <input type="text" name="discount[]" id="discount-'+x+'"\
+                                    class="form-control"\
+                                    onkeyup="calculator('+x+')"\>\
+                            </div>\
+                            <div class="col-md">\
+                                <label><b>Sub Total</b></label>\
+                                <input type="text" name="sub_total[]" class="form-control" id="single-total-'+x+'">\
+                            </div>\
+                            <div class="col-md p-2 ">\
+                                <div class="btn btn-danger mt-4" id="remove_product_item" onclick="deleteRow('+x+')">\
+                                    <i class="fas fa-times"></i>\
+                                </div>\
+                            </div>\
+                        </div>';
+
+            
+            $("#product_item").append(html);
+        })
+
+
+        var deleteRow = (rowId) => {
+
+            $("#product_item #material-row-"+rowId+"").remove();
+            x--;
+            totalCount();
+        }
+
+
+        var calculator = (key) => {
+
+            let quantity = Number($('#quantity-'+key).val());
+            let unit_price = Number($('#unit_price-'+key).val());
+            let discount = Number($('#discount-'+key).val());
+
+            // alert(key);
+
+            // console.log(quantity, unit_price, discount);
+
+            if(quantity != '' && unit_price != '')
+            {
+                // get total unit price
+                let total_unit_price = quantity * unit_price;
+                let singleTotal = total_unit_price - ((total_unit_price * discount) / 100);
+
+                // show value
+                $("#single-total-"+key).val(singleTotal.toFixed(2));
+
+                totalCount();
+                
+            }
+        }
+
+
+        let totalCount = () => {
+
+            let transportCost   = Number($("#transport_cost").val());
+            let totalPaid       = Number($("#total_paid").val());
+            let totalBill = 0;
+            // alert(x);
+            for(i=0; i<=x; i++)
+            {
+                totalBill += Number($("#single-total-"+i).val());
+            }
+
+            totalBill = totalBill + transportCost;
+            let due = totalBill - totalPaid;
+
+            $("#total_bill").val(totalBill.toFixed(2));
+            $("#due").val(due.toFixed(2));
+
+        }
+    </script>
+@endpush
