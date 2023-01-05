@@ -22,8 +22,8 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Order Image</th>
-                    <th>Order Name</th>
+                    <th>Company Image</th>
+                    <th>Order By</th>
                     <th>Order ID</th>
                     <th>Party Name</th>
                     <th>Total Bill</th>
@@ -38,10 +38,10 @@
                 @forelse($records as $key =>$item)
                 <tr>
                     <th scope="row" >{{++$key}}</th>
-                    <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded-circle m-auto d-block" width="50"></td>
-                    <td>{{\App\Models\Product::find($item->product_id)->name}}</td>
-                    <td>{{$item->id}}</td>
+                    <td><img src="{{ asset(\App\Models\party::find($item->party_id)->image) }}" alt="" class="img-fluid m-auto d-block" width="70"></td>
                     <td>{{Str::upper( \App\Models\party::find($item->party_id)->name)}}</td>
+                    <td>{{$item->id}}</td>
+                    <td>{{\App\Models\party::find($item->party_id)->company}}</td>
                     <td>{{$item->total_price}}</td>
                     <td>{{$item->total_paid}}</td>
                     <td>{{$item->due}}</td>
@@ -63,6 +63,12 @@
                             <div tabindex="-1" role="menu" aria-hidden="true"
                                 class="dropdown-menu dropdown-menu-right">
                                 <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('order.view', $item->id) }}">
+                                            <i class="nav-link-icon fa fa-pen"></i>
+                                            <span> View</span>
+                                        </a>
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('order.edit', $item->id) }}">
                                             <i class="nav-link-icon fa fa-pen"></i>

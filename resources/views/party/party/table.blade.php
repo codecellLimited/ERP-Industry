@@ -23,7 +23,9 @@
                         <h5><b>{{ $item->company }}</b></h5>
                         <h6>{{ $item->email }}</h6>
                         <h6>{{ $item->phone }}</h6>
-
+                        <a href="{{ route('party.profile', $item->id) }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-eye" aria-hidden="true"></i> </a>
+                        
                         <a href="{{ route('party.edit', $item->id) }}" class="btn btn-sm btn-primary">
                             <i class="fas fa-pen"></i>
                         </a>
