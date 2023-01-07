@@ -258,13 +258,10 @@ class OrderController extends Controller
 
         $companyId = auth()->user()->company_id;
         $parties = Party::where('company_id', $companyId)->get();
-        $record = order::where('company_id', $companyId)->find($key);
+        $record = order::find($key);
+        $party = party:: find($record->party_id);
 
-
-        $party = party:: where($request->party_id)->first();
-        $records = order:: find($key);
-
-        return view('party.order.invoiceorder')->with(compact('party','records','parties','record'));
+        return view('party.order.invoiceorder')->with(compact('party','parties','record'));
     }
 
 
