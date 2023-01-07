@@ -223,8 +223,8 @@ Route::middleware('auth')
 
    Route::controller(App\Http\Controllers\salaryController::class)
    ->group(function(){
-   Route::get('Salary-list','show')->name('salary');
-
+      Route::get('Salary-list','show')->name('salary');
+      Route::get('Salary-search','calculateSalary')->name('salary.calculate');
    });
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\attendance;
 use Illuminate\Http\Request;
 
 use App\Models\employee;
@@ -14,11 +15,26 @@ class salaryController extends Controller
      * =============================================*/
     public function show(Request $request)
     {
-        
         $salarys = employee::where('status', true)->orderBy('id_no', 'asc')->get();
-        return view('HR.salary.table')->with(compact('salarys'));    
+        return view('HR.salary.table')->with(compact('salarys'));  
+    }
+
+
+    public function calculateSalary(Request $request)
+    {
+        $month = $request->searchmonth;
+        $employees = employee::where('status', true)->orderBy('id_no', 'asc')->get();
+        $salarys = [];
+
+        foreach($employees as $item){
+            $absence = attendance::whereMonth('date', $month)->where('employee_id', $item->id)->where('attendance', 0)->count();
         
-        
+            $item['monthly_salary'] = $item->monthly_salary - ($absence * $item->daily_salary);
+            $salarys[] = $item;            
+        }
+
+        return view('HR.salary.table')->with(compact('salarys'));
+
     }
 
 

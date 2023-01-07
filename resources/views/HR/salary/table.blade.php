@@ -21,30 +21,27 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <form action="{{route('salary')}}" method="GET" id="orderIdForm">
-                            @csrf
+                        <form action="{{route('salary.calculate')}}" method="GET" id="orderIdForm">
                             
                             <div class="form-group">
                                 <div class="row">
-
-                                                            
                                     <div class="col-md">
                                         <label for=""><b>Search on month</b></label>
                                         <select name="searchmonth" class="form-control @error('searchmonth') is-invalid @enderror">
-                                        <option value="0" selected>select a month</option>
-                                        <option value="1" >Januart</option>
-                                        <option value="2" >February</option>
-                                        <option value="3" >March</option>
-                                        <option value="4" >April</option>
-                                        <option value="5" >May</option>
-                                        <option value="6" >June</option>
-                                        <option value="7" >July</option>
-                                        <option value="8" >August</option>
-                                        <option value="9" >September</option>
-                                        <option value="10" >October</option>
-                                        <option value="11" >November</option>
-                                        <option value="12" >December</option>
-                                    </select>
+                                            <option value="0" selected>select a month</option>
+                                            <option value="1" >Januart</option>
+                                            <option value="2" >February</option>
+                                            <option value="3" >March</option>
+                                            <option value="4" >April</option>
+                                            <option value="5" >May</option>
+                                            <option value="6" >June</option>
+                                            <option value="7" >July</option>
+                                            <option value="8" >August</option>
+                                            <option value="9" >September</option>
+                                            <option value="10" >October</option>
+                                            <option value="11" >November</option>
+                                            <option value="12" >December</option>
+                                        </select>
 
                                         @error('searchmonth')
                                             <span class="invalid-feedback">

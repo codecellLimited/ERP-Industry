@@ -11,7 +11,7 @@
 
     <div class="card shadow">
         <div class="card-body table-responsive">
-            <table class="table table-striped table-hover" style="color:black;">
+            <table class="table table-striped table-hover data-table" style="color:black;">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -61,3 +61,27 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.data-table').DataTable( {
+                dom: 'Bfrtip',
+                ordering: false,
+                buttons: [
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            stripHtml : false,
+                            columns: [1, 2, 3, 4, 5, 6, 7] 
+                            //specify which column you want to print
+    
+                        }
+                    },
+                    
+                    // 'excel', 'pdf',
+                ]
+            } );
+        } );
+    </script>
+@endpush
