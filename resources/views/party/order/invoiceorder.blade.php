@@ -29,7 +29,7 @@
             </div>
             <div class="card shadow">
                 <div class="card-body table-responsive">
-                    <table class="table table-striped table-hover data-table" style="color:black;">
+                    <table class="table table-striped table-hover" style="color:black;">
                     
                         <thead>
                             <tr>
@@ -37,9 +37,7 @@
                                 <th>Quantity</th>
                                 <th>Unit Price</th>
                                 <th>Discount(%)</th>
-                                <th>Total</th>
-                                <th>Total Paid</th>
-                                <th>Due</th>
+                                
 
                             </tr>
                         </thead>
@@ -87,15 +85,16 @@
                                         @endforeach
                                     </table>
                                 </td>
-                                <td>{{$records->total_price}}</td>
-                                <td>{{$records->total_paid}}</td>
-                                <td>{{$records->due}}</td>
+                                
                                 
                             </tr>
                             
                         </tbody>
                     </table>
-
+                    <div class="col-md-3 ml-auto"><h4><b>Total Price:</b>{{$records->total_price}}</h4>
+                    <h4><b>Total Paid :</b>{{$records->total_paid}}</h4>
+                    <h4><b>Total Due  :</b>{{$records->due}}</h4></div>
+                    
                 </div>
 
             </div>
