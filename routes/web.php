@@ -65,6 +65,7 @@ Route::middleware('auth')
         Route::get('party/{key}', 'edit')->name('party.edit');
         Route::post('party/update', 'update')->name('party.update');
         Route::get('party/delete/{key}', 'destroy')->name('party.delete');
+        Route:: get('party/profile/{key}','profile')->name('party.profile');
 
     });
 
@@ -75,6 +76,7 @@ Route::middleware('auth')
        Route::get('order-list','show')->name('order');
        Route::get('order/create', 'create')->name('order.create');
        Route::post('order/store', 'store')->name('order.store');
+       Route::post('order/{key}', 'store')->name('order.view');
        Route::get('order/{key}', 'edit')->name('order.edit');
        Route::post('order/update', 'update')->name('order.update');
        Route::get('order/delete/{key}', 'destroy')->name('order.delete');
@@ -223,8 +225,8 @@ Route::middleware('auth')
 
    Route::controller(App\Http\Controllers\salaryController::class)
    ->group(function(){
-      Route::get('Salary-list','show')->name('salary');
-      Route::get('Salary-search','calculateSalary')->name('salary.calculate');
+   Route::get('Salary-list','show')->name('salary');
+
    });
 
 

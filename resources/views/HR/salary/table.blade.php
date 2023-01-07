@@ -21,7 +21,8 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <form action="{{route('salary.calculate')}}" method="GET" id="orderIdForm">
+                        <form action="{{route('salary')}}" method="GET" id="orderIdForm">
+                            @csrf
                             
                             <div class="form-group">
                                 <div class="row">

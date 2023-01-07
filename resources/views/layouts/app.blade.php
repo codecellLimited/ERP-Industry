@@ -88,7 +88,7 @@
                         <a class="collapse-item" href="{{ route('suppliers') }}">Profile</a>
                         <a class="collapse-item" href="{{ route('materialForSupplier') }}">Materials</a>
                         <a class="collapse-item" href="{{ route('purchase') }}">Material Purchase</a>
-                        <a class="collapse-item" href="javascript::">Requisition</a>
+                        
                     </div>
                 </div>
             </li>
@@ -128,13 +128,13 @@
                 </div>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('quotation')}}" >
                 <i class="fas fa-fw fa-user-tie"></i>
                     <span>Quotations</span>
                 </a>
                 
-            </li>
+            </li> -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('sanction')}}" >
@@ -292,17 +292,17 @@
 
             @endif
 
-            @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2  )
+            @if(auth()->user()->role == 4 || auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3 )
             
-            @if(auth()->user()->role != 4)
-            <!-- devider -->
-            <hr class="sidebar-devider">
-            
-            <div class="sidebar-heading">
-                Stock & Inventories
-            </div>
+            @if(auth()->user()->role != 4 || auth()->user()->role != 3)
+                <!-- devider -->
+                <hr class="sidebar-devider">
+                
+                <div class="sidebar-heading">
+                    Stock & Inventories
+                </div>
             @endif
-
+            @if(auth()->user()->role != 3)
             <!-- Nav Item For Stock & Inventories  -->
             <li class="nav-item">
                 <a href="{{route('asset')}}" class="nav-link collapsed">
@@ -310,26 +310,33 @@
                 <span>assets</span>
                 </a>
             </li>
-
+            @endif
+            @if(auth()->user()->role != 3)
             <li class="nav-item">
                 <a href="{{route('Material')}}" class="nav-link collapsed">
                 <i class="fa fa-cog"></i>
                 <span>Materials</span>
                 </a>
             </li>
+            @endif
+            @if(auth()->user()->role != 3)
+
             <li class="nav-item"> 
                 <a href="{{route('MaterialProduction')}}" class="nav-link collapsed">    
                     <i class="fa fa-cog"></i>
                     <span>Material Production</span>
                 </a>
             </li>
-
+@endif
+@if(auth()->user()->role != 3)
             <li class="nav-item"> 
                 <a href="{{route('totalProduction')}}" class="nav-link collapsed">
                     <i class="fa fa-industry"></i>
                     <span>Total Production</span>
                 </a>
             </li>
+            @endif
+            @if(auth()->user()->role != 3)
 
             <li class="nav-item">
                 <a href="{{route('ProductionPerDay')}}" class="nav-link collapsed">
@@ -337,6 +344,8 @@
                 <span>Production Per Day</span>
                 </a>
             </li>
+            @endif
+            
             <li class="nav-item"> 
                 <a href="{{route('ProductionPerParty')}}" class="nav-link collapsed">    
                     <i class="fa fa-industry"></i>
@@ -366,7 +375,7 @@
                     </button>
 
                     <div class="mr-auto w-100 text-center" style="color:#142983;">
-                        <h2 class="m-0"><b>Codecell ERP Solution For Industry</b></h2>
+                        <h2 class="m-0"><b>ERP For Garments Management</b></h2>
                     </div>
 
                     <!-- Topbar Navbar -->

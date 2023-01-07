@@ -6,6 +6,7 @@ use App\Models\attendance;
 use Illuminate\Http\Request;
 
 use App\Models\employee;
+use App\Models\attendance;
 
 class salaryController extends Controller
 {
@@ -47,6 +48,27 @@ class salaryController extends Controller
         $employee = employee::find($key);
 
         return view('HR.salary.form')->with(compact('employee','searchmonth',''));
+    }
+
+    
+    /** --------------- salary search by month
+     * =============================================*/
+
+    public function calculateSalary(Request $request)
+    {
+        $month = $request->searchmonth;
+        $employees = employee::where('status', true)->orderBy('id_no', 'asc')->get();
+        $salarys = [];
+
+        foreach($employees as $item){
+            $absence = attendance::whereMonth('date', $month)->where('employee_id', $item->id_no)->where('attendance', 0)->count();
+        
+            $item['monthly_salary'] = $item->monthly_salary - ($absence * $item->daily_salary);
+            $salarys[] = $item;            
+        }
+
+        return view('HR.salary.table')->with(compact('salarys'));
+
     }
     
 
