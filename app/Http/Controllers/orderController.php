@@ -116,7 +116,6 @@ class OrderController extends Controller
         return to_route('order')->with('success', 'Record created successfully');
     }
 
-
     
     /** --------------- show edit form
      * =============================================*/
@@ -251,6 +250,22 @@ class OrderController extends Controller
         return back()->with('error', 'Something went wrong. Please try again after login');
     }
 
+    
+    /** --------------- invoice 
+     * =============================================*/
+    public function view(Request $request){
+        $key = $request->key;
+
+        $companyId = auth()->user()->company_id;
+        $parties = Party::where('company_id', $companyId)->get();
+        $record = order::where('company_id', $companyId)->find($key);
+
+
+        $party = party:: where($request->party_id)->first();
+        $records = order:: find($key);
+
+        return view('party.order.invoiceorder')->with(compact('party','records','parties','record'));
+    }
 
 
 

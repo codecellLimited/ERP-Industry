@@ -76,7 +76,7 @@ Route::middleware('auth')
        Route::get('order-list','show')->name('order');
        Route::get('order/create', 'create')->name('order.create');
        Route::post('order/store', 'store')->name('order.store');
-       Route::post('order/{key}', 'store')->name('order.view');
+       Route::get('order/invoice/{key}', 'view')->name('order.view');
        Route::get('order/{key}', 'edit')->name('order.edit');
        Route::post('order/update', 'update')->name('order.update');
        Route::get('order/delete/{key}', 'destroy')->name('order.delete');
