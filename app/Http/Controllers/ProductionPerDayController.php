@@ -140,12 +140,15 @@ class ProductionPerDayController extends Controller
     public function search(Request $request)
     {
         $key = $request->key;
-        $orderid = order::find($key);
-
+        if($orderid = order::find($key)):
         $totalProduction = \App\Models\ProductionPerDay:: where('order_id', $orderid->id)->sum('production');
         $leftProduction = $orderid->quantity - $totalProduction;
-
         return view('inventory.ProductionPerDay.form')->with(compact('orderid', 'totalProduction', 'leftProduction'));
+        else:
+        return back()->with('error', "Record does not exists");
+        endif;
+
+        
     }
 
 }

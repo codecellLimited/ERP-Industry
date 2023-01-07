@@ -26,8 +26,7 @@
         </div>
     </div>
     @endif
-    
-    <br>
+
 
     @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3)
     <div class=".col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">

@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('page_title', 'Employee')
-   
 @section('web-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -13,7 +11,7 @@
 
     <div class="card shadow">
         <div class="card-body table-responsive">
-            <table class="table table-striped table-hover data-table-print" style="color:black;">
+            <table class="table table-striped table-hover data-table" style="color:black;">
             @section('page_title', 'Employee List')
             
                 <thead>
@@ -64,6 +62,7 @@
             </table>
         </div>
     </div>
+@endsection
 
 
 
@@ -72,26 +71,3 @@
 
 
 @endsection()
-
-@push('js')
-    <script>
-        $(document).ready(function() {
-            $('.data-table-print').DataTable( {
-                dom: 'Bfrtip',
-                ordering: false,
-                buttons: [
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            stripHtml : false,
-                            columns: [1, 2, 3, 4, 5, 6, 7] 
-                            //specify which column you want to print
-    
-                        }
-                    },
-                    'excel', 'pdf',
-                ]
-            } );
-        } );
-    </script>
-@endpush

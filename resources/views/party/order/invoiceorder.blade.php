@@ -5,19 +5,24 @@
 <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Party Profile</h1>
+        <button class="btn btn-sm btn-outline-primary" onclick="printDiv('printDiv')">
+            <i class="fa fa-print"></i>
+            Print
+        </button>
         <a href="{{ route('order') }}" class="btn btn-primary shadow-sm">
-        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Back
+            <i class="fas fa-arrow-left fa-sm text-white-50"></i> Back
         </a>
     </div>
 
 <!-- profile -->
     <div class="modal-content">
 
-        <div class="modal-body" style="color:black;">
+        <div class="modal-body py-5" style="color:black;" id="printDiv">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row mb-5">
                     <div class="col-md-8">
-                        <h4><b>Order No: </b> {{$records->id}}</h4>
+                        <h4><b>Order No: </b> {{date('d-m-Y H:i:s A')}}</h4>
+                        <h4><b>Order No: </b> {{$record->id}}</h4>
                         <h4><b> Party Name :</b> {{$party->name}}</h4>
                         <h4><b> Party Phone:</b> {{$party->phone}}</h4>
                         <h4><b> Party Email:</b> {{$party->email}}</h4>
@@ -37,63 +42,43 @@
                                 <th>Quantity</th>
                                 <th>Unit Price</th>
                                 <th>Discount(%)</th>
-                                
-
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $abc = json_decode($record->data);?>
+
+                            @foreach($abc as $row)
                             <tr>
-                                <td>
-                                    <?php $abc = json_decode($records->data);?>
-                                    <table>
-                                    @foreach($abc as $row)
-                                    <tr>
-                                        <td>
-                                            {{\App\Models\product::find($row->name)->name}}
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    </table>
-                                </td>
-                                <td>
-                                    
-                                    <table>
-                                        @foreach($abc as $row)
-                                        <tr>
-                                            <td>{{$row->quantity}} {{\App\Models\unit::find($row->unit)->name}} </td>
-                                        </tr>
-                                        @endforeach
-                                    </table>
-                                </td>
-                                <td>
-                                    
-                                    <table>
-                                        @foreach($abc as $row)
-                                        <tr>
-                                            <td>{{$row->unit_price}} </td>
-                                        </tr>
-                                        @endforeach
-                                    </table>
-                                </td>
-                                <td>
-                                    
-                                    <table>
-                                        @foreach($abc as $row)
-                                        <tr>
-                                            <td>{{$row->discount}} </td>
-                                        </tr>
-                                        @endforeach
-                                    </table>
-                                </td>
-                                
-                                
+                                <td>{{\App\Models\product::find($row->name)->name}}</td>
+                                <td>{{$row->quantity}} {{\App\Models\unit::find($row->unit)->name}} </td>
+                                <td>{{$row->unit_price}} </td>
+                                <td>{{$row->discount}} </td>
                             </tr>
+                            @endforeach
                             
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><b>Total Price :</b></td>
+                                <td>{{$record->total_price}}</td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><b>Total Paid :</b></td>
+                                <td>{{$record->total_paid}}</td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><b>Total Due :</b></td>
+                                <td>{{$record->due}}</td>
+                            </tr>
                         </tbody>
                     </table>
-                    <div class="col-md-3 ml-auto"><h4><b>Total Price:</b>{{$records->total_price}}</h4>
-                    <h4><b>Total Paid :</b>{{$records->total_paid}}</h4>
-                    <h4><b>Total Due  :</b>{{$records->due}}</h4></div>
+
                     
                 </div>
 
@@ -101,7 +86,19 @@
 
         </div>
     </div>
-  
-
-
 @endsection
+
+@push('js')
+     <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+@endpush
