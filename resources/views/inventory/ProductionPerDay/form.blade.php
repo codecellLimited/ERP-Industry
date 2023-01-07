@@ -71,8 +71,8 @@
                         <div class="col-md-4">
                             <img src="{{ asset($orderid->image) }}" alt="" class="img-fluid m-auto d-block" width="150">
                             <br>
-                            <h6 class="mt-3">Order Name: <b>{{\App\Models\Product::find($orderid->product_id)->name}}</b></h6>
-                            <h6>Party Name: <b>{{\App\Models\party::find($orderid->party_id)->name}}</b></h6>
+                            <h6 class="mt-3">Order Name: <b>{{\App\Models\Product::find($orderid->product_id)->name ?? ''}}</b></h6>
+                            <h6>Party Name: <b>{{\App\Models\party::find($orderid->party_id)->name ?? ''}}</b></h6>
                             <h6>Total Order: <b>@if(isset($record))
                                                    {{\App\Models\order::find($orderid->order_id)->quantity }}
                                                 @else
@@ -105,7 +105,7 @@
                                     <input type="text" name="product_name" 
                                         class="form-control @error('product_name') is-invalid @enderror"
                                         @if(isset($orderid))
-                                        value="{{\App\Models\Product::find($orderid->product_id)->name}}"
+                                        value="{{\App\Models\Product::find($orderid->product_id)->name ?? ''}}"
                                         @else
                                         value="{{ old('product_name') }}"
                                         @endif>

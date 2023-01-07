@@ -134,6 +134,11 @@ Route::middleware('auth')
        Route::get('product/{key}', 'edit')->name('product.edit');
        Route::post('product/update', 'update')->name('product.update');
        Route::get('product/delete/{key}', 'destroy')->name('product.delete');
+
+
+      //  ajax request
+      Route::get('product/get/unit', 'getProductUnit')->name('product.unit');
+      Route::get('product/get/price', 'getProductPrice')->name('product.price');
     });
 
      /**-------------    Route for sanction

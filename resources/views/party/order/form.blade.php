@@ -187,7 +187,7 @@
 
                                 <div class="col-md-3">
                                     <label for="">Product Name*</label>
-                                    <select name="name[]" id="" class="form-control @error('name') is-invalid @enderror" required>
+                                    <select name="name[]" id="productKey-0" class="form-control @error('name') is-invalid @enderror" required onchange="loadProductUnit('0')">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\product::get() as $item)
                                         <option value="{{ $item->id }}"
@@ -197,8 +197,6 @@
                                             @endif  >
                                         {{$item->name}}</option>
                                         @endforeach
-                                        
-                                    
                                     </select>
 
                                     @error('name')
@@ -217,9 +215,9 @@
                                 </div>
 
 
-                                <div class="col-md">
+                                <div class="col-md" id="loadUnitFromAjax-0">
                                     <label for="">Unit*</label>
-                                    <select name="unit[]" id="" class="form-control @error('unit_id') is-invalid @enderror" required>
+                                    <select name="unit[]" id="productUnit-0" class="form-control @error('unit_id') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\Unit::get() as $item)
                                             <option value="{{ $item->id }}"
@@ -394,9 +392,6 @@
                                 </span>
                             @enderror
                         </div>
-
-
-
                         <button class="btn btn-primary">Save</button>
                     </form>
                 </div>
@@ -409,8 +404,42 @@
 @endsection
 
 @push('js')
-    
+
     <script>
+
+        const loadProductUnit = (index) => {
+            const key = $("#productKey-"+index).val();
+            // console.log(key);
+            $.ajax({
+                url: '{{route("product.unit")}}',
+                type: 'GET',
+                data:{
+                    key: key
+                },
+                success: (res) => {
+                    // console.log(res);
+                    $("#loadUnitFromAjax-"+index).html(res);
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+
+            $.ajax({
+                url: '{{route("product.price")}}',
+                type: 'GET',
+                data:{
+                    key: key
+                },
+                success: (res) => {
+                    console.log(res);
+                    $("#unit_price-"+index).val(res);
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+        }
 
         @if (isset($record))
         let x = {{ count(json_decode($record->data)) - 1 }};
@@ -422,7 +451,7 @@
             var html = '<div class="row" id="material-row-'+ x +'">\
                                 <div class="col-md-3">\
                                     <label for="">Product Name*</label>\
-                                    <select name="name[]" id="" class="form-control @error('name') is-invalid @enderror" required>\
+                                    <select name="name[]" id="productKey-'+x+'" class="form-control @error('name') is-invalid @enderror" required onchange="loadProductUnit('+x+')">\
                                         <option value="" selected disabled>Select One</option>\
                                         @foreach(\App\Models\product::get() as $item)\
                                         <option value="{{ $item->id }}"\
@@ -445,7 +474,7 @@
                                     class="form-control"\
                                     onchange="calculator('+ x +')">\
                             </div>\
-                            <div class="col-md">\
+                            <div class="col-md" id="loadUnitFromAjax-'+x+'">\
                                     <label for="">Unit*</label>\
                                     <select name="unit[]" id="" class="form-control @error('unit_id') is-invalid @enderror" required>\
                                         <option value="" selected disabled>Select One</option>\

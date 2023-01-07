@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 /** Models */
 use App\Models\Product;
+use App\Models\Unit;
 
 class ProductController extends Controller
 {
@@ -133,6 +134,60 @@ class ProductController extends Controller
         $product = product::destroy($key);
 
         return to_route('product')->with('success', 'Record deleted successfully');
+    }
+
+
+
+
+    public function getProductUnit(Request $request)
+    {
+        $companyId = auth()->user()->company_id;
+        $key = $request->key;
+
+        $units = Unit::where('company_id', $companyId)->where('status', true)->get();
+        $html = "";
+
+        if($product = Product::find($key))
+        {
+            $html .= "<label>Unit*</label>
+            <select name=\"unit[]\" class=\"form-control\" required>
+            <option value=\"\" selected disabled>Select One</option>";
+
+            foreach($units as $item)
+            {
+                if($item->id == $product->unit_id):
+                $selected = "selected";
+                else:
+                $selected = "";
+                endif;
+
+                $html .= "<option value=\"{$item->id}\" $selected>{$item->name}</option>";
+            }
+
+            $html .= "</select>";
+        }
+        else
+        {
+            $html .= "Not Found";
+        }
+
+        return $html;
+    }
+
+
+
+    public function getProductPrice(Request $request)
+    {
+        $companyId = auth()->user()->company_id;
+        $key = $request->key;
+        $html = 0;
+
+        if($product = Product::find($key))
+        {
+            $html = $product->price;
+        }
+
+        return $html;
     }
 
 }
