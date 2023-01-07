@@ -27,7 +27,7 @@
                         @endisset
 
                         <div class="form-group">
-                            <label for="">Supplier Name</label>
+                            <label for="">Supplier Name*</label>
                             <input type="text" name="name" autofocus
                                 class="form-control @error('name') is-invalid @enderror"
                                 @if(isset($supplier))
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
-                                    <label for="">Supplier Email</label>
+                                    <label for="">Supplier Email*</label>
                                     <input type="email" name="email" 
                                         class="form-control @error('email') is-invalid @enderror"
                                         @if(isset($supplier))
@@ -63,7 +63,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Supplier Phone</label>
+                                    <label for="">Supplier Phone*</label>
                                     <input type="tel" name="phone" 
                                         class="form-control @error('phone') is-invalid @enderror"
                                         @if(isset($supplier))
@@ -86,7 +86,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
-                                    <label for="">Company Name</label>
+                                    <label for="">Company Name*</label>
                                     <input type="text" name="company" 
                                         class="form-control @error('company') is-invalid @enderror"
                                         @if(isset($supplier))
@@ -103,7 +103,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Image</label>
+                                    <label for="">Image*</label>
                                         
                                     @if(isset($supplier))
                                     <br><img src="{{ asset($supplier->image) }}" alt="" class="img-fluid" width="150">
@@ -122,7 +122,7 @@
 
 
                         <div class="form-group">
-                            <label for="">Address</label>
+                            <label for="">Address*</label>
                             <textarea type="text" name="address"
                                 class="form-control @error('address') is-invalid @enderror"
                             > @if(isset($supplier)) {{ $supplier->address }} @else {{ old('address') }} @endif </textarea>

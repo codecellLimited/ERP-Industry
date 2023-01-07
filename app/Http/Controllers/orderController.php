@@ -227,29 +227,6 @@ class OrderController extends Controller
     }
 
 
-
-    /**-------------------- Invoice
-     * ===================================================*/
-    public function invoice(Request $request)
-    {
-        $key = $request->key;
-        $companyId = auth()->user()->company_id;
-
-        $row = order::where([
-                    'company_id'    =>  $companyId,
-                    'id'            =>  $key,
-                ]);
-
-        if($row->exists())
-        {
-            $record = $row->first();
-
-            return view('order.invoice')->with(compact('record'));
-        }
-
-        return back()->with('error', 'Something went wrong. Please try again after login');
-    }
-
     
     /** --------------- invoice 
      * =============================================*/

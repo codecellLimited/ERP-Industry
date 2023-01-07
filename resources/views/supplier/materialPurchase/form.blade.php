@@ -29,7 +29,7 @@
                         <div class="form-group" >
                             <div class="row">
                                 <div class="col-md">
-                                    <label for="">Purchase Date</label>
+                                    <label for="">Purchase Date*</label>
                                     <input type="date" name="purchase_date" 
                                         class="form-control @error('purchase_date') is-invalid @enderror"
                                         @if(isset($purchase))
@@ -46,7 +46,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Supplier</label>
+                                    <label for="">Supplier*</label>
                                     <select name="supplierID" id="" class="form-control @error('supplierID') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\Supplier::get() as $item)
@@ -76,7 +76,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
-                                    <label for="">Material Name</label>
+                                    <label for="">Material Name*</label>
                                     <select name="material_id" id="" class="form-control @error('material_id') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\materialForSupplier::get() as $item)
@@ -99,7 +99,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Quantity</label>
+                                    <label for="">Quantity*</label>
                                     <input type="text" name="quantity" 
                                         class="form-control @error('quantity') is-invalid @enderror"
                                         @if(isset($purchase))
@@ -116,7 +116,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Unit</label>
+                                    <label for="">Unit*</label>
                                     <select name="unit_id" id="" class="form-control @error('unit_id') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\Unit::get() as $item)
@@ -140,7 +140,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Unit Price</label>
+                                    <label for="">Unit Price*</label>
                                     <input type="text" name="unit_price" 
                                         class="form-control @error('unit_price') is-invalid @enderror"
                                         @if(isset($purchase))
@@ -157,7 +157,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Discount(%)</label>
+                                    <label for="">Discount(%)*</label>
                                     <input type="text" name="discount" 
                                         class="form-control @error('discount') is-invalid @enderror"
                                         @if(isset($purchase))
