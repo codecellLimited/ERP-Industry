@@ -22,9 +22,9 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Company Image</th>
-                    <th>Order By</th>
                     <th>Order ID</th>
+                    <th>Company logo</th>
+                    <th>Order By</th>
                     <th>Party Name</th>
                     <th>Total Bill</th>
                     <th>Total Paid</th>
@@ -38,10 +38,11 @@
                 @forelse($records as $key =>$item)
                 <tr>
                     <th scope="row" >{{++$key}}</th>
-                    <td><img src="{{ asset(\App\Models\party::find($item->party_id)->image) }}" alt="" class="img-fluid m-auto d-block" width="70"></td>
-                    <td>{{Str::upper( \App\Models\party::find($item->party_id)->name)}}</td>
                     <td>{{$item->id}}</td>
+                    <td><img src="{{ asset(\App\Models\party::find($item->party_id)->image) }}" alt="" class="img-fluid m-auto d-block" width="70"></td>
                     <td>{{\App\Models\party::find($item->party_id)->company}}</td>
+                    
+                    <td>{{Str::upper( \App\Models\party::find($item->party_id)->name)}}</td>
                     <td>{{$item->total_price}}</td>
                     <td>{{$item->total_paid}}</td>
                     <td>{{$item->due}}</td>
@@ -65,8 +66,8 @@
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('order.view', $item->id) }}">
-                                            <i class="nav-link-icon fa fa-pen"></i>
-                                            <span> View</span>
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <span> Invoice</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
