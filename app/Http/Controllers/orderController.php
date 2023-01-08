@@ -76,7 +76,7 @@ class OrderController extends Controller
         $request->validate([
             'party_id'              => 'required',
             'order_date'            => 'required',
-            'order_delivery_date'   => 'required',
+            'order_delivery_date'   => 'required|date|date_format:Y-m-d|after:order_date',
             'image'                 => 'nullable|mimes:jpg,jpeg,png'
         ]);
 
@@ -226,29 +226,6 @@ class OrderController extends Controller
         return back()->with('error', 'Something went wrong. Please try again after login');
     }
 
-
-
-    /**-------------------- Invoice
-     * ===================================================*/
-    public function invoice(Request $request)
-    {
-        $key = $request->key;
-        $companyId = auth()->user()->company_id;
-
-        $row = order::where([
-                    'company_id'    =>  $companyId,
-                    'id'            =>  $key,
-                ]);
-
-        if($row->exists())
-        {
-            $record = $row->first();
-
-            return view('order.invoice')->with(compact('record'));
-        }
-
-        return back()->with('error', 'Something went wrong. Please try again after login');
-    }
 
     
     /** --------------- invoice 

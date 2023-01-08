@@ -177,4 +177,17 @@ class employeeController extends Controller
         return to_route('employee')->with('success', 'Record deleted successfully');
     }
 
+    public function getemployeename(Request $request){
+        $companyId = auth()->user()->company_id;
+        $key = $request->key;
+        $html = "Not Found";
+
+        if($employee = employee::where("id_no", $key)->first())
+        {
+            $html = $employee->name;
+        }
+
+        return $html;
+    }
+
 }

@@ -28,7 +28,7 @@
 
                         <div class="form-group">
                             <div class="col-md-4">
-                                <label for="">Material Name</label>
+                                <label for="">Material Name*</label>
                                 <input type="text" name="name" autofocus
                                     class="form-control @error('name') is-invalid @enderror"
                                     @if(isset($materialForSupplier))
@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                    <label for=""><b>Material Image</b></label>
+                                    <label for=""><b>Material Image*</b></label>
                                     @if(isset($materialForSupplier))
                                         <img src="{{asset($materialForSupplier->image)}}" alt="" width="100px" height="100px">
                                     @endif

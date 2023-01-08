@@ -4,7 +4,7 @@
 @section('page_title', 'profile')
 <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Party Profile</h1>
+        <h1 class="h3 mb-0 text-gray-800">Order Invoice</h1>
         <button class="btn btn-sm btn-outline-primary" onclick="printDiv('printDiv')">
             <i class="fa fa-print"></i>
             Print
@@ -21,7 +21,7 @@
             <div class="container-fluid">
                 <div class="row mb-5">
                     <div class="col-md-8">
-                        <h4><b>Order No: </b> {{date('d-m-Y H:i:s A')}}</h4>
+                        <h4><b>Order Date: </b> {{date('d-m-Y H:i:s A')}}</h4>
                         <h4><b>Order No: </b> {{$record->id}}</h4>
                         <h4><b> Party Name :</b> {{$party->name}}</h4>
                         <h4><b> Party Phone:</b> {{$party->phone}}</h4>

@@ -222,6 +222,10 @@ Route::middleware('auth')
       Route::get('employee/{key}', 'edit')->name('employee.edit');
       Route::post('employee/update', 'update')->name('employee.update');
       Route::get('employee/delete/{key}', 'destroy')->name('employee.delete');
+   
+      //ajax request
+      Route::get('ajax/employee/name', 'getemployeename')->name('employee.name');
+
    });
 
 

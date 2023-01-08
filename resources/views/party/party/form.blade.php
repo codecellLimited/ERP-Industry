@@ -27,7 +27,7 @@
                         @endisset
 
                         <div class="form-group">
-                            <label for="">Party Name</label>
+                            <label for="">Party Name*</label>
                             <input type="text" name="name" autofocus
                                 class="form-control @error('name') is-invalid @enderror"
                                 @if(isset($parties))
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
-                                    <label for="">Party Email</label>
+                                    <label for="">Party Email*</label>
                                     <input type="email" name="email" 
                                         class="form-control @error('email') is-invalid @enderror"
                                         @if(isset($parties))
@@ -63,7 +63,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Party Phone</label>
+                                    <label for="">Party Phone*</label>
                                     <input type="tel" name="phone" 
                                         class="form-control @error('phone') is-invalid @enderror"
                                         @if(isset($parties))
@@ -86,7 +86,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md">
-                                    <label for="">Company Name</label>
+                                    <label for="">Company Name*</label>
                                     <input type="text" name="company" 
                                         class="form-control @error('company') is-invalid @enderror"
                                         @if(isset($parties))
@@ -103,7 +103,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for="">Image</label>
+                                    <label for="">Image*</label>
                                     @if(isset($parties))
                                     <br><img src="{{ asset($parties->image) }}" alt="" class="img-fluid" width="200">
                                     @endif
@@ -121,7 +121,7 @@
 
 
                         <div class="form-group">
-                            <label for="">Address</label>
+                            <label for="">Address*</label>
                             <textarea type="text" name="address"
                                 class="form-control @error('address') is-invalid @enderror">@if(isset($parties)){{ $parties->address }}@else {{ old('address') }}@endif</textarea>
 
