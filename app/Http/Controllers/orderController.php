@@ -76,7 +76,7 @@ class OrderController extends Controller
         $request->validate([
             'party_id'              => 'required',
             'order_date'            => 'required',
-            'order_delivery_date'   => 'required',
+            'order_delivery_date'   => 'required|date|date_format:Y-m-d|after:order_date',
             'image'                 => 'nullable|mimes:jpg,jpeg,png'
         ]);
 
