@@ -24,6 +24,9 @@
                         <h6>{{ $item->company }}</h5>
                         <h6>{{ $item->phone }}</h6>
 
+                        <a href="{{ route('Supplier.profile', $item->id) }}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-eye" aria-hidden="true"></i> </a>
+
                         <a href="{{ route('suppliers.edit', $item->id) }}" class="btn btn-sm btn-primary">
                             <i class="fas fa-pen"></i>
                         </a>

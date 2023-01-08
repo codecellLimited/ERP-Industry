@@ -35,6 +35,7 @@ Route::middleware('auth')
         Route::get('suppliers/{key}', 'edit')->name('suppliers.edit');
         Route::post('suppliers/update', 'update')->name('suppliers.update');
         Route::get('suppliers/delete/{key}', 'destroy')->name('suppliers.delete');
+        Route:: get('suppliers/profile/{key}','profile')->name('Supplier.profile');
 
     });
 
