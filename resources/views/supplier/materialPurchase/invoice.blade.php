@@ -4,12 +4,12 @@
 @section('page_title', 'profile')
 <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Order Invoice</h1>
+        <h1 class="h3 mb-0 text-gray-800">Purchase Invoice</h1>
         <button class="btn btn-sm btn-outline-primary" onclick="printDiv('printDiv')">
             <i class="fa fa-print"></i>
             Print
         </button>
-        <a href="{{ route('order') }}" class="btn btn-primary shadow-sm">
+        <a href="{{ route('purchase') }}" class="btn btn-primary shadow-sm">
             <i class="fas fa-arrow-left fa-sm text-white-50"></i> Back
         </a>
     </div>
@@ -18,18 +18,19 @@
     <div class="modal-content">
 
         <div class="modal-body py-5" style="color:black;" id="printDiv">
+        <br>
             <div class="container-fluid">
                 <div class="row mb-5">
                     <div class="col-md-8">
-                        <h4><b>Order Date: </b> {{date('d-m-Y H:i:s A')}}</h4>
-                        <h4><b>Order No: </b> {{$record->id}}</h4>
-                        <h4><b> Party Name :</b> {{$party->name}}</h4>
-                        <h4><b> Party Phone:</b> {{$party->phone}}</h4>
-                        <h4><b> Party Email:</b> {{$party->email}}</h4>
-                        <h4><b> Company Name:</b> {{$party->company}}</h4>
+                        <h4><b>Purchase Date: </b> {{date('d-m-Y H:i:s A')}}</h4>
+                        <h4><b>Purchase No: </b> {{$record->id}}</h4>
+                        <h4><b> Supplier Name :</b> {{$supplier->name}}</h4>
+                        <h4><b> Supplier Phone:</b> {{$supplier->phone}}</h4>
+                        <h4><b> Supplier Email:</b> {{$supplier->email}}</h4>
+                        <h4><b> Company Name:</b> {{$supplier->company}}</h4>
                     </div>
                 <div class="col-md-4 ml-auto">
-                    <img src="{{asset($party->image)}}" alt="" style="width:200px;height:200px" class="img-fluid">
+                    <img src="{{asset($supplier->image)}}" alt="" style="width:200px;height:200px" class="img-fluid">
                 </div>
             </div>
             <div class="card shadow">
@@ -49,7 +50,7 @@
 
                             @foreach($abc as $row)
                             <tr>
-                                <td>{{\App\Models\product::find($row->name)->name}}</td>
+                                <td>{{\App\Models\material::find($row->product_id)->name}}</td>
                                 <td>{{$row->quantity}} {{\App\Models\unit::find($row->unit)->name}} </td>
                                 <td>{{$row->unit_price}} </td>
                                 <td>{{$row->discount}} </td>

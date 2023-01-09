@@ -200,6 +200,7 @@ class PurchaseController extends Controller
     public function updateStatus(Request $request)
     {
         $key = $request->key;
+        $status = $request->status;
         $companyId = auth()->user()->company_id;
 
         $row = purchase::where([
@@ -209,15 +210,19 @@ class PurchaseController extends Controller
 
         if($row->exists())
         {
-            if($row->first()->status) // if status == 1
+            if($status == 1) 
             {
-                $row->update(['status'  =>  false]);
+                $row->update(['status'  =>  1]);
             }
-            else    // if status == 0
+            else if($status == 2)
             {
-                $row->update(['status'  =>  true]);
+                $row->update(['status' => 2]);
             }
-
+            else    
+            {
+                $row->update(['status'  =>  0]);
+            }
+        
             return back()->with('success', 'Record updated successfully');
         }
 
@@ -234,9 +239,9 @@ class PurchaseController extends Controller
         $companyId = auth()->user()->company_id;
         $suppliers = supplier::where('company_id', $companyId)->get();
         $record = purchase::find($key);
-        $supplier = supplier:: find($record->party_id);
+        $supplier = supplier:: find($record->supplierID);
 
-        return view('supplier.materialPurchase.invoiceorder')->with(compact('supplier','suppliers','record'));
+        return view('supplier.materialPurchase.invoice')->with(compact('supplier','suppliers','record'));
     }
 
 

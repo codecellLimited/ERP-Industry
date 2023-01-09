@@ -51,6 +51,8 @@
                         <span class="badge bg-warning">On Processing</span>
                         @elseif($item->status == 2)
                         <span class="badge bg-success text-light">Completed</span>
+                        @elseif($item->status == 3)
+                        <span class="badge bg-success text-light">Delivered</span>
                         @elseif($item->status == 0)
                         <span class="badge bg-danger text-light">Rejected</span>
                         @endif
