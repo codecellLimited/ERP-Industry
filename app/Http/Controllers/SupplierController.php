@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 /** Models */
 use App\Models\Supplier;
+use App\Models\Purchase;
 
 class SupplierController extends Controller
 {
@@ -16,6 +17,17 @@ class SupplierController extends Controller
         $suppliers = Supplier::where('status', true)->latest()->get();
 
         return view('supplier.supplier.table')->with(compact('suppliers'));
+    }
+
+
+    /**--view profile-- */
+    public function profile(Request $request){
+        $key = $request->key;
+        $Suppliers = supplier:: find($key);
+
+        $records = Purchase:: where('supplierID',$key)->get();
+
+        return view('supplier.supplier.profile')->with(compact('Suppliers','records'));
     }
 
 
