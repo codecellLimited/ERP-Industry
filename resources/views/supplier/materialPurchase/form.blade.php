@@ -83,7 +83,7 @@
                                         <label for="">Product name*</label>
                                         <select name="product_id[]" class="form-control @error('product_id') is-invalid @enderror" required>
                                             <option value="" selected disabled>Select One</option>
-                                            @foreach (\App\Models\material::get() as $item)
+                                            @foreach (\App\Models\materialForSupplier::get() as $item)
                                             <option value="{{ $item->id }}"
                                                 @if(isset($records)) {{ ($item->id == $records->product_id) ? 'selected' : '' }} @endif>
                                                 {{ $item->name }}</option>
@@ -173,7 +173,7 @@
                                     <label for="">Product Name*</label>
                                     <select name="product_id[]" id="productKey-0" class="form-control @error('product_id') is-invalid @enderror" required onchange="loadProductUnit('0')">
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\material::get() as $item)
+                                        @foreach(\App\Models\materialForSupplier::get() as $item)
                                         <option value="{{ $item->id }}"
                                             @if(isset($record))
                                                 {{($record->product_id == $item->id)? 'selected':''}}
@@ -438,7 +438,7 @@
                                     <label for="">Product Name*</label>\
                                     <select name="product_id[]" id="productKey-'+x+'" class="form-control @error('product_id') is-invalid @enderror" required onchange="loadProductUnit('+x+')">\
                                         <option value="" selected disabled>Select One</option>\
-                                        @foreach(\App\Models\material::get() as $item)\
+                                        @foreach(\App\Models\materialForSupplier::get() as $item)\
                                         <option value="{{ $item->id }}"\
                                             @if(isset($record))\
                                                 {{($record->product_id == $item->id)? 'selected':''}}\
