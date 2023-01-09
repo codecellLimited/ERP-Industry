@@ -22,7 +22,7 @@
                         <th scope="col">Employee Name</th>
                         <th scope="col">Leave Type</th>
                         <th scope="col">Date From Leave</th>
-                        <th scope="col">Date Upto Leave</th>
+                        <th scope="col">Next Joining Date</th>
                         <th scope="col">Total Days</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -31,8 +31,8 @@
                     @forelse($leave as $key => $item)
                     <tr style="color:black;">
                         <th scope="row" >{{++$key}}</th>
-                        <td>{{ $item->employee_id}}</td>
-                        <td>{{ $item->name}}</td>
+                        <td>{{ Str::upper($item->employee_id)}}</td>
+                        <td>{{ Str::upper($item->name)}}</td>
 
                         <td>@if( $item->type == 1) Inform
                             @elseif( $item->type == 2) Application

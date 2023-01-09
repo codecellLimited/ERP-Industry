@@ -38,7 +38,7 @@
                 <tr>
                     <th scope="row" >{{++$key}}</th>
                     <td><img src="{{ asset(\App\Models\supplier::find($item->supplierID)->image) }}" alt="" class="img-fluid m-auto d-block" width="70"></td>
-                    <td>{{\App\Models\supplier::find($item->supplierID)->company}}</td>
+                    <td>{{Str::upper(\App\Models\supplier::find($item->supplierID)->company)}}</td>
                     
                     <td>{{Str::upper( \App\Models\supplier::find($item->supplierID)->name)}}</td>
                     <td>{{$item->total_price}}</td>

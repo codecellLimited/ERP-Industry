@@ -160,10 +160,10 @@ class OrderController extends Controller
             $data['image'] = $path;
         }
 
-        for($i=0; $i < count($request->product); $i++)
+        for($i=0; $i < count($request->name); $i++)
         {
             $details[] = [
-                'product' => $request->product[$i],
+                'name' => $request->name[$i],
                 'quantity'      => $request->quantity[$i],
                 'unit'          => $request->unit[$i],
                 'unit_price'    => $request->unit_price[$i],
