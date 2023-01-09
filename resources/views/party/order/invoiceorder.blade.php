@@ -42,6 +42,7 @@
                                 <th>Quantity</th>
                                 <th>Unit Price</th>
                                 <th>Discount(%)</th>
+                                <th>Sub Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,10 +54,29 @@
                                 <td>{{$row->quantity}} {{\App\Models\unit::find($row->unit)->name}} </td>
                                 <td>{{$row->unit_price}} </td>
                                 <td>{{$row->discount}} </td>
+                                <td>{{$row->sub_total}} </td>
                             </tr>
                             @endforeach
                             
+                            
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Transport Cost :</b></td>
+                                <td>{{$record->transport_cost}}</td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td><b>Total Price :</b></td>
@@ -66,11 +86,13 @@
                             <tr>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td><b>Total Paid :</b></td>
                                 <td>{{$record->total_paid}}</td>
                             </tr>
 
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td><b>Total Due :</b></td>

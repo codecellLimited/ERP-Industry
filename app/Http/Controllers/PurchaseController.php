@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\supplier;
 use App\Models\purchase;
-use App\Models\material;
+use App\Models\materialForSupplier;
 
 class PurchaseController extends Controller
 {
@@ -61,7 +61,7 @@ class PurchaseController extends Controller
 
         $purchase = purchase::where('company_id', $companyId)->get();
         $supplier = supplier:: where('company_id', $companyId)->where('status', true)->get();
-        $material = material:: where('company_id', $companyId)->where('status', true)->get();
+        $material = materialForSupplier:: where('company_id', $companyId)->where('status', true)->get();
 
         return view('supplier.materialPurchase.form')->with(compact('purchase','supplier','material'));
     }
