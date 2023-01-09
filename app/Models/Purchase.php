@@ -12,18 +12,13 @@ class Purchase extends Model
     protected $fillable = [
         'purchase_date',
         'supplierID',
-        'material_id',
-        'quantity',
-        'unit_id',
-        'unit_price',
-        'discount',
-        'total_discount',
+        'data',
         'transport_cost',
-        'grand_total',
+        'total_price',
         'total_paid',
-        'total_due',
+        'due',
         'payment_method',
-        'purchase_note',
+        'note',
         
     ];
 

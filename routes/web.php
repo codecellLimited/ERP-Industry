@@ -48,9 +48,11 @@ Route::middleware('auth')
         Route::get('purchase-list', 'show')->name('purchase');
         Route::get('purchase/create', 'create')->name('purchase.create');
         Route::post('purchase/store', 'store')->name('purchase.store');
+       Route::get('purchase/invoice/{key}', 'view')->name('purchase.view');
         Route::get('purchase/{key}', 'edit')->name('purchase.edit');
         Route::post('purchase/update', 'update')->name('purchase.update');
         Route::get('purchase/delete/{key}', 'destroy')->name('purchase.delete');
+        Route::get('purchase/status/{key}/{status}', 'updateStatus')->name('purchase.status');
 
     });
     
