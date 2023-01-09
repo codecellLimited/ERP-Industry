@@ -384,7 +384,7 @@
                         <div class="form-group">
                             <label for=""><b>Purchase note*</b></label>
                             <textarea type="text" name="note" class="form-control @error('note') is-invalid @enderror"
-                            >@if(isset($record)) {{ $record->note }} @else {{ old('note') }} @endif</textarea>
+                            >@if(isset($record)){{ $record->note }}@else{{ old('note')}}@endif</textarea>
 
                             @error('note')
                                 <span class="invalid-feedback">

@@ -33,7 +33,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Order NO</th>
+                                <th>Purchase NO</th>
                                 <th>Product Name</th>
                                 <th>Quantity</th>
                                 <th>Unit Price</th>
@@ -55,7 +55,7 @@
                                     @foreach($abc as $row)
                                     <tr>
                                         <td>
-                                            {{\App\Models\product::find($row->name)->name}}
+                                            {{\App\Models\material::find($row->product_id)->name}}
                                         </td>
                                     </tr>
                                     @endforeach

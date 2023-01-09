@@ -158,7 +158,7 @@ class PurchaseController extends Controller
             $data['image'] = $path;
         }
 
-        for($i=0; $i < count($request->product); $i++)
+        for($i=0; $i < count($request->product_id); $i++)
         {
             $details[] = [
                 'product_id' => $request->product_id[$i],

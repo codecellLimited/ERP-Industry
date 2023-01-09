@@ -39,7 +39,7 @@
                                     <input type="date" name="purchase_date" 
                                         class="form-control @error('purchase_date') is-invalid @enderror"
                                         @if(isset($record))
-                                        value="{{ date('Y-M-d', strtotime($record->purchase_date)) }}"
+                                        value="{{ date('Y-m-d', strtotime($record->purchase_date)) }}"
                                         @else
                                         value="{{ old('purchase_date') }}"
                                         @endif>
@@ -76,7 +76,7 @@
 
                         <div class="form-group" id="product_item">
                             @if (isset($record))
-                                @foreach (json_decode($record->data) as $key => $item)
+                                @foreach (json_decode($record->data) as $key => $records)
                                 <div class="row" id="material-row-{{$key}}">
                                     
                                     <div class="col-md">
@@ -85,8 +85,8 @@
                                             <option value="" selected disabled>Select One</option>
                                             @foreach (\App\Models\material::get() as $item)
                                             <option value="{{ $item->id }}"
-                                                @if(isset($record)) {{ ($item->id == $record->product_id) ? 'selected' : '' }} @endif>
-                                                {{ $item->company }}</option>
+                                                @if(isset($records)) {{ ($item->id == $records->product_id) ? 'selected' : '' }} @endif>
+                                                {{ $item->name }}</option>
                                             @endforeach
                                             
                                         </select>
@@ -104,7 +104,7 @@
                                         <label for=""><b>Quantity*</b></label>
                                         <input type="text" name="quantity[]" id="quantity-{{$key}}"
                                             class="quantity form-control"
-                                            onchange="calculator('{{$key}}')" value="{{ $item->quantity }}">
+                                            onchange="calculator('{{$key}}')" value="{{ $records->quantity }}">
                                     </div>
 
                                     <div class="col-md">
@@ -113,9 +113,9 @@
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\Unit::get() as $item)
                                             <option value="{{ $item->id }}"
-                                                @if(isset($record))
-                                                    {{($record->unit_id == $item->id) ? 'selected' : ''}}
-                                                @else{{(old('unit_id')== $item->id) ? 'selected' : ''}}
+                                                @if(isset($records))
+                                                    {{($records->unit == $item->id) ? 'selected' : ''}}
+                                                @else{{(old('unit')== $item->id) ? 'selected' : ''}}
 
                                                 @endif> 
                                         
@@ -135,21 +135,21 @@
                                         <label for=""><b>Unit Price*</b></label>
 
                                         <input type="text" name="unit_price[]" id="unit_price-{{$key}}" 
-                                            class="unit_price form-control" value="{{ $item->unit_price }}"
+                                            class="unit_price form-control" value="{{ $records->unit_price }}"
                                             onchange="calculator('{{$key}}')">
                                     </div>
 
                                     <div class="col-md">
                                         <label for=""><b>Discount(%)*</b></label>
                                         <input type="text" name="discount[]" id="discount-{{$key}}"
-                                            class="discount form-control" value="{{ $item->discount }}"
+                                            class="discount form-control" value="{{ $records->discount }}"
                                             onkeyup="calculator('{{$key}}')">
                                     </div>
 
                                     <div class="col-md">
                                         <label><b>Sub Total</b></label>
                                         <input type="text" name="sub_total[]" class="form-control" readonly
-                                            id="single-total-{{$key}}" value="{{ $item->sub_total }}">
+                                            id="single-total-{{$key}}" value="{{ $records->sub_total }}">
                                     </div>
 
                                     @if ($key == 0)
@@ -334,13 +334,13 @@
                                 <select name="payment_method" class="form-control @error('supplierID') is-invalid @enderror" required>
                                     <option value="" selected disabled>Select One</option>
                                     <option value="1" 
-                                        @if(isset($record)) {{ ($record->payment_method == "Bank Payment") ? 'selected' : '' }} @endif >
+                                        @if(isset($record)) {{ ($record->payment_method == "1") ? 'selected' : '' }} @endif >
                                         Bank Payment
                                     </option>
                                     <option value="2" 
-                                        @if(isset($record)) {{ ($record->payment_method == "Cash Payment") ? 'selected' : '' }} @endif>Cash Payment</option>
+                                        @if(isset($record)) {{ ($record->payment_method == "2") ? 'selected' : '' }} @endif>Cash Payment</option>
                                     <option value="3" 
-                                        @if(isset($record)) {{ ($record->payment_method == "Online Transaction") ? 'selected' : '' }} @endif>Online Transaction</option>
+                                        @if(isset($record)) {{ ($record->payment_method == "3") ? 'selected' : '' }} @endif>Online Transaction</option>
                                 </select>
 
                                 @error('payment_method')
@@ -349,6 +349,7 @@
                                     </span>
                                 @enderror
                             </div>
+                            
                             <div class="col-md">
                                 <label for=""><b>Choose Image</b></label>
                                 @if(isset($record))
@@ -368,7 +369,7 @@
                         <div class="form-group">
                             <label for=""><b>Purchase note*</b></label>
                             <textarea type="text" name="note" class="form-control @error('note') is-invalid @enderror"
-                            >@if(isset($record)) {{ $record->note }} @else {{ old('note') }} @endif</textarea>
+                            >@if(isset($record)){{ $record->note }}@else{{ old('note') }}@endif</textarea>
 
                             @error('note')
                                 <span class="invalid-feedback">

@@ -19,7 +19,7 @@ class Purchase extends Model
         'due',
         'payment_method',
         'note',
-        
+        'image',
     ];
 
 }
