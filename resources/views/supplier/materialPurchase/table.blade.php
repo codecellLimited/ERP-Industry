@@ -23,7 +23,7 @@
                 <tr>
                     <th>#</th>
                     <th>Company logo</th>
-                    <th>Purchase By</th>
+                    <th>Company Name</th>
                     <th>Supplier Name</th>
                     <th>Total Bill</th>
                     <th>Total Paid</th>
@@ -37,7 +37,6 @@
                 @forelse($records as $key =>$item)
                 <tr>
                     <th scope="row" >{{++$key}}</th>
-                    <td>{{$item->id}}</td>
                     <td><img src="{{ asset(\App\Models\supplier::find($item->supplierID)->image) }}" alt="" class="img-fluid m-auto d-block" width="70"></td>
                     <td>{{\App\Models\supplier::find($item->supplierID)->company}}</td>
                     
@@ -47,9 +46,9 @@
                     <td>{{$item->due}}</td>
                     <td>
                         @if ($item->status == 1)
-                        <span class="badge bg-warning">On Processing</span>
+                        <span class="badge bg-warning">Ordered</span>
                         @elseif($item->status == 2)
-                        <span class="badge bg-success text-light">Completed</span>
+                        <span class="badge bg-success text-light">Received</span>
                         @elseif($item->status == 0)
                         <span class="badge bg-danger text-light">Rejected</span>
                         @endif
@@ -88,7 +87,7 @@
                                             onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('purchase.status', [$item->id, 1])}}'); }"
                                         >
                                             <i class="nav-link-icon fa fa-handshake"></i>
-                                            <span>On Processing</span>
+                                            <span>Ordered</span>
                                         </a>
                                     </li>
                                     @endif
@@ -99,7 +98,7 @@
                                             onclick="if(confirm('Are you sure? you are changing the status of this record')){ location.replace('{{route('purchase.status', [$item->id, 2])}}'); }"
                                         >
                                             <i class="nav-link-icon fa fa-handshake"></i>
-                                            <span>Completed</span>
+                                            <span>Received</span>
                                         </a>
                                     </li>
                                     @endif
