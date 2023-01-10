@@ -65,9 +65,9 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md">
+                                <div class="col-md" style="display:none;" id="party_show">
                                     <label for=""><b>Party Name</b></label>
-                                    <select name="party_id" id="party_show" class="form-control @error('party_id') is-invalid @enderror">
+                                    <select name="party_id"  class="form-control @error('party_id') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\party::get() as $item)
                                         <option value="{{ $item->id }}"
@@ -86,9 +86,9 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md">
+                                <div class="col-md" style="display:none;" id="supplier_show" >
                                     <label for=""><b>Supplier Name</b></label>
-                                    <select name="supplier_id" id="supplier_show" class="form-control @error('supplier_id') is-invalid @enderror">
+                                    <select name="supplier_id" class="form-control @error('supplier_id') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\supplier::get() as $item)
                                         <option value="{{ $item->id }}"
@@ -255,19 +255,25 @@
 
 @endsection
 
-@push('js')
+<!-- @push('js')
     <script>
         function toggoldiv(value){
+            console.log(value);
+            alert(value);
+            
+            const party_show = document.getElementById("party_show");
+            const supplier_show = document.getElementById("supplier_show");
+
             if(value == '1'){
-                const party_show = document.getElementById("party_show");
-                party_show.display = value == 1 ? "block":"none";
+                party_show.display = "block";
+                supplier_show.display = "none";
             }  
             else if(value == '2'){
-                const party_show = document.getElementById("supplier_show");
-                supplier_show.display = value == 1 ? "block":"none";
-
+                
+                party_show.display = "none";
+                supplier_show.display = "block";
             }
         }
     </script>
 
-@endpush
+@endpush -->
