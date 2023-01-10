@@ -255,10 +255,11 @@
 
 @endsection
 
-@push('js')
+<!-- @push('js')
     <script>
         function toggoldiv(value){
             console.log(value);
+            alert(value);
             
             const party_show = document.getElementById("party_show");
             const supplier_show = document.getElementById("supplier_show");
@@ -275,4 +276,4 @@
         }
     </script>
 
-@endpush
+@endpush -->
