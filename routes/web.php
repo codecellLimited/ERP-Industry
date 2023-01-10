@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 /** ------------ Auth Routes
  * ======================================*/
-// Route::view('/', 'auth.login')->name('login.view');
+Route::view('/', 'auth.login')->name('login.view');
 // user login
 Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 // user logout
