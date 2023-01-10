@@ -12,9 +12,12 @@ class completedController extends Controller
      * =============================================*/
     public function show()
     {
-        $completed = order::where('status', 2)->latest()->get();
+        $companyId = auth()->user()->company_id;
 
-        return view('sales.completedOrder.table')->with(compact('completed'));
+        $records = order::where(['company_id'    => $companyId,])
+                          ->where('status','>', 1)->latest()->get();
+
+        return view('sales.completedOrder.table')->with(compact('records'));
     }
 
 

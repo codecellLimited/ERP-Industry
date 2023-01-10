@@ -108,7 +108,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for=""><b>Upto Date</b></label>
+                                    <label for=""><b>Next Joining Date</b></label>
                                     <input type="date" name="date_to" id="day2"
                                         class="form-control @error('date_to') is-invalid @enderror"
                                         @if(isset($leave))

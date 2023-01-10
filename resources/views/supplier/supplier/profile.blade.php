@@ -33,11 +33,13 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Order NO</th>
+                                <th>Purchase NO</th>
                                 <th>Product Name</th>
                                 <th>Quantity</th>
                                 <th>Unit Price</th>
                                 <th>Discount(%)</th>
+                                <th>Sub Total</th>
+                                <th>Transport Cost</th>
                                 <th>Total</th>
                                 <th>Total Paid</th>
                                 <th>Due</th>
@@ -55,7 +57,7 @@
                                     @foreach($abc as $row)
                                     <tr>
                                         <td>
-                                            {{\App\Models\product::find($row->name)->name}}
+                                            {{\App\Models\materialForSupplier::find($row->product_id)->name}}
                                         </td>
                                     </tr>
                                     @endforeach
@@ -91,6 +93,17 @@
                                         @endforeach
                                     </table>
                                 </td>
+                                <td>
+                                    
+                                    <table>
+                                        @foreach($abc as $row)
+                                        <tr>
+                                            <td>{{$row->sub_total}} </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </td>
+                                <td>{{$item->transport_cost}}</td>
                                 <td>{{$item->total_price}}</td>
                                 <td>{{$item->total_paid}}</td>
                                 <td>{{$item->due}}</td>

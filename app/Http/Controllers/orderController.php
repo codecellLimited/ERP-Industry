@@ -160,10 +160,10 @@ class OrderController extends Controller
             $data['image'] = $path;
         }
 
-        for($i=0; $i < count($request->product); $i++)
+        for($i=0; $i < count($request->name); $i++)
         {
             $details[] = [
-                'product' => $request->product[$i],
+                'name' => $request->name[$i],
                 'quantity'      => $request->quantity[$i],
                 'unit'          => $request->unit[$i],
                 'unit_price'    => $request->unit_price[$i],
@@ -199,9 +199,10 @@ class OrderController extends Controller
 
     /**-------------------- Update Status
      * ===================================================*/
-    public function updateStatus(Request $request)
+    public function orderStatus(Request $request)
     {
         $key = $request->key;
+        $status = $request->status;
         $companyId = auth()->user()->company_id;
 
         $row = order::where([
@@ -211,13 +212,21 @@ class OrderController extends Controller
 
         if($row->exists())
         {
-            if($row->first()->status) // if status == 1
+            if($status == 1) 
             {
-                $row->update(['status'  =>  false]);
+                $row->update(['status'  =>  1]);
             }
-            else    // if status == 0
+            else if($status == 2)
             {
-                $row->update(['status'  =>  true]);
+                $row->update(['status' => 2]);
+            }
+            else if($status == 3)
+            {
+                $row->update(['status' => 3]);
+            }
+            else    
+            {
+                $row->update(['status'  =>  0]);
             }
 
             return back()->with('success', 'Record updated successfully');

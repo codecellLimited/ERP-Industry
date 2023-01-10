@@ -38,6 +38,8 @@
                                 <th>Quantity</th>
                                 <th>Unit Price</th>
                                 <th>Discount(%)</th>
+                                <th>Sub Total</th>
+                                <th>Transport Cost</th>
                                 <th>Total</th>
                                 <th>Total Paid</th>
                                 <th>Due</th>
@@ -82,7 +84,6 @@
                                     </table>
                                 </td>
                                 <td>
-                                    
                                     <table>
                                         @foreach($abc as $row)
                                         <tr>
@@ -91,6 +92,16 @@
                                         @endforeach
                                     </table>
                                 </td>
+                                <td>
+                                    <table>
+                                        @foreach($abc as $row)
+                                        <tr>
+                                            <td>{{$row->sub_total}} </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </td>
+                                <td>{{$item->transport_cost}}</td>
                                 <td>{{$item->total_price}}</td>
                                 <td>{{$item->total_paid}}</td>
                                 <td>{{$item->due}}</td>
