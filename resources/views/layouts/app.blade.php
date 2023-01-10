@@ -127,13 +127,13 @@
                 </div>
             </li>
 
-            <!-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('quotation')}}" >
                 <i class="fas fa-fw fa-user-tie"></i>
                     <span>Quotations</span>
                 </a>
                 
-            </li> -->
+            </li> 
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{route('sanction')}}" >
@@ -253,6 +253,7 @@
                         {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
                         <a class="collapse-item" href="{{route('transection')}}">Bank transections</a>
                         <a class="collapse-item" href="{{route('expense')}}">Expenses</a>
+                        <a class="collapse-item" href="{{route('transection')}}">Transection</a>
                         <a class="collapse-item" href="{{route('partyreceive')}}">Party Receive</a>
                         <a class="collapse-item" href="{{route('supplierpayment')}}">Supplier Payment</a>
                         <a class="collapse-item" href="{{route('lc')}}">LC</a>

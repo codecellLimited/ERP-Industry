@@ -298,31 +298,35 @@ Route::middleware('auth')
 
 
 
-   /**-------------    Route for Bank Transection
+    /**-------------    Route for expense 
      * ========================================================*/    
-
-     Route::controller(App\Http\Controllers\transectionController::class)
+    
+     Route::controller(App\Http\Controllers\expenseController::class)
      ->group(function(){
-       Route::get('Transection-list','show')->name('transection');
- 
+         Route::get('expense-list','show')->name('expense');
+         Route::get('expense/create', 'create')->name('expense.create');
+        Route::post('expense/store', 'store')->name('expense.store');
+        Route::get('expense/{key}', 'edit')->name('expense.edit');
+        Route::post('expense/update', 'update')->name('expense.update');
+        Route::get('expense/delete/{key}', 'destroy')->name('expense.delete');
      });
-
+ 
 
 
     /**-------------    Route for expense 
      * ========================================================*/    
     
-    Route::controller(App\Http\Controllers\expenseController::class)
-    ->group(function(){
-        Route::get('expense-list','show')->name('expense');
-        Route::get('expense/create', 'create')->name('expense.create');
-       Route::post('expense/store', 'store')->name('expense.store');
-       Route::get('expense/{key}', 'edit')->name('expense.edit');
-       Route::post('expense/update', 'update')->name('expense.update');
-       Route::get('expense/delete/{key}', 'destroy')->name('expense.delete');
-    });
-
-
+     Route::controller(App\Http\Controllers\transectionController::class)
+     ->group(function(){
+         Route::get('transection-list','show')->name('transection');
+         Route::get('transection/create', 'create')->name('transection.create');
+        Route::post('transection/store', 'store')->name('transection.store');
+        Route::get('transection/{key}', 'edit')->name('transection.edit');
+        Route::post('transection/update', 'update')->name('transection.update');
+        Route::get('transection/delete/{key}', 'destroy')->name('transection.delete');
+     });
+ 
+  
 
     /**-------------    Route for partyreceive
      * ========================================================*/    

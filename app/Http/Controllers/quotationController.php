@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\quotation;
+use App\Models\party;
 
 
 class quotationController extends Controller
@@ -23,7 +24,8 @@ class quotationController extends Controller
      * =============================================*/
     public function create()
     {
-        return view('sales.quotation.form');
+        $parties = party::where('status', true)->get();
+        return view('sales.quotation.form')->with(compact('parties'));
     }
 
 
@@ -35,20 +37,28 @@ class quotationController extends Controller
         $request->validate([
 
             'party_id'  => 'required',
-            'product_id'  => 'required',
             'quotation_date'  => 'required',
-            'quantity'  => 'required | integer',
-            'unit_id'  => 'required',
-            'unit_price'  => 'required | integer',
-            'discount'  => 'required | integer',
-            'total_discount'  => 'required | integer',
-            'grand_total'  => 'required | integer',
-            'total' => 'required | integer',
-            'tax' => 'required | integer'
+            'total_price' => 'required ',
         ]);
 
         $data = $request->all();
 
+
+        for($i=0; $i < count($request->product_id); $i++)
+        {
+            $details[] = [
+                'product_id'    => $request->product_id[$i],
+                'quantity'      => $request->quantity[$i],
+                'unit'          => $request->unit[$i],
+                'unit_price'    => $request->unit_price[$i],
+                'discount'      => $request->discount[$i] ?? 0,
+                'sub_total'     => $request->sub_total[$i],
+            ];
+        }
+
+        
+        $data['data'] = json_encode($details);
+        $data['company_id'] = auth()->user()->company_id;
         $quotation = quotation::create($data);
 
         return to_route('quotation')->with('success', 'Record created successfully');
@@ -78,21 +88,28 @@ class quotationController extends Controller
         $request->validate([
             
             'party_id'  => 'required',
-            'product_id'  => 'required',
             'quotation_date'  => 'required',
-            'quantity'  => 'required | integer',
-            'unit_id'  => 'required',
-            'unit_price'  => 'required | integer',
-            'discount'  => 'required | integer',
-            'total_discount'  => 'required | integer',
-            'grand_total'  => 'required | integer',
-            'total' => 'required | integer',
-            'tax' => 'required | integer'
+            'total_price' => 'required',
+
         ]);
 
         
         $data = $request->all();
 
+        for($i=0; $i < count($request->product_id); $i++)
+        {
+            $details[] = [
+                'product_id'    => $request->product_id[$i],
+                'quantity'      => $request->quantity[$i],
+                'unit'          => $request->unit[$i],
+                'unit_price'    => $request->unit_price[$i],
+                'discount'      => $request->discount[$i] ?? 0,
+                'sub_total'     => $request->sub_total[$i],
+            ];
+        }
+
+        $data['data'] = json_encode($details);
+        $data['company_id'] = auth()->user()->company_id;
         $quotation = quotation::find($key)->update($data);
 
         return to_route('quotation')->with('success', 'Record updated successfully');

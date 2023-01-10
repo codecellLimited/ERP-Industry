@@ -12,16 +12,10 @@ class quotation extends Model
     protected $fillable = [
         'quotation_date',
         'party_id',
-        'product_id',
-        'quantity',
-        'unit_id',
-        'unit_price',
-        'discount',
-        'total_discount',
-        'total',
-        'grand_total',
-        'tax',
+        'total_price',
+        'data',
         'quotation_note',
-        'quotation_status'
+        'note'
+        
     ];
 }

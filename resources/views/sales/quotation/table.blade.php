@@ -35,7 +35,7 @@
                     <th scope="row" >{{++$key}}</th>
                     <th>{{$item->quotation_date}}</th>
                     <td>{{Str::upper( \App\Models\party::find($item->party_id)->name)}}</td>
-                    <td>{{$item->grand_total}}</td>
+                    <td>{{$item->total_price}}</td>
                     <!-- <td>@if($item->quotation_status == 1) <span class="badge bg-warning">Sending</span>
                         @elseif($item->quotation_status == 2) <span class="badge bg-primary">Pending</span>
                         @endif
