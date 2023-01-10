@@ -253,6 +253,7 @@
                         {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
                         <a class="collapse-item" href="{{route('transection')}}">Bank transections</a>
                         <a class="collapse-item" href="{{route('expense')}}">Expenses</a>
+                        <a class="collapse-item" href="{{route('transection')}}">Transection</a>
                         <a class="collapse-item" href="{{route('partyreceive')}}">Party Receive</a>
                         <a class="collapse-item" href="{{route('supplierpayment')}}">Supplier Payment</a>
                         <a class="collapse-item" href="{{route('lc')}}">LC</a>
