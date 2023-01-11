@@ -52,10 +52,10 @@
 
                                 <div class="col-md">
                                     <label for=""><b>Transection For</b></label>
-                                    <select name="transection_for" id="show_party_supplier" onchange="toggoldiv(this.value)" class="form-control @error('transection_for') is-invalid @enderror" required>
+                                    <select name="transection_for" id="" onchange="toggoldiv(this.value)" class="form-control @error('transection_for') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        <option value="1" @if(isset($transection)) @if($transection->transection_for == 1) {{'selected'}} @endif @endif >Receive Party Payment</option>
-                                        <option value="2" @if(isset($transection)) @if($transection->transection_for == 2) {{'selected'}} @endif @endif >Pay Supplier Payment</option>
+                                        <option value="1" @if(isset($transection)) @if($transection->transection_for == 1) {{'selected'}} @endif @endif >Party Receive </option>
+                                        <option value="2" @if(isset($transection)) @if($transection->transection_for == 2) {{'selected'}} @endif @endif >Supplier Payment</option>
                                     </select>
 
                                     @error('transection_for')
@@ -87,7 +87,7 @@
                                 </div>
 
                                 <div class="col-md" style="display:none;" id="supplier_show" >
-                                    <label for=""><b>Supplier Name</b></label>
+                                    <label for=""><b>Supplier Company Name</b></label>
                                     <select name="supplier_id" class="form-control @error('supplier_id') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\supplier::get() as $item)
@@ -99,7 +99,7 @@
                                         
                                         @endif>
                                         
-                                        {{$item->name}}</option>
+                                        {{$item->company}}</option>
                                         @endforeach
                                         
                                     </select>
@@ -154,9 +154,9 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md">
+                                <div class="col-md" >
                                     <label for=""><b>Payment Method</b></label>
-                                    <select name="payment_method" id="" class="form-control @error('payment_method') is-invalid @enderror" required>
+                                    <select name="payment_method" id="" onchange="transection(this.value)" class="form-control @error('payment_method') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
                                         <option value="1" @if(isset($transection)) @if($transection->payment_method == 1) {{'selected'}} @endif @endif >Hand cash</option>
                                         <option value="2" @if(isset($transection)) @if($transection->payment_method == 2) {{'selected'}} @endif @endif >Bank Payment</option>
@@ -170,7 +170,7 @@
                                 </div>
 
 
-                                <div class="col-md">
+                                <div class="col-md" style="display:none;" id="account">
                                     <label for=""><b>Account</b></label>
                                     <select name="account" id="" class="form-control @error('account') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
@@ -194,6 +194,23 @@
                                     @enderror
                                 </div>
 
+                                <div class="col-md" style="display:none;" id="bearer">
+                                    <label for=""><b>Bearer Name</b></label>
+                                    <input type="text" name="bearer" 
+                                        class="form-control @error('bearer') is-invalid @enderror"
+                                        @if(isset($transection))
+                                        value="{{ $transection->bearer}}"
+                                        @else
+                                        value="{{ old('bearer') }}"
+                                        @endif>
+
+                                    @error('bearer')
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                                 <div class="col-md">
                                     <label for=""><b>Amount</b></label>
                                     <input type="text" name="amount" 
@@ -210,19 +227,10 @@
                                         </span>
                                     @enderror
                                 </div>
-                                
+  
                             </div>
                         </div>
 
-                        
-                        <div class="form-group">
-                            <div class="row">
-
-                                
-                                 
-                            </div>
-                        </div>
-                        
 
                         <div class="form-group">
                             
@@ -255,25 +263,38 @@
 
 @endsection
 
-<!-- @push('js')
+@push('js')
     <script>
         function toggoldiv(value){
-            console.log(value);
-            alert(value);
             
             const party_show = document.getElementById("party_show");
             const supplier_show = document.getElementById("supplier_show");
 
             if(value == '1'){
-                party_show.display = "block";
-                supplier_show.display = "none";
+                party_show.style.display = "block";
+                supplier_show.style.display = "none";
             }  
             else if(value == '2'){
                 
-                party_show.display = "none";
-                supplier_show.display = "block";
+                party_show.style.display = "none";
+                supplier_show.style.display = "block";
+            }
+        }
+
+        function transection(value){
+            const bearer = document.getElementById("bearer");
+            const account = document.getElementById("account");
+
+            if(value == '1'){
+                bearer.style.display = "block";
+                account.style.display = "none";
+            }  
+            else if(value == '2'){
+                
+                bearer.style.display = "none";
+                account.style.display = "block";
             }
         }
     </script>
 
-@endpush -->
+@endpush
