@@ -54,8 +54,8 @@
                                     <label for=""><b>Transection For</b></label>
                                     <select name="transection_for" id="" onchange="toggoldiv(this.value)" class="form-control @error('transection_for') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        <option value="1" @if(isset($transection)) @if($transection->transection_for == 1) {{'selected'}} @endif @endif >Receive Party Payment</option>
-                                        <option value="2" @if(isset($transection)) @if($transection->transection_for == 2) {{'selected'}} @endif @endif >Pay Supplier Payment</option>
+                                        <option value="1" @if(isset($transection)) @if($transection->transection_for == 1) {{'selected'}} @endif @endif >Party Receive </option>
+                                        <option value="2" @if(isset($transection)) @if($transection->transection_for == 2) {{'selected'}} @endif @endif >Supplier Payment</option>
                                     </select>
 
                                     @error('transection_for')
@@ -87,7 +87,7 @@
                                 </div>
 
                                 <div class="col-md" style="display:none;" id="supplier_show" >
-                                    <label for=""><b>Supplier Name</b></label>
+                                    <label for=""><b>Supplier Company Name</b></label>
                                     <select name="supplier_id" class="form-control @error('supplier_id') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\supplier::get() as $item)
@@ -99,7 +99,7 @@
                                         
                                         @endif>
                                         
-                                        {{$item->name}}</option>
+                                        {{$item->company}}</option>
                                         @endforeach
                                         
                                     </select>
@@ -231,15 +231,6 @@
                             </div>
                         </div>
 
-                        
-                        <div class="form-group">
-                            <div class="row">
-
-                                
-                                 
-                            </div>
-                        </div>
-                        
 
                         <div class="form-group">
                             
