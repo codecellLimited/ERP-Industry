@@ -316,6 +316,14 @@ Route::middleware('auth')
      });
  
 
+
+    /**-------------    Route for banktransection 
+     * ========================================================*/    
+    
+     Route::controller(App\Http\Controllers\TransectionController::class)
+     ->group(function(){
+         Route::get('transection-list','showBankTransection')->name('banktransection');
+     });
  
   
 /**-------------    Route for transection
