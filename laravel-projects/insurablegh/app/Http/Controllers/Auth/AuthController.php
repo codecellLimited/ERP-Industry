@@ -67,9 +67,7 @@ class AuthController extends Controller
     public function register(StoreUserRequest $request){
 
         $request->validated($request ->all());
-        // $request->validate([
-        //     'password' =>  ['required','confirmed', Password:: min(8)->letters()->numbers()->mixedcase()->symbols()]
-        // ]);
+        
         $msg = "OTP Send Successfully";
         $user = $request->all();
         
@@ -96,7 +94,6 @@ class AuthController extends Controller
         
         return $this->success([
             'user' => $user,
-            // 'token' => $user->createToken('API Token of'. $user->name)->plainTextToken
         ], $msg);
     }
 
@@ -196,7 +193,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' =>  'required|email|exists:users',
             'otp' =>  'required',
-            'password' =>  ['required','confirmed', Password:: min(8)->letters()->numbers()->mixedcase()->symbols()]
+            'password' =>  ['required','confirmed', Password:: min(8)->letters()->numbers()->mixedcase()]
         ]);
     
         if($validator->fails())

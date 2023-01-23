@@ -1,0 +1,208 @@
+@extends('layouts.app')
+
+@section('page_title', 'Deshboard')
+   
+@section('web-content')
+
+<!-- Page Heading -->
+{{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Hello {{ auth()->user()->name }}</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+</div> --}}
+
+<div class="row">
+    
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3) 
+    <div class=".col-lg-3 col-md-3 col-sm-6" style="margin-bottom:5px;">
+        <div class="card" style="background-color:blue;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                    <h4><b>Total Supplier</b></h4>
+                    
+                    <h4>{{\App\Models\Supplier::count();}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3)
+    <div class=".col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:#7B9DE2;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                    <h4><b>Total Party</b></h4>
+                    
+                    <h4>{{\App\Models\Party::count();}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
+    <div class=".col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:#F2A510;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                    <h4><b>Total Employee</b></h4>
+                    
+                    <h4>{{\App\Models\Employee::count();}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
+    <div class=".col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:green;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                    <h4><b>Total Products</b></h4>
+                    
+                    <h4>{{\App\Models\Product::count();}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 )
+    <div class="col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:#FD0202; border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                    <h4><b>Total User</b></h4>
+                    <h4>{{\App\Models\User:: count();}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
+    <div class="col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:#075326;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                    <h4><b>Total Materials</b></h4>
+                    <h4>{{\App\Models\Material::count();}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 3)
+    <div class="col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:#2749B8;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                
+                    <h4><b>Total Order</b></h4>
+                    
+                    <h4>{{\App\Models\Order::count();}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 5)
+    <div class=".col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:#228C22;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                
+                    <h4><b>Total Income</b></h4>
+                    
+                    <h4>{{App\Models\PartyReceive::where('status', true)->sum('amount')}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
+    <div class=".col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:green;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                
+                    <h4><b>Todays Employee Attendance</b></h4>
+                    <?php $today= new DateTime('today');?>
+                    <h4>{{\App\Models\Attendance::where('status', true)->wheredate('date', $today)->where('attendance', 1)->orderBy('employee_id', 'asc')->count();}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 5)
+    <div class=".col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:#F2A510;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+               
+                    <h4><b>This month Expense</b></h4>
+                    
+                    <h4>{{\App\Models\Expense::where('status', true)->whereMonth('created_at',now()->month)->sum('amount')}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
+    <div class=".col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:blue;border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                    <h4><b>Total Employee Salary</b></h4>
+                    
+                    <h4>{{\App\Models\Employee::where('status', true)->sum('monthly_salary')}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <br>
+
+    @if(auth()->user()->role == 1 || auth()->user()->role == 2 || auth()->user()->role == 4)
+    <div class="col-lg-3 col-md-3 col-sm-6"  style="margin-bottom:5px;">
+        <div class="card" style="background-color:#D43939; border-radius:20px;">
+            <div class="card-body">
+                <div class="my-3 text-center" style="color:white;">
+                
+                    <h4><b>Total Completed Order</b></h4>
+                    <h4>{{\App\Models\Order::where('status', 2)->count();}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+</div>
+
+@endsection

@@ -8,6 +8,9 @@ use App\Models\User;
 use App\Traits\HttpResponses;
 use App\Http\Controllers\Auth\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
@@ -67,44 +70,37 @@ class ProfileController extends Controller
 
     public function ChangePassword(Request $request){
         
-        
+        $msg = "Password Changed successfully";
         $validator = Validator::make($request->all(), [
-            'email' =>  'required|email|exists:users',
+           
             'old_password' => 'required',
-            'password' =>  'required|confirmed',
+            'password' =>  ['required','confirmed', Password:: min(8)->letters()->numbers()->mixedcase()]
         ]);
 
-        
+
     
-        if($validator->fails())
-        {
+        if($validator->fails()){
             return $this->error([], $validator->errors()->first());
         }
-            
-        $user = User::where('email', $request->email)->where('otp', $request->otp);
-    
-        if($user->exists()){
-            $msg = "Password Changed successfully";
-            $user = $user->first();
 
-            
-                $user->update([
-                    'email_verified_at'   => now(),
-                    'otp'   =>  null,
-                    'password' => bcrypt($request->password),
-                ]);
-            
+        $user = $request->user();
     
-            return $this->success([
-                'user' => $user,
-                'token' => $user->createToken('API Token of'. $user->name)->plainTextToken
-            ], $msg);
+        if(Hash::check($request->old_password, $user->password)){
+            $msg = "Password Changed successfully";
+            
+            User::find($user->id)->update([
+                'password' => bcrypt($request->password),
+            ]);
         }
-        else
-        {
-            $msg = "Otp Not Matched";
-            return $this->success([], $msg);
+
+        else{
+           $msg = "Old password doesn't matched.";
+            return $this->error([], $msg);
         }
+
+        return $this->success([
+            'user' => $user,
+        ], $msg);
     }
 
 }
