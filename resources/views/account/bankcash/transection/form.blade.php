@@ -52,7 +52,7 @@
 
                                 <div class="col-md">
                                     <label for=""><b>Transection For</b></label>
-                                    <select name="purpose" id="" onchange="toggoldiv(this.value)" class="form-control @error('purpose') is-invalid @enderror" required>
+                                    <select name="purpose" id="purpose" onchange="toggoldiv(this.value)" class="form-control @error('purpose') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
                                         <option value="1" @if(isset($transection)) @if($transection->purpose == 1) {{'selected'}} @endif @endif >Party Receive </option>
                                         <option value="2" @if(isset($transection)) @if($transection->purpose == 2) {{'selected'}} @endif @endif >Supplier Payment</option>
@@ -266,9 +266,6 @@
 @push('js')
     <script>
         
-
-
-
         function toggoldiv(value){
             
             const party_show = document.getElementById("party_show");
@@ -277,53 +274,55 @@
             if(value == '1'){
                 party_show.style.display = "block";
                 supplier_show.style.display = "none";
-
-                const loadtotaldue = () => {
-                    const key = $("#order_id").val();
-
-                    $.ajax({
-                        url: '{{route("order.due")}}',
-                        type: 'GET',
-                        data:{
-                            key: key
-                        },
-                        success: (res) => {
-                            console.log(res);
-                            $("#order_no").val(res);
-                        },
-                        error: (err) => {
-                            console.log(err);
-                        }
-                    })
-                }
-
             }  
             else if(value == '2'){
                 
                 party_show.style.display = "none";
                 supplier_show.style.display = "block";
-
-                const loadtotaldue = () => {
-                    const key = $("#order_id").val();
-
-                    $.ajax({
-                        url: '{{route("purchase.due")}}',
-                        type: 'GET',
-                        data:{
-                            key: key
-                        },
-                        success: (res) => {
-                            console.log(res);
-                            $("#order_no").val(res);
-                        },
-                        error: (err) => {
-                            console.log(err);
-                        }
-                    })
-                }
-
             }
         }
+
+
+        const loadtotaldue = () => {
+            const key = $("#order_id").val();
+            const purpose = $("#purpose").val();
+
+            if(purpose == 1)
+            {
+                $.ajax({
+                    url: '{{route("order.due")}}',
+                    type: 'GET',
+                    data:{
+                        key: key
+                    },
+                    success: (res) => {
+                        console.log(res);
+                        $("#order_no").val(res);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                })
+            }
+            else
+            {
+                $.ajax({
+                    url: '{{route("purchase.due")}}',
+                    type: 'GET',
+                    data:{
+                        key: key
+                    },
+                    success: (res) => {
+                        console.log(res);
+                        $("#order_no").val(res);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                })
+            }
+        }
+
 
         function transection(value){
             const bearer = document.getElementById("bearer");

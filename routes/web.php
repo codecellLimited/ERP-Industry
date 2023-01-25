@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 /** ------------ Auth Routes
  * ======================================*/
 Route::view('/', 'auth.login')->name('login.view');
+Route::view("/welcome", 'welcome');
 
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'ShowLogin'])->name('login.get');
 
