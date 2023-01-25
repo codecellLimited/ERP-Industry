@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\order;
+use App\Models\Order;
 
-class completedController extends Controller
+class CompletedController extends Controller
 {
     /** --------------- Completed Order data table
      * =============================================*/
@@ -14,7 +14,7 @@ class completedController extends Controller
     {
         $companyId = auth()->user()->company_id;
 
-        $records = order::where(['company_id'    => $companyId,])
+        $records = Order::where(['company_id'    => $companyId,])
                           ->where('status','>', 1)->latest()->get();
 
         return view('sales.completedOrder.table')->with(compact('records'));
@@ -29,7 +29,7 @@ class completedController extends Controller
     {
         $key = $request->key;
 
-        $order = order::destroy($key);
+        $order = Order::destroy($key);
 
         return to_route('completed')->with('success', 'Record deleted successfully');
     }

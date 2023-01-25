@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\supplier;
-use App\Models\purchase;
-use App\Models\materialForSupplier;
+use App\Models\Supplier;
+use App\Models\Purchase;
+use App\Models\Material;
+use App\Models\Transection;
 
 class PurchaseController extends Controller
 {
@@ -16,7 +17,7 @@ class PurchaseController extends Controller
     {
         $companyId = auth()->user()->company_id;
 
-        $records = purchase::where([
+        $records = Purchase::where([
                         'company_id'    => $companyId,
                     ])
                     ->latest()
@@ -40,7 +41,7 @@ class PurchaseController extends Controller
             return to_route('party.list');
         }
 
-        $supplier = supplier::where('company_id', $companyId)
+        $supplier = Supplier::where('company_id', $companyId)
                     // ->where('name', 'like', "%{$searchItem}%")
                     // ->orWhere('email', 'like', "%{$searchItem}%")
                     // ->orWhere('phone', 'like', "%{$searchItem}%")
@@ -59,9 +60,9 @@ class PurchaseController extends Controller
     {
         $companyId = auth()->user()->company_id;
 
-        $purchase = purchase::where('company_id', $companyId)->get();
-        $supplier = supplier:: where('company_id', $companyId)->where('status', true)->get();
-        $material = materialForSupplier:: where('company_id', $companyId)->where('status', true)->get();
+        $purchase = Purchase::where('company_id', $companyId)->get();
+        $supplier = Supplier:: where('company_id', $companyId)->where('status', true)->get();
+        $material = Material:: where('company_id', $companyId)->where('status', true)->get();
 
         return view('supplier.materialPurchase.form')->with(compact('purchase','supplier','material'));
     }
@@ -74,9 +75,9 @@ class PurchaseController extends Controller
     {
         // return $request;
         $request->validate([
-            'supplierID'              => 'required',
+            'supplier_id'              => 'required',
             'purchase_date'            => 'required',
-            'image'                 => 'nullable|mimes:jpg,jpeg,png'
+            'image'                 => 'nullable|mimes:jpg,jpeg,png,webp'
         ]);
 
         $data = $request->all();
@@ -94,10 +95,10 @@ class PurchaseController extends Controller
             $data['image'] = $path;
         }
 
-        for($i=0; $i < count($request->product_id); $i++)
+        for($i=0; $i < count($request->name); $i++)
         {
             $details[] = [
-                'product_id' => $request->product_id[$i],
+                'name'          => $request->name[$i],
                 'quantity'      => $request->quantity[$i],
                 'unit'          => $request->unit[$i],
                 'unit_price'    => $request->unit_price[$i],
@@ -110,7 +111,7 @@ class PurchaseController extends Controller
         $data['data'] = json_encode($details);
         $data['company_id'] = auth()->user()->company_id;
         
-       $suppliers = purchase::create($data);
+       $suppliers = Purchase::create($data);
 
         return to_route('purchase')->with('success', 'Record created successfully');
     }
@@ -123,8 +124,8 @@ class PurchaseController extends Controller
         $key = $request->key;
         $companyId = auth()->user()->company_id;
 
-        $supplier = supplier::where('company_id', $companyId)->get();
-        $record = purchase::where('company_id', $companyId)->find($key);
+        $supplier = Supplier::where('company_id', $companyId)->get();
+        $record = Purchase::where('company_id', $companyId)->find($key);
 
         return view('supplier.materialPurchase.form')->with(compact('record', 'supplier'));
     }
@@ -138,9 +139,9 @@ class PurchaseController extends Controller
         $key = $request->key;
 
         $request->validate([
-            'supplierID'              => 'required',
+            'supplier_id'              => 'required',
             'purchase_date'            => 'required',
-            'image'                 => 'nullable|mimes:jpg,jpeg,png'
+            'image'                 => 'nullable|mimes:jpg,jpeg,png,webp'
         ]);
 
         $data = $request->all();
@@ -158,10 +159,10 @@ class PurchaseController extends Controller
             $data['image'] = $path;
         }
 
-        for($i=0; $i < count($request->product_id); $i++)
+        for($i=0; $i < count($request->name); $i++)
         {
             $details[] = [
-                'product_id' => $request->product_id[$i],
+                'name' => $request->name[$i],
                 'quantity'      => $request->quantity[$i],
                 'unit'          => $request->unit[$i],
                 'unit_price'    => $request->unit_price[$i],
@@ -174,8 +175,8 @@ class PurchaseController extends Controller
         $data['data'] = json_encode($details);
         $data['company_id'] = auth()->user()->company_id;
     
-
-        $suppliers = purchase::find($key)->update($data);
+        //return $data;
+        $suppliers = Purchase::find($key)->update($data);
 
         return to_route('purchase')->with('success', 'Record updated successfully');
     }
@@ -188,7 +189,7 @@ class PurchaseController extends Controller
     {
         $key = $request->key;
 
-        $supplier = purchase::destroy($key);
+        $supplier = Material::destroy($key);
 
         return back()->with('success', 'Record deleted successfully');
     }
@@ -203,7 +204,7 @@ class PurchaseController extends Controller
         $status = $request->status;
         $companyId = auth()->user()->company_id;
 
-        $row = purchase::where([
+        $row = Purchase::where([
                     'company_id'    =>  $companyId,
                     'id'            =>  $key,
                 ]);
@@ -237,14 +238,30 @@ class PurchaseController extends Controller
         $key = $request->key;
 
         $companyId = auth()->user()->company_id;
-        $suppliers = supplier::where('company_id', $companyId)->get();
-        $record = purchase::find($key);
-        $supplier = supplier:: find($record->supplierID);
+        $suppliers = Supplier::where('company_id', $companyId)->get();
+        $record = Purchase::find($key);
+        $supplier = Supplier:: find($record->supplier_id);
+        $transection = Transection:: where('order_id',$record->id)->get();
 
-        return view('supplier.materialPurchase.invoice')->with(compact('supplier','suppliers','record'));
+
+        return view('supplier.materialPurchase.invoice')->with(compact('supplier','suppliers','record','transection'));
     }
 
 
-
+    /**---------get due in transection page --------
+     ===============================================*/
+     public function getPurchaseDue(Request $request)
+     {
+         $companyId = auth()->user()->company_id;
+         $key = $request->key;
+         $html = 0;
+ 
+         if($purchase = Purchase::find($key))
+         {
+             $html = $purchase->due;
+         }
+ 
+         return $html;
+     }
 
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 /** Models */
 use App\Models\ProductionPerDay;
-use App\Models\order;
+use App\Models\Order;
 
 class ProductionPerDayController extends Controller
 {
@@ -73,7 +73,7 @@ class ProductionPerDayController extends Controller
     {
         $key = $request->key;
         $orderid = ProductionPerDay::find($key);
-        $quantity = \App\Models\order::find($orderid->order_id)->quantity;
+        $quantity = \App\Models\Order::find($orderid->order_id)->quantity;
         $record = true;
 
         // $totalProduction =  \App\Models\ProductionPerDay::where('order_id', $orderid->order_id)->sum('production');
@@ -140,7 +140,7 @@ class ProductionPerDayController extends Controller
     public function search(Request $request)
     {
         $key = $request->key;
-        if($orderid = order::find($key)):
+        if($orderid = Order::find($key)):
             $totalProduction = \App\Models\ProductionPerDay:: where('order_id', $orderid->id)->sum('production');
             $leftProduction = $orderid->quantity - $totalProduction;
         return view('inventory.ProductionPerDay.form')->with(compact('orderid', 'totalProduction', 'leftProduction'));

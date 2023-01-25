@@ -230,7 +230,7 @@
 
                         <div class="col-md-4">
                             
-                            <h6 class="mt-3">Material Name: <b>{{ \App\Models\material::find($Materialedit->material_id)->name }}</b></h6>
+                            <h6 class="mt-3">Material Name: <b>{{ \App\Models\Material::find($Materialedit->material_id)->name }}</b></h6>
                             <h6>Quality: <b>{{ $Materialedit->quality }}</b></h6>
                             <h6>Remaining Item: <b>{{\App\Models\Material::where('id',$Materialedit->material_id)->first()->quantity - \App\Models\MaterialProduction:: where('material_id', $Materialedit->material_id)->sum('quantity') + $Materialedit->quantity}} {{$Materialedit->unit}}</b></h6>
                         </div>

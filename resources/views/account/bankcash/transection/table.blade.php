@@ -5,7 +5,7 @@
 @section('web-content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">transections List</h1>
+        <h1 class="h3 mb-0 text-gray-800">Transections History</h1>
         <a href="{{ route('transection.create') }}" class="btn btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50"></i> Add new transection
         </a>
@@ -19,10 +19,11 @@
                     <tr style="color:black;">
                         <th scope="col">#</th>
                         <th scope="col">Date</th>
-                        <th scope="col">transection Purpose</th>
+                        <th scope="col">Transection Purpose</th>
+                        <th scope="col">Order Number</th>
                         <th scope="col">Payment Method</th>
-                        <th scope="col">Amount</th>
                         <th scope="col">Account No</th>
+                        <th scope="col">Amount</th>
                         <th scope="col">Remark</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -32,19 +33,28 @@
                     <tr style="color:black;">
                         <th scope="row" >{{++$key}}</th>
                         <td>{{date('d-m-Y',strtotime($item->date))}}</td>
-                        <td>{{$item->purpose}}</td>
-                        <td>@if( $item->payment_method == 1) Hand Cash
-                            @elseif( $item->payment_method == 2) Bank Transiction 
-                            @else 
+                        <td> @if($item->purpose == 1) Party Receive
+                            @else Supplier Payment
                             @endif
                         </td>
+                        <td>{{$item->order_id}}</td>
+                        <td>@if( $item->payment_method == 1) Hand Cash
+                            @else Bank Transection 
+                            @endif
+                        </td>
+                        <td>{{ \App\Models\Bankadd::find($item->account)->account_number ?? $item->bearer }}</td>
                         <td>{{$item->amount}}</td>
-                        <td>{{ \App\Models\bankadd::find($item->account)->account_number ?? "Hand Cash"}}</td>
+                        
                         <td>{{$item->remark}}</td>
                         <td class="text-nowrap">
-                             <a href="{{ route('transection.edit', $item->id) }}" class="btn btn-sm btn-primary">
+                            
+                                <a href="{{ route('transection.view', $item->id) }}" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                           
+                             {{-- <a href="{{ route('transection.edit', $item->id) }}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-pen"></i>
-                            </a>
+                            </a> --}}
 
                             <button class="btn btn-sm btn-primary"
                                 onclick="if(confirm('Are you sure? you are going to delete this record')){ location.replace('transection/delete/{{$item->id}}'); }">

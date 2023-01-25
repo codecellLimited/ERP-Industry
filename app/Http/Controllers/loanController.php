@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\loan;
+use App\Models\Loan;
 
-class loanController extends Controller
+class LoanController extends Controller
 {
     /** --------------- loan data table
      * =============================================*/
     public function show()
     { 
-        $loan = loan::where('status', true)->latest()->get();
+        $loan = Loan::where('status', true)->latest()->get();
 
         return view('account.financial.loan.table')->with(compact('loan'));
     }
@@ -57,7 +57,7 @@ class loanController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $loan = loan::find($key);
+        $loan = Loan::find($key);
 
         return view('account.financial.loan.form')->with(compact('loan'));
     }
@@ -81,7 +81,7 @@ class loanController extends Controller
         
         $data = $request->all();
 
-        $loan = loan::find($key)->update($data);
+        $loan = Loan::find($key)->update($data);
 
         return to_route('loan')->with('success', 'Record updated successfully');
     }
@@ -94,7 +94,7 @@ class loanController extends Controller
     {
         $key = $request->key;
 
-        $loan = loan::destroy($key);
+        $loan = Loan::destroy($key);
 
         return to_route('loan')->with('success', 'Record deleted successfully');
     }

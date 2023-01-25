@@ -52,7 +52,7 @@
                                     <label for=""><b>Pay Via</b></label>
                                     <select name="pay_via" id="" class="form-control @error('pay_via') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\designation::get() as $item)
+                                        @foreach(\App\Models\Designation::get() as $item)
                                         <option value="{{ $item->id }}"
                                         @if(isset($credit))
                                         {{($credit->pay_via == $item->id)? 'selected' : '' }}
@@ -106,7 +106,7 @@
                                     <label for=""><b>Account</b></label>
                                     <select name="account" id="" class="form-control @error('account') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\bankadd::get() as $item)
+                                        @foreach(\App\Models\Bankadd::get() as $item)
                                         <option value="{{ $item->id }}"
                                         @if(isset($credit))
                                         {{($credit->account == $item->id)? 'selected' : '' }}

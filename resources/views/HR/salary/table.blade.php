@@ -100,7 +100,7 @@
                 <tr>
                     <td>{{$item->id_no}}</td>
                     <td>{{$item->name}}</td>
-                    <td>{{\App\Models\department:: find($item->department_id)->name}}</td>
+                    <td>{{\App\Models\Department:: find($item->department_id)->name}}</td>
                     <td>{{$item->monthly_salary}}</td>
                 </tr>
                 @empty

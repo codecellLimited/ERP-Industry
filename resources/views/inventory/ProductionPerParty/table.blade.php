@@ -21,7 +21,7 @@
                         <img src="{{ asset($item->image) }}" alt="" class="img-fluid  m-auto d-block" style="width: 150px; height:100px;">
                         <br>
                         <h6><b>Order Name: </b>{{\App\Models\Product::find($item->product_id)->name}}</h6>
-                        <h6><b>Party Name: </b>{{\App\Models\party::find($item->party_id)->name}}</h6>
+                        <h6><b>Party Name: </b>{{\App\Models\Party::find($item->party_id)->name}}</h6>
                         <h6><b>Total Order: </b>{{$item->quantity }}</h6>
                             
                 

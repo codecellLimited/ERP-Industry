@@ -20,7 +20,7 @@
                 <div class="my-3 text-center" style="color:white;">
                     <h4><b>Total Supplier</b></h4>
                     
-                    <h4>{{\App\Models\supplier::count();}}</h4>
+                    <h4>{{\App\Models\Supplier::count();}}</h4>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 <div class="my-3 text-center" style="color:white;">
                     <h4><b>Total Party</b></h4>
                     
-                    <h4>{{\App\Models\party::count();}}</h4>
+                    <h4>{{\App\Models\Party::count();}}</h4>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 <div class="my-3 text-center" style="color:white;">
                     <h4><b>Total Employee</b></h4>
                     
-                    <h4>{{\App\Models\employee::count();}}</h4>
+                    <h4>{{\App\Models\Employee::count();}}</h4>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <div class="my-3 text-center" style="color:white;">
                     <h4><b>Total Products</b></h4>
                     
-                    <h4>{{\App\Models\product::count();}}</h4>
+                    <h4>{{\App\Models\Product::count();}}</h4>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
             <div class="card-body">
                 <div class="my-3 text-center" style="color:white;">
                     <h4><b>Total Materials</b></h4>
-                    <h4>{{\App\Models\material::count();}}</h4>
+                    <h4>{{\App\Models\Material::count();}}</h4>
                 </div>
             </div>
         </div>
@@ -114,7 +114,7 @@
                 
                     <h4><b>Total Order</b></h4>
                     
-                    <h4>{{\App\Models\order::count();}}</h4>
+                    <h4>{{\App\Models\Order::count();}}</h4>
                 </div>
             </div>
         </div>
@@ -131,7 +131,7 @@
                 
                     <h4><b>Total Income</b></h4>
                     
-                    <h4>{{App\Models\partyreceive::where('status', true)->sum('amount')}}</h4>
+                    <h4>{{App\Models\PartyReceive::where('status', true)->sum('amount')}}</h4>
                 </div>
             </div>
         </div>
@@ -148,7 +148,7 @@
                 
                     <h4><b>Todays Employee Attendance</b></h4>
                     <?php $today= new DateTime('today');?>
-                    <h4>{{\App\Models\attendance::where('status', true)->wheredate('date', $today)->where('attendance', 1)->orderBy('employee_id', 'asc')->count();}}</h4>
+                    <h4>{{\App\Models\Attendance::where('status', true)->wheredate('date', $today)->where('attendance', 1)->orderBy('employee_id', 'asc')->count();}}</h4>
                 </div>
             </div>
         </div>
@@ -165,7 +165,7 @@
                
                     <h4><b>This month Expense</b></h4>
                     
-                    <h4>{{\App\Models\expense::where('status', true)->whereMonth('created_at',now()->month)->sum('amount')}}</h4>
+                    <h4>{{\App\Models\Expense::where('status', true)->whereMonth('created_at',now()->month)->sum('amount')}}</h4>
                 </div>
             </div>
         </div>
@@ -181,7 +181,7 @@
                 <div class="my-3 text-center" style="color:white;">
                     <h4><b>Total Employee Salary</b></h4>
                     
-                    <h4>{{\App\Models\employee::where('status', true)->sum('monthly_salary')}}</h4>
+                    <h4>{{\App\Models\Employee::where('status', true)->sum('monthly_salary')}}</h4>
                 </div>
             </div>
         </div>
@@ -197,7 +197,7 @@
                 <div class="my-3 text-center" style="color:white;">
                 
                     <h4><b>Total Completed Order</b></h4>
-                    <h4>{{\App\Models\order::where('status', 2)->count();}}</h4>
+                    <h4>{{\App\Models\Order::where('status', 2)->count();}}</h4>
                 </div>
             </div>
         </div>

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\attendance;
 use Illuminate\Http\Request;
 
-use App\Models\employee;
-use App\Models\attendance;
+use App\Models\Employee;
+use App\Models\Attendance;
 
-class salaryController extends Controller
+class SalaryController extends Controller
 {
 
 
@@ -16,26 +15,8 @@ class salaryController extends Controller
      * =============================================*/
     public function show(Request $request)
     {
-        $salarys = employee::where('status', true)->orderBy('id_no', 'asc')->get();
+        $salarys = Employee::where('status', true)->orderBy('id_no', 'asc')->get();
         return view('HR.salary.table')->with(compact('salarys'));  
-    }
-
-
-    public function calculateSalary(Request $request)
-    {
-        $month = $request->searchmonth;
-        $employees = employee::where('status', true)->orderBy('id_no', 'asc')->get();
-        $salarys = [];
-
-        foreach($employees as $item){
-            $absence = attendance::whereMonth('date', $month)->where('employee_id', $item->id)->where('attendance', 0)->count();
-        
-            $item['monthly_salary'] = $item->monthly_salary - ($absence * $item->daily_salary);
-            $salarys[] = $item;            
-        }
-
-        return view('HR.salary.table')->with(compact('salarys'));
-
     }
 
 
@@ -45,7 +26,7 @@ class salaryController extends Controller
     public function searchid(Request $request)
     {
         $key = $request->key;
-        $employee = employee::find($key);
+        $employee = Employee::find($key);
 
         return view('HR.salary.form')->with(compact('employee','searchmonth',''));
     }
@@ -57,11 +38,11 @@ class salaryController extends Controller
     public function calculateSalary(Request $request)
     {
         $month = $request->searchmonth;
-        $employees = employee::where('status', true)->orderBy('id_no', 'asc')->get();
+        $employees = Employee::where('status', true)->orderBy('id_no', 'asc')->get();
         $salarys = [];
 
         foreach($employees as $item){
-            $absence = attendance::whereMonth('date', $month)->where('employee_id', $item->id_no)->where('attendance', 0)->count();
+            $absence = Attendance::whereMonth('date', $month)->where('employee_id', $item->id_no)->where('attendance', 0)->count();
         
             $item['monthly_salary'] = $item->monthly_salary - ($absence * $item->daily_salary);
             $salarys[] = $item;            

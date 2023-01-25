@@ -35,7 +35,7 @@
                 @forelse($MaterialProductions as $key =>$item)
                 <tr>
                     <th scope="row" >{{++$key}}</th>
-                    <td>{{\App\Models\material::find($item->material_id)->name}}</td>
+                    <td>{{\App\Models\Material::find($item->material_id)->name}}</td>
                     <td>{{$item->quantity}} {{$item->unit}} </td>
                     <td>{{$item->quality}}</td>
                     <td>{{$item->receiver}}</td>

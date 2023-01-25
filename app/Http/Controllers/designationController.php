@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\designation;
+use App\Models\Designation;
 
-class designationController extends Controller
+class DesignationController extends Controller
 {
     /** --------------- designations data table
      * =============================================*/
     public function show()
     {
-        $designations = designation::where('status', true)->latest()->get();
+        $designations = Designation::where('status', true)->latest()->get();
 
         return view('HR.designation.table')->with(compact('designations'));
     }
@@ -39,7 +39,7 @@ class designationController extends Controller
         $data = $request->all();
 
         
-        $designation = designation::create($data);
+        $designation = Designation::create($data);
 
         return to_route('designation')->with('success', 'Record created successfully');
     }
@@ -51,7 +51,7 @@ class designationController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $designation = designation::find($key);
+        $designation = Designation::find($key);
 
         return view('HR.designation.form')->with(compact('designation'));
     }
@@ -73,7 +73,7 @@ class designationController extends Controller
         $data = $request->all();
 
         
-        $designation = designation::find($key)->update($data);
+        $designation = Designation::find($key)->update($data);
 
         return to_route('designation')->with('success', 'Record updated successfully');
     }
@@ -86,7 +86,7 @@ class designationController extends Controller
     {
         $key = $request->key;
 
-        $designation = designation::destroy($key);
+        $designation = Designation::destroy($key);
 
         return to_route('designation')->with('success', 'Record deleted successfully');
     }

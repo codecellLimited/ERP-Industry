@@ -36,7 +36,7 @@
                                     <label for=""><b>Bank Name</b></label>
                                     <select name="bank_name" id="" class="form-control @error('bank_name') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\bank::get() as $item)
+                                        @foreach(\App\Models\Bank::get() as $item)
                                         <option value="{{ $item->id }}"
                                         @if(isset($bankadd))
                                         {{ ($bankadd->bank_name == $item->id) ? 'selected' : ''}}

@@ -80,27 +80,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                                <div class="col-md-4">
-                                    <label for=""><b>Asset Image</b></label>
-                                    @if(isset($asset))
-                                        <img src="{{asset($asset->image)}}" alt="" width="100px" height="100px">
-                                    @endif
-                                    <input type="file" name="image" 
-                                        class="form-control @error('image') is-invalid @enderror">
-
-                                    @error('image')
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                        </div>   
-                            
-                            
                         
-
 
 
                         <button class="btn btn-primary">Save</button>

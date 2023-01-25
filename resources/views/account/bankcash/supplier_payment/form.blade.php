@@ -53,7 +53,7 @@
                                     <label for=""><b>Supplier Name</b></label>
                                     <select name="name" id="" class="form-control @error('name') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\supplier::get() as $item)
+                                        @foreach(\App\Models\Supplier::get() as $item)
                                         <option value="{{ $item->id }}"
                                         @if(isset($supplierpayment))
                                         {{($supplierpayment->name == $item->id) ? 'selected':''}}
@@ -103,7 +103,7 @@
                                     <label for=""><b>Account</b></label>
                                     <select name="account" id="" class="form-control @error('account') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\bankadd::get() as $item)
+                                        @foreach(\App\Models\Bankadd::get() as $item)
                                         <option value="{{ $item->id }}"
                                         @if(isset($supplierpayment))
                                             {{($supplierpayment->account == $item->id) ? 'selected': '' }}
@@ -144,16 +144,7 @@
                             </div>
                         </div>
 
-                        
-                        <div class="form-group">
-                            <div class="row">
-
-                                
-                                 
-                            </div>
-                        </div>
-                        
-
+                      
                         <div class="form-group">
                             
                                 

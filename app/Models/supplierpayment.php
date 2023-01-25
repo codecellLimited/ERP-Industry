@@ -9,12 +9,5 @@ class supplierpayment extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-        'date',
-        'name',
-        'method',
-        'account',
-        'amount',
-        'remark'
-    ];
+    
 }

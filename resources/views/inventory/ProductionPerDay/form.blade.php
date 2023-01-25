@@ -72,11 +72,11 @@
                             <img src="{{ asset($orderid->image) }}" alt="" class="img-fluid m-auto d-block" width="150">
                             <br>
                             <h6 class="mt-3">Order Name: <b>{{\App\Models\Product::find($orderid->product_id)->name ?? ''}}</b></h6>
-                            <h6>Party Name: <b>{{\App\Models\party::find($orderid->party_id)->name ?? ''}}</b></h6>
+                            <h6>Party Name: <b>{{\App\Models\Party::find($orderid->party_id)->name ?? ''}}</b></h6>
                             <h6>Total Order: <b>@if(isset($record))
-                                                   {{\App\Models\order::find($orderid->order_id)->quantity }}
+                                                   {{\App\Models\Order::find($orderid->order_id)->quantity }}
                                                 @else
-                                                {{\App\Models\order::find($orderid->id)->quantity }}
+                                                {{\App\Models\Order::find($orderid->id)->quantity }}
                                                 @endif </b></h6>
                             <h6>Total Production: <b>{{$totalProduction}}</b></h6>
                             <h6>Production Left: <b>{{$leftProduction}}</b></h6>

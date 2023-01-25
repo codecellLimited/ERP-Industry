@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\partyreceive;
+use App\Models\PartyReceive;
 
-class partyreceiveController extends Controller
+class PartyReceiveController extends Controller
 {
     /** --------------- partyreceive data table
      * =============================================*/
     public function show()
     { 
-        $partyreceive = partyreceive::where('status', true)->latest()->get();
+        $partyreceive = PartyReceive::where('status', true)->latest()->get();
 
         return view('account.bankcash.party_receive.table')->with(compact('partyreceive'));
     }
@@ -44,7 +44,7 @@ class partyreceiveController extends Controller
 
         $data = $request->all();
 
-        $partyreceive = partyreceive::create($data);
+        $partyreceive = PartyReceive::create($data);
 
         return to_route('partyreceive')->with('success', 'Record created successfully');
     }
@@ -56,7 +56,7 @@ class partyreceiveController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $partyreceive = partyreceive::find($key);
+        $partyreceive = PartyReceive::find($key);
 
         return view('account.bankcash.party_receive.form')->with(compact('partyreceive'));
     }
@@ -83,7 +83,7 @@ class partyreceiveController extends Controller
         
         $data = $request->all();
 
-        $partyreceive = partyreceive::find($key)->update($data);
+        $partyreceive = PartyReceive::find($key)->update($data);
 
         return to_route('partyreceive')->with('success', 'Record updated successfully');
     }
@@ -96,7 +96,7 @@ class partyreceiveController extends Controller
     {
         $key = $request->key;
 
-        $partyreceive = partyreceive::destroy($key);
+        $partyreceive = PartyReceive::destroy($key);
 
         return to_route('partyreceive')->with('success', 'Record deleted successfully');
     }

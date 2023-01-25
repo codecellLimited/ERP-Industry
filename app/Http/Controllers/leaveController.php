@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\leave;
+use App\Models\Leave;
 
-class leaveController extends Controller
+class LeaveController extends Controller
 {
-    /** --------------- leave data table
+    /** --------------- Leave data table
      * =============================================*/
     public function show()
     { 
-        $leave = leave::where('status', true)->latest()->get();
+        $leave = Leave::where('status', true)->latest()->get();
 
         return view('HR.leave.table')->with(compact('leave'));
     }
@@ -46,7 +46,7 @@ class leaveController extends Controller
 
         $data = $request->all();
 
-        $leave = leave::create($data);
+        $leave = Leave::create($data);
 
         return to_route('leave')->with('success', 'Record created successfully');
     }
@@ -58,7 +58,7 @@ class leaveController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $leave = leave::find($key);
+        $leave = Leave::find($key);
 
         return view('HR.leave.form')->with(compact('leave'));
     }
@@ -87,7 +87,7 @@ class leaveController extends Controller
         
         $data = $request->all();
 
-        $leave = leave::find($key)->update($data);
+        $leave = Leave::find($key)->update($data);
 
         return to_route('leave')->with('success', 'Record updated successfully');
     }
@@ -100,7 +100,7 @@ class leaveController extends Controller
     {
         $key = $request->key;
 
-        $leave = leave::destroy($key);
+        $leave = Leave::destroy($key);
 
         return to_route('leave')->with('success', 'Record deleted successfully');
     }

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 /** Models */
 use App\Models\Material;
+use App\Models\Unit;
+
 
 class MaterialController extends Controller
 {
@@ -103,7 +105,56 @@ class MaterialController extends Controller
     }
 
 
+    public function getMaterialUnit(Request $request)
+    {
+        $companyId = auth()->user()->company_id;
+        $key = $request->key;
 
+        $units = Unit::where('company_id', $companyId)->where('status', true)->get();
+        $html = "";
+
+        if($material = Material::find($key))
+        {
+            $html .= "<label>Unit*</label>
+            <select name=\"unit[]\" class=\"form-control\" required>
+            <option value=\"\" selected disabled>Select One</option>";
+
+            foreach($units as $item)
+            {
+                if($item->id == $material->unit_id):
+                $selected = "selected";
+                else:
+                $selected = "";
+                endif;
+
+                $html .= "<option value=\"{$item->id}\" $selected>{$item->name}</option>";
+            }
+
+            $html .= "</select>";
+        }
+        else
+        {
+            $html .= "Not Found";
+        }
+
+        return $html;
+    }
+
+
+    
+    public function getMaterialPrice(Request $request)
+    {
+        $companyId = auth()->user()->company_id;
+        $key = $request->key;
+        $html = 0;
+
+        if($material = Material::find($key))
+        {
+            $html = $material->price;
+        }
+
+        return $html;
+    }
     
 
 }

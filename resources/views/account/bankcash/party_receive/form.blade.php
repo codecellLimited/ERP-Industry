@@ -53,7 +53,7 @@
                                     <label for=""><b>Party Name</b></label>
                                     <select name="party" id="" class="form-control @error('party') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\party::get() as $item)
+                                        @foreach(\App\Models\Party::get() as $item)
                                         <option value="{{ $item->id }}"
                                         @if(isset($partyreceive))
                                         {{($partyreceive->party == $item->id) ? 'selected':''}}
@@ -99,7 +99,7 @@
                                     <label for=""><b>Account</b></label>
                                     <select name="account" id="" class="form-control @error('account') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\bankadd::get() as $item)
+                                        @foreach(\App\Models\Bankadd::get() as $item)
                                         <option value="{{ $item->id }}"
                                         @if(isset($partyreceive))
                                             {{($partyreceive->account == $item->id) ? 'selected': '' }}
@@ -137,15 +137,6 @@
                                     @enderror
                                 </div>
                                 
-                            </div>
-                        </div>
-
-                        
-                        <div class="form-group">
-                            <div class="row">
-
-                                
-                                 
                             </div>
                         </div>
                         

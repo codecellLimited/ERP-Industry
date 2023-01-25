@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\asset;
+use App\Models\Asset;
 
-class assetController extends Controller
+class AssetController extends Controller
 {
     /** --------------- assets data table
      * =============================================*/
     public function show()
     {
-        $asset = asset::where('status', true)->latest()->get();
+        $asset = Asset::where('status', true)->latest()->get();
 
         return view('inventory.asset.table')->with(compact('asset'));
     }
@@ -55,7 +55,7 @@ class assetController extends Controller
             $data['image'] = $path;
         }
         
-        $asset = asset::create($data);
+        $asset = Asset::create($data);
 
         return to_route('asset')->with('success', 'Record created successfully');
     }
@@ -67,7 +67,7 @@ class assetController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $asset = asset::find($key);
+        $asset = Asset::find($key);
 
         return view('inventory.asset.form')->with(compact('asset'));
     }
@@ -105,7 +105,7 @@ class assetController extends Controller
             $data['image'] = $path;
         }
 
-        $asset = asset::find($key)->update($data);
+        $asset = Asset::find($key)->update($data);
 
         return to_route('asset')->with('success', 'Record updated successfully');
     }
@@ -118,7 +118,7 @@ class assetController extends Controller
     {
         $key = $request->key;
 
-        $asset = asset::destroy($key);
+        $asset = Asset::destroy($key);
 
         return to_route('asset')->with('success', 'Record deleted successfully');
     }

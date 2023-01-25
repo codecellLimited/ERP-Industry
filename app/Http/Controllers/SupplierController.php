@@ -23,9 +23,9 @@ class SupplierController extends Controller
     /**--view profile-- */
     public function profile(Request $request){
         $key = $request->key;
-        $Suppliers = supplier:: find($key);
+        $Suppliers = Supplier:: find($key);
 
-        $records = Purchase:: where('supplierID',$key)->get();
+        $records = Purchase:: where('supplier_id',$key)->get();
 
         return view('supplier.supplier.profile')->with(compact('Suppliers','records'));
     }

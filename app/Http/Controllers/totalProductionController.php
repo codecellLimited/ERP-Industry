@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 /** Models */
 use App\Models\ProductionPerDay;
-use App\Models\order;
+use App\Models\Order;
 use App\Models\Product;
 use Carbon\Carbon;
 
@@ -18,7 +18,7 @@ class totalProductionController extends Controller
     {
         $productId = Product::where('status', true)->latest()->get();
         
-        return view('inventory.totalProduction.table')->with(compact('productId'));
+        return view('inventory.TotalProduction.table')->with(compact('productId'));
     }
 
     public function fixedDate(Request $request)
@@ -28,7 +28,7 @@ class totalProductionController extends Controller
 
         $datebetween = Product::where('status', true)->latest()->get();
 
-        return view('inventory.totalProduction.table')->with(compact('datebetween','startdate','enddate'));
+        return view('inventory.TotalProduction.table')->with(compact('datebetween','startdate','enddate'));
     }
 
     

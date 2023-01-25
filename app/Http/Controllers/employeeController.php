@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\employee;
+use App\Models\Employee;
 
-class employeeController extends Controller
+class EmployeeController extends Controller
 {
     /** --------------- employee data table
      * =============================================*/
     public function show()
     {
-        $employee = employee::where('status', true)->orderBy('id_no', 'asc')->get();
+        $employee = Employee::where('status', true)->orderBy('id_no', 'asc')->get();
 
         return view('HR.employee.table')->with(compact('employee'));
     }
@@ -60,7 +60,7 @@ class employeeController extends Controller
             $request->image->move(public_path('employee'), $FileName);
 
             // save into database
-            $path = 'employee/' . $FileName;
+            $path = 'Employee/' . $FileName;
 
             $data['image'] = $path;
         }
@@ -77,7 +77,7 @@ class employeeController extends Controller
             $data['nid_image'] = $path;
         }
 
-        $employee = employee::create($data);
+        $employee = Employee::create($data);
 
         return to_route('employee')->with('success', 'Record created successfully');
     }
@@ -89,7 +89,7 @@ class employeeController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $employee = employee::find($key);
+        $employee = Employee::find($key);
 
         return view('HR.employee.form')->with(compact('employee'));
     }
@@ -159,7 +159,7 @@ class employeeController extends Controller
             $data['nid_image'] = $path;
         }
 
-        $employee = employee::find($key)->update($data);
+        $employee = Employee::find($key)->update($data);
 
         return to_route('employee')->with('success', 'Record updated successfully');
     }
@@ -172,7 +172,7 @@ class employeeController extends Controller
     {
         $key = $request->key;
 
-        $employee = employee::destroy($key);
+        $employee = Employee::destroy($key);
 
         return to_route('employee')->with('success', 'Record deleted successfully');
     }
@@ -182,7 +182,7 @@ class employeeController extends Controller
         $key = $request->key;
         $html = "Not Found";
 
-        if($employee = employee::where("id_no", $key)->first())
+        if($employee = Employee::where("id_no", $key)->first())
         {
             $html = $employee->name;
         }

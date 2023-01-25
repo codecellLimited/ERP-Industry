@@ -11279,10 +11279,3 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
-
-#party_show {
-  display: none;
-}
-#supplier_show{
-  display: none;
-}

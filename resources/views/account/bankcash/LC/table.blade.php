@@ -42,12 +42,12 @@
                         <td>{{$item->pi_number}}</td>
                         <td>{{$item->pi_date}}</td>
                         <td>{{$item->pi_value}}</td>
-                        <td>{{ \App\Models\party::find($item->party_id)->name }}</td>
+                        <td>{{ \App\Models\Party::find($item->party_id)->name }}</td>
                         <td>{{$item->received_bdt}}</td>
                         <td>{{$item->status_bdt}}</td>
                         <td>{{$item->lc_number}}</td>
                         <td>{{$item->lc_date}}</td>
-                        <td>{{ \App\Models\bank::find($item->bank_id)->name }}</td>
+                        <td>{{ \App\Models\Bank::find($item->bank_id)->name }}</td>
                         
                         <td>{{$item->amd_no_date}}</td>
                         <td>{{$item->submitted_date}}</td>

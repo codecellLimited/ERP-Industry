@@ -99,7 +99,7 @@
                                         <label for="">Product name*</label>
                                         <select name="name[]" class="form-control @error('name') is-invalid @enderror" required>
                                             <option value="" selected disabled>Select One</option>
-                                            @foreach (\App\Models\product::get() as $item)
+                                            @foreach (\App\Models\Product::get() as $item)
                                             <option value="{{ $item->id }}"
                                                 @if(isset($records)) {{ ($item->id == $records->name) ? 'selected' : '' }} @endif>
                                                 {{ $item->name }}</option>
@@ -189,7 +189,7 @@
                                     <label for="">Product Name*</label>
                                     <select name="name[]" id="productKey-0" class="form-control @error('name') is-invalid @enderror" required onchange="loadProductUnit('0')">
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\product::get() as $item)
+                                        @foreach(\App\Models\Product::get() as $item)
                                         <option value="{{ $item->id }}"
                                             @if(isset($record))
                                                 {{($record->name == $item->id)? 'selected':''}}
@@ -304,7 +304,7 @@
                                 </div>
 
                                 <div class="col-md">
-                                    <label for=""><b>Total Paid*</b></label>
+                                    <label for=""><b>Advance Payment*</b></label>
                                     <input type="text" name="total_paid" id="total_paid"
                                         class="form-control @error('total_paid') is-invalid @enderror"
                                         onkeyup="totalCount()"
@@ -453,7 +453,7 @@
                                     <label for="">Product Name*</label>\
                                     <select name="name[]" id="productKey-'+x+'" class="form-control @error('name') is-invalid @enderror" required onchange="loadProductUnit('+x+')">\
                                         <option value="" selected disabled>Select One</option>\
-                                        @foreach(\App\Models\product::get() as $item)\
+                                        @foreach(\App\Models\Product::get() as $item)\
                                         <option value="{{ $item->id }}"\
                                             @if(isset($record))\
                                                 {{($record->name == $item->id)? 'selected':''}}\

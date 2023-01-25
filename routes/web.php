@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Auth;
 /** ------------ Auth Routes
  * ======================================*/
 Route::view('/', 'auth.login')->name('login.view');
-// user login
+
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'ShowLogin'])->name('login.get');
+
+ // user login
 Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 // user logout
 Route::get('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -54,12 +57,17 @@ Route::middleware('auth')
         Route::get('purchase/delete/{key}', 'destroy')->name('purchase.delete');
         Route::get('purchase/status/{key}/{status}', 'updateStatus')->name('purchase.status');
 
+        
+      //  ajax request
+
+      Route::get('purchase/get/due', 'getPurchaseDue')->name('purchase.due');
+
     });
     
     
     /**-------------    Route for party
      * ========================================================*/
-    Route::controller(App\Http\Controllers\partyController::class)
+    Route::controller(App\Http\Controllers\PartyController::class)
     ->group(function(){
 
         Route::get('party-list', 'show')->name('party');
@@ -74,7 +82,7 @@ Route::middleware('auth')
 
     /**-------------    Route for party-order
      * ========================================================*/
-    Route::controller(App\Http\Controllers\orderController::class)
+    Route::controller(App\Http\Controllers\OrderController::class)
     ->group(function(){
        Route::get('order-list','show')->name('order');
        Route::get('order/create', 'create')->name('order.create');
@@ -84,6 +92,10 @@ Route::middleware('auth')
        Route::post('order/update', 'update')->name('order.update');
        Route::get('order/delete/{key}', 'destroy')->name('order.delete');
        Route::get('order/status/{key}/{status}', 'orderStatus')->name('order.status');
+
+       //ajax
+
+       Route::get('order/get/due', 'getOrderDue')->name('order.due');
     });
 
 
@@ -148,7 +160,7 @@ Route::middleware('auth')
      * ========================================================*/
     
     
-     Route::controller(App\Http\Controllers\sanctionController::class)
+     Route::controller(App\Http\Controllers\SanctionController::class)
      ->group(function(){
         Route::get('sanction-list','show')->name('sanction');
         Route::get('account-sanction-list','showaccount')->name('sanctionaccount');
@@ -166,7 +178,7 @@ Route::middleware('auth')
      * ========================================================*/
     
     
-    Route::controller(App\Http\Controllers\completedController::class)
+    Route::controller(App\Http\Controllers\CompletedController::class)
     ->group(function(){
        Route::get('Completed Order-list','show')->name('completed');
        Route::get('completed/delete/{key}', 'destroy')->name('completed.delete');
@@ -176,7 +188,7 @@ Route::middleware('auth')
      /**-------------    Route for Quotation
      * ========================================================*/
     
-    Route::controller(App\Http\Controllers\quotationController::class)
+    Route::controller(App\Http\Controllers\QuotationController::class)
     ->group(function(){
        Route::get('quotation-list','show')->name('quotation');
        Route::get('quotation/create', 'create')->name('quotation.create');
@@ -190,7 +202,7 @@ Route::middleware('auth')
     /**-------------    Route for departments
      * ========================================================*/
     
-   Route::controller(App\Http\Controllers\departmentController::class)
+   Route::controller(App\Http\Controllers\DepartmentController::class)
    ->group(function(){
       Route::get('department-list','show')->name('department');
       Route::get('department/create', 'create')->name('department.create');
@@ -204,7 +216,7 @@ Route::middleware('auth')
    /**-------------    Route for designations
     * ========================================================*/
    
-   Route::controller(App\Http\Controllers\designationController::class)
+   Route::controller(App\Http\Controllers\DesignationController::class)
    ->group(function(){
       Route::get('designation-list','show')->name('designation');
       Route::get('designation/create', 'create')->name('designation.create');
@@ -217,7 +229,7 @@ Route::middleware('auth')
    /**-------------    Route for employees
     * ========================================================*/
    
-   Route::controller(App\Http\Controllers\employeeController::class)
+   Route::controller(App\Http\Controllers\EmployeeController::class)
    ->group(function(){
       Route::get('employee-list','show')->name('employee');
       Route::get('employee/create', 'create')->name('employee.create');
@@ -235,7 +247,7 @@ Route::middleware('auth')
    /**-------------    Route for employees Salarys
     * ========================================================*/    
 
-   Route::controller(App\Http\Controllers\salaryController::class)
+   Route::controller(App\Http\Controllers\SalaryController::class)
    ->group(function(){
    Route::get('Salary-list','show')->name('salary');
 
@@ -245,7 +257,7 @@ Route::middleware('auth')
       /**-------------    Route for employees Attendance
      * ========================================================*/    
     
-    Route::controller(App\Http\Controllers\attendanceController::class)
+    Route::controller(App\Http\Controllers\AttendanceController::class)
     ->group(function(){
        Route::get('attendance-list','show')->name('attendance');
        Route::get('attendance/create', 'create')->name('attendance.create');
@@ -259,7 +271,7 @@ Route::middleware('auth')
     /**-------------    Route for bank add
      * ========================================================*/    
     
-    Route::controller(App\Http\Controllers\bankaddController::class)
+    Route::controller(App\Http\Controllers\BankaddController::class)
     ->group(function(){
        Route::get('bankadd-list','show')->name('bankadd');
        Route::get('bankadd/create', 'create')->name('bankadd.create');
@@ -272,7 +284,7 @@ Route::middleware('auth')
     /**-------------    Route for debit bank
      * ========================================================*/    
     
-    Route::controller(App\Http\Controllers\debitController::class)
+    Route::controller(App\Http\Controllers\DebitController::class)
     ->group(function(){
         Route::get('debit-list','show')->name('debit');
         Route::get('debit/create', 'create')->name('debit.create');
@@ -286,7 +298,7 @@ Route::middleware('auth')
     /**-------------    Route for credit bank
      * ========================================================*/   
     
-    Route::controller(App\Http\Controllers\creditController::class)
+    Route::controller(App\Http\Controllers\CreditController::class)
     ->group(function(){
         Route::get('credit-list','show')->name('credit');
         Route::get('credit/create', 'create')->name('credit.create');
@@ -301,7 +313,7 @@ Route::middleware('auth')
     /**-------------    Route for expense 
      * ========================================================*/    
     
-     Route::controller(App\Http\Controllers\expenseController::class)
+     Route::controller(App\Http\Controllers\ExpenseController::class)
      ->group(function(){
          Route::get('expense-list','show')->name('expense');
          Route::get('expense/create', 'create')->name('expense.create');
@@ -310,20 +322,22 @@ Route::middleware('auth')
         Route::post('expense/update', 'update')->name('expense.update');
         Route::get('expense/delete/{key}', 'destroy')->name('expense.delete');
      });
+
  
-
-
-    /**-------------    Route for expense 
+  
+/**-------------    Route for transection
      * ========================================================*/    
     
-     Route::controller(App\Http\Controllers\transectionController::class)
+     Route::controller(App\Http\Controllers\TransectionController::class)
      ->group(function(){
          Route::get('transection-list','show')->name('transection');
+         Route::get('BankTransection-list','showBankTransection')->name('banktransection');
          Route::get('transection/create', 'create')->name('transection.create');
-        Route::post('transection/store', 'store')->name('transection.store');
-        Route::get('transection/{key}', 'edit')->name('transection.edit');
-        Route::post('transection/update', 'update')->name('transection.update');
-        Route::get('transection/delete/{key}', 'destroy')->name('transection.delete');
+         Route::post('transection/store', 'store')->name('transection.store');
+         Route::get('transection/{key}', 'edit')->name('transection.edit');
+         Route::post('transection/update', 'update')->name('transection.update');
+         Route::get('transection/delete/{key}', 'destroy')->name('transection.delete');
+         Route::get('transection/invoice/{key}', 'view')->name('transection.view');
      });
  
   
@@ -331,7 +345,7 @@ Route::middleware('auth')
     /**-------------    Route for partyreceive
      * ========================================================*/    
     
-    Route::controller(App\Http\Controllers\partyreceiveController::class)
+    Route::controller(App\Http\Controllers\PartyReceiveController::class)
     ->group(function(){
         Route::get('partyreceive-list','show')->name('partyreceive');
         Route::get('partyreceive/create', 'create')->name('partyreceive.create');
@@ -339,12 +353,13 @@ Route::middleware('auth')
        Route::get('partyreceive/{key}', 'edit')->name('partyreceive.edit');
        Route::post('partyreceive/update', 'update')->name('partyreceive.update');
        Route::get('partyreceive/delete/{key}', 'destroy')->name('partyreceive.delete');
+       Route::get('partyreceive/invoice/{key}', 'view')->name('partyreceive.view');
     });
 
     /**-------------    Route for supplierpayment
      * ========================================================*/    
     
-    Route::controller(App\Http\Controllers\supplierpaymentController::class)
+    Route::controller(App\Http\Controllers\SupplierPaymentController::class)
     ->group(function(){
         Route::get('supplierpayment-list','show')->name('supplierpayment');
         Route::get('supplierpayment/create', 'create')->name('supplierpayment.create');
@@ -352,6 +367,8 @@ Route::middleware('auth')
        Route::get('supplierpayment/{key}', 'edit')->name('supplierpayment.edit');
        Route::post('supplierpayment/update', 'update')->name('supplierpayment.update');
        Route::get('supplierpayment/delete/{key}', 'destroy')->name('supplierpayment.delete');
+       Route::get('supplierpayment/invoice/{key}', 'view')->name('supplierpayment.view');
+
     });
 
     /**-------------    Route for lc
@@ -371,7 +388,7 @@ Route::middleware('auth')
     /**-------------    Route for Leave management
      * ========================================================*/
 
-    Route:: controller(App\Http\Controllers\leaveController::class)
+    Route:: controller(App\Http\Controllers\LeaveController::class)
     ->group(function(){
         Route::get('Leave-application-list','show')->name('leave');
         Route::get('leave/create','create')->name('leave.create');
@@ -385,7 +402,7 @@ Route::middleware('auth')
     /**-------------    Route for loan Application
      * ========================================================*/
 
-    Route:: controller(App\Http\Controllers\loanController::class)
+    Route:: controller(App\Http\Controllers\LoanController::class)
     ->group(function(){
         Route::get('loan-application-list','show')->name('loan');
         Route::get('loan/create','create')->name('loan.create');
@@ -398,7 +415,7 @@ Route::middleware('auth')
     /**-------------    Route for assets
      * ========================================================*/
 
-    Route:: controller(App\Http\Controllers\assetController::class)
+    Route:: controller(App\Http\Controllers\AssetController::class)
     ->group(function(){
        Route::get('asset/list','show')->name('asset');
        Route::get('asset/create','create')->name('asset.create');
@@ -419,6 +436,13 @@ Route::middleware('auth')
        Route::get('Material/edit/{key}','edit')->name('Material.edit');
        Route::post('Material/update','update')->name('Material.update');
        Route::get('Material/delete/{key}', 'destroy')->name('Material.delete');
+
+       
+      //  ajax request
+
+      Route::get('material/get/unit', 'getMaterialUnit')->name('material.unit');
+      Route::get('material/get/price', 'getmaterialPrice')->name('material.price');
+
     });
 
      /**-------------    Route for MaterialProduction Application
@@ -463,7 +487,7 @@ Route::middleware('auth')
     /**-------------    Route for totalProduction Application
      * ========================================================*/
 
-    Route:: controller(App\Http\Controllers\totalProductionController::class)
+    Route:: controller(App\Http\Controllers\TotalProductionController::class)
     ->group(function(){
        Route::get('totalProduction/list','show')->name('totalProduction');
        Route::get('totalProduction/delete/{key}', 'destroy')->name('totalProduction.delete');
@@ -475,7 +499,7 @@ Route::middleware('auth')
     /**-------------    Route for materialForSupplier
      * ========================================================*/
 
-    Route::controller(App\Http\Controllers\materialForSupplierController::class)
+    Route::controller(App\Http\Controllers\MaterialForSupplierController::class)
     ->group(function(){
        Route::get('materialForSupplier-list','show')->name('materialForSupplier');
        Route::get('materialForSupplier/create', 'create')->name('materialForSupplier.create');
@@ -488,10 +512,4 @@ Route::middleware('auth')
 });
 
 
-// Route::domain("{subdomain}." . config('app.short_url'))
-// ->group(function(){
-//    Route::get('/', function($subdomain){
-//       return $subdomain;
-//    });
-// });
 

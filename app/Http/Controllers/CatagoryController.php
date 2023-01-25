@@ -13,7 +13,7 @@ class CatagoryController extends Controller
      * =============================================*/
     public function show()
     {
-        $catagorys = catagory::where('status', true)->latest()->get();
+        $catagorys = Catagory::where('status', true)->latest()->get();
 
         return view('sales.catagory.table')->with(compact('catagorys'));
     }
@@ -39,7 +39,7 @@ class CatagoryController extends Controller
         $data = $request->all();
 
         
-        $catagory = catagory::create($data);
+        $catagory = Catagory::create($data);
 
         return to_route('catagory')->with('success', 'Record created successfully');
     }
@@ -51,7 +51,7 @@ class CatagoryController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $catagory = catagory::find($key);
+        $catagory = Catagory::find($key);
 
         return view('sales.catagory.form')->with(compact('catagory'));
     }
@@ -73,7 +73,7 @@ class CatagoryController extends Controller
         $data = $request->all();
 
         
-        $catagory = catagory::find($key)->update($data);
+        $catagory = Catagory::find($key)->update($data);
 
         return to_route('catagory')->with('success', 'Record updated successfully');
     }
@@ -86,7 +86,7 @@ class CatagoryController extends Controller
     {
         $key = $request->key;
 
-        $catagory = catagory::destroy($key);
+        $catagory = Catagory::destroy($key);
 
         return to_route('catagory')->with('success', 'Record deleted successfully');
     }

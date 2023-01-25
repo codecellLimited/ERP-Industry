@@ -23,7 +23,7 @@
                         <h4><b> Company Name:</b> {{$Suppliers->company}}</h4>
                     </div>
                 <div class="col-md-4 ml-auto">
-                    <img src="{{asset($Suppliers->image)}}" alt="" sizes="width:60px;height:60px" class="img-fluid">
+                    <img src="{{asset($Suppliers->image)}}" alt=""  class="img-fluid" style="width:200px;height:200px;">
                 </div>
             </div>
             <div class="card shadow">
@@ -57,7 +57,7 @@
                                     @foreach($abc as $row)
                                     <tr>
                                         <td>
-                                            {{\App\Models\materialForSupplier::find($row->product_id)->name}}
+                                            {{\App\Models\Material::find($row->name)->name}}
                                         </td>
                                     </tr>
                                     @endforeach
@@ -68,7 +68,7 @@
                                     <table>
                                         @foreach($abc as $row)
                                         <tr>
-                                            <td>{{$row->quantity}} {{\App\Models\unit::find($row->unit)->name}} </td>
+                                            <td>{{$row->quantity}} {{\App\Models\Unit::find($row->unit)->name}} </td>
                                         </tr>
                                         @endforeach
                                     </table>
@@ -112,7 +112,7 @@
                             @empty
                             <div class="col-12 py-5 text-center">
                                 <tr>
-                                    <td colspan='9'>No Record Found</td>
+                                    <td colspan='11'>No Record Found</td>
                                 </tr>
                             </div>
                             @endforelse

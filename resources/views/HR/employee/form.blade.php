@@ -89,7 +89,7 @@
                                     <label for=""><b>Department Name</b></label>
                                     <select name="department_id" id="" class="form-control @error('department_id') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\department::get() as $item)
+                                        @foreach(\App\Models\Department::get() as $item)
                                         <option value="{{ $item->id }}"
                                             @if(isset($employee))
                                                 {{($employee->department_id == $item->id) ? 'selected' : ''}}
@@ -111,7 +111,7 @@
                                     <label for=""><b>Designation</b></label>
                                     <select name="designation_id" id="" class="form-control @error('designation_id') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\designation::get() as $item)
+                                        @foreach(\App\Models\Designation::get() as $item)
                                         <option value="{{ $item->id }}"
                                             @if(isset($employee))
                                                 {{($employee->designation_id == $item->id)? 'selected':''}}

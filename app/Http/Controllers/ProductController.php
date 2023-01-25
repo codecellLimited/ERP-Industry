@@ -14,7 +14,7 @@ class ProductController extends Controller
      * =============================================*/
     public function show()
     {
-        $products = product::where('status', true)->latest()->get();
+        $products = Product::where('status', true)->latest()->get();
 
         return view('sales.product.table')->with(compact('products'));
     }
@@ -38,15 +38,12 @@ class ProductController extends Controller
         $data = $request->all();
 
         $request->validate([
-        
-
-
             'name'  => 'required',
             'catagory_id' => 'required',
             'brand_id' => 'required',
             'price' => 'required | integer',
             'unit_id' => 'required',
-            'image' => 'nullable|memes:jpg,png,jpeg'
+            'image' => 'nullable|mimes:jpg,png,jpeg,webp',
 
         ]);
 
@@ -98,7 +95,7 @@ class ProductController extends Controller
             'brand_id' => 'required',
             'price' => 'required | integer',
             'unit_id' => 'required',
-            'image' => 'nullable|memes:jpg,png,jpeg'
+            'image' => 'nullable|mimes:jpg,png,jpeg,webp'
 
         ]);
 
@@ -118,7 +115,7 @@ class ProductController extends Controller
             $data['image'] = $path;
         }
 
-        $products = product::find($key)->update($data);
+        $products = Product::find($key)->update($data);
 
         return to_route('product')->with('success', 'Record updated successfully');
     }
@@ -131,7 +128,7 @@ class ProductController extends Controller
     {
         $key = $request->key;
 
-        $product = product::destroy($key);
+        $product = Product::destroy($key);
 
         return to_route('product')->with('success', 'Record deleted successfully');
     }

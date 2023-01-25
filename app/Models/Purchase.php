@@ -10,16 +10,17 @@ class Purchase extends Model
     use HasFactory;
 
     protected $fillable = [
+        'supplier_id',
         'purchase_date',
-        'supplierID',
+        'purchase_receive_date',
         'data',
-        'transport_cost',
         'total_price',
+        'transport_cost',
         'total_paid',
         'due',
         'payment_method',
         'note',
-        'image',
+        'image'
     ];
 
 }

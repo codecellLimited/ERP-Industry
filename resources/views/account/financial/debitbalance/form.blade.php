@@ -53,7 +53,7 @@
                                     <label for=""><b>Account Number</b></label>
                                     <select name="account" id="" class="form-control @error('account') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\bankadd::get() as $item)
+                                        @foreach(\App\Models\Bankadd::get() as $item)
                                         <option value="{{ $item->id }}"
                                         @if(isset($debit))
                                         {{($debit->account == $item->id)? 'selected' : '' }}
@@ -119,7 +119,7 @@
                                     <label for=""><b>Reveived By</b></label>
                                     <select name="received" id="" class="form-control @error('received') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\designation::get() as $item)
+                                        @foreach(\App\Models\Designation::get() as $item)
                                         <option value="{{ $item->id }}"
                                         @if(isset($debit))
                                         {{($debit->received == $item->id)? 'selected' : '' }}

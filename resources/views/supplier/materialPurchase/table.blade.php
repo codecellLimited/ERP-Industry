@@ -37,10 +37,10 @@
                 @forelse($records as $key =>$item)
                 <tr>
                     <th scope="row" >{{++$key}}</th>
-                    <td><img src="{{ asset(\App\Models\supplier::find($item->supplierID)->image) }}" alt="" class="img-fluid m-auto d-block" width="70"></td>
-                    <td>{{Str::upper(\App\Models\supplier::find($item->supplierID)->company)}}</td>
+                    <td><img src="{{ asset(\App\Models\Supplier::find($item->supplier_id)->image) }}" alt="" class="img-fluid m-auto d-block" width="70"></td>
+                    <td>{{Str::upper(\App\Models\Supplier::find($item->supplier_id)->company)}}</td>
                     
-                    <td>{{Str::upper( \App\Models\supplier::find($item->supplierID)->name)}}</td>
+                    <td>{{Str::upper( \App\Models\Supplier::find($item->supplier_id)->name)}}</td>
                     <td>{{$item->total_price}}</td>
                     <td>{{$item->total_paid}}</td>
                     <td>{{$item->due}}</td>

@@ -15,7 +15,7 @@ class BrandController extends Controller
     {
         $Brand = Brand::where('status', true)->latest()->get();
 
-        return view('sales.Brand.table')->with(compact('Brand'));
+        return view('sales.brand.table')->with(compact('Brand'));
     }
 
 
@@ -23,7 +23,7 @@ class BrandController extends Controller
      * =============================================*/
     public function create()
     {
-        return view('sales.Brand.form');
+        return view('sales.brand.form');
     }
 
 

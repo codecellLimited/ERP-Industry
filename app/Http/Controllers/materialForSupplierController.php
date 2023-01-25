@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\materialForSupplier;
+use App\Models\MaterialForSupplier;
 
-class materialForSupplierController extends Controller
+class MaterialForSupplierController extends Controller
 {
     /** --------------- materialForSuppliers data table
      * =============================================*/
     public function show()
     {
-        $materialForSupplier = materialForSupplier::where('status', true)->latest()->get();
+        $materialForSupplier = MaterialForSupplier::where('status', true)->latest()->get();
 
         return view('supplier.materialForSupplier.table')->with(compact('materialForSupplier'));
     }
@@ -53,7 +53,7 @@ class materialForSupplierController extends Controller
             $data['image'] = $path;
         }
         
-        $materialForSupplier = materialForSupplier::create($data);
+        $materialForSupplier = MaterialForSupplier::create($data);
 
         return to_route('materialForSupplier')->with('success', 'Record created successfully');
     }
@@ -65,7 +65,7 @@ class materialForSupplierController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $materialForSupplier = materialForSupplier::find($key);
+        $materialForSupplier = MaterialForSupplier::find($key);
 
         return view('supplier.materialForSupplier.form')->with(compact('materialForSupplier'));
     }
@@ -101,7 +101,7 @@ class materialForSupplierController extends Controller
             $data['image'] = $path;
         }
 
-        $materialForSupplier = materialForSupplier::find($key)->update($data);
+        $materialForSupplier = MaterialForSupplier::find($key)->update($data);
 
         return to_route('materialForSupplier')->with('success', 'Record updated successfully');
     }
@@ -114,7 +114,7 @@ class materialForSupplierController extends Controller
     {
         $key = $request->key;
 
-        $materialForSupplier = materialForSupplier::destroy($key);
+        $materialForSupplier = MaterialForSupplier::destroy($key);
 
         return to_route('materialForSupplier')->with('success', 'Record deleted successfully');
     }

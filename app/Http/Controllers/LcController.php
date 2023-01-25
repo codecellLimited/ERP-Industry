@@ -13,7 +13,7 @@ class LcController extends Controller
      * =============================================*/
     public function show()
     { 
-        $lc = lc::where('status', true)->latest()->get();
+        $lc = Lc::where('status', true)->latest()->get();
 
         return view('account.bankcash.LC.table')->with(compact('lc'));
     }
@@ -53,7 +53,7 @@ class LcController extends Controller
 
         $data = $request->all();
 
-        $lc = lc::create($data);
+        $lc = Lc::create($data);
 
         return to_route('lc')->with('success', 'Record created successfully');
     }
@@ -65,7 +65,7 @@ class LcController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $lc = lc::find($key);
+        $lc = Lc::find($key);
 
         return view('account.bankcash.LC.form')->with(compact('lc'));
     }
@@ -101,7 +101,7 @@ class LcController extends Controller
         
         $data = $request->all();
 
-        $lc = lc::find($key)->update($data);
+        $lc = Lc::find($key)->update($data);
 
         return to_route('lc')->with('success', 'Record updated successfully');
     }
@@ -114,7 +114,7 @@ class LcController extends Controller
     {
         $key = $request->key;
 
-        $lc = lc::destroy($key);
+        $lc = Lc::destroy($key);
 
         return to_route('lc')->with('success', 'Record deleted successfully');
     }

@@ -9,12 +9,5 @@ class partyreceive extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-        'date',
-        'party',
-        'method',
-        'account',
-        'amount',
-        'remark'
-    ];
+    
 }

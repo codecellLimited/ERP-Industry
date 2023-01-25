@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 /** Models */
 use App\Models\ProductionPerDay;
-use App\Models\order;
+use App\Models\Order;
 
 class ProductionPerPartyController extends Controller
 {
@@ -14,7 +14,7 @@ class ProductionPerPartyController extends Controller
      * =============================================*/
     public function show()
     {
-       $orderid = order::where('status', true)->latest()->get();
+       $orderid = Order::where('status', true)->latest()->get();
         
         return view('inventory.ProductionPerParty.table')->with(compact('orderid'));
     }

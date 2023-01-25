@@ -5,98 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\debit;
+use App\Models\Transection;
 
-class debitController extends Controller
+class DebitController extends Controller
 {
     /** --------------- debit data table
      * =============================================*/
     public function show()
     { 
-        $debit = debit::where('status', true)->latest()->get();
+        $transection = Transection::where('status', true)->where('purpose', 2)->where('payment_method', 2)->latest()->get();
 
-        return view('account.financial.debitbalance.table')->with(compact('debit'));
+        return view('account.financial.debitbalance.table')->with(compact('transection'));
     }
 
-
-    /** --------------- debit data table
-     * =============================================*/
-    public function create()
-    {
-        return view('account.financial.debitbalance.form');
-    }
-
-
-
-    /** --------------- Store debit
-     * =============================================*/
-    public function store(Request $request)
-    {
-        $request->validate([
-           
-            'credit_from'  => 'required',
-            'account'  => 'required',
-            'amount'  => 'required|integer',
-            'received'  => 'required',
-           
-        ]);
-
-        $data = $request->all();
-
-        $debit = debit::create($data);
-
-        return to_route('debit')->with('success', 'Record created successfully');
-    }
-
-
-    
-    /** --------------- debit data edit
-     * =============================================*/
-    public function edit(Request $request)
-    {
-        $key = $request->key;
-        $debit = debit::find($key);
-
-        return view('account.financial.debitbalance.form')->with(compact('debit'));
-    }
-
-
-
-
-    /** --------------- Update debit
-     * =============================================*/
-    public function update(Request $request)
-    {
-        $key = $request->key;
-
-        $request->validate([
-           
-            'credit_from'  => 'required',
-            'account'  => 'required',
-            'amount'  => 'required|integer',
-            'received'  => 'required',
-           
-        ]);
-
-        
-        $data = $request->all();
-
-        $debit = debit::find($key)->update($data);
-
-        return to_route('debit')->with('success', 'Record updated successfully');
-    }
-
-
-
-    /** --------------- Update debit
-     * =============================================*/
-    public function destroy(Request $request)
-    {
-        $key = $request->key;
-
-        $debit = debit::destroy($key);
-
-        return to_route('debit')->with('success', 'Record deleted successfully');
-    }
 
 }

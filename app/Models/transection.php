@@ -11,10 +11,11 @@ class transection extends Model
 
     protected $fillable=[
         'date',
-        'transection_for',
+        'purpose',
         'party_id',
         'supplier_id',
-        'order',
+        'bearer',
+        'order_id',
         'due',
         'payment_method',
         'account',

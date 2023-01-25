@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\sanction;
+use App\Models\Sanction;
 
 
-class sanctionController extends Controller
+class SanctionController extends Controller
 {
     /** --------------- sanction data table
      * =============================================*/
     public function show()
     {
-        $sanction = sanction::latest()->get();
+        $sanction = Sanction::latest()->get();
 
         return view('sales.sanction_payment.table')->with(compact('sanction'));
     }
@@ -22,7 +22,7 @@ class sanctionController extends Controller
      * =============================================*/
     public function showaccount()
     {
-        $sanction = sanction::where('status','>',1)->latest()->get();
+        $sanction = Sanction::where('status','>',1)->latest()->get();
 
         return view('account.sanction_payment.table')->with(compact('sanction'));
     }
@@ -50,7 +50,7 @@ class sanctionController extends Controller
 
         $data = $request->all();
 
-        $sanction = sanction::create($data);
+        $sanction = Sanction::create($data);
 
         return to_route('sanction')->with('success', 'Record created successfully');
     }
@@ -62,7 +62,7 @@ class sanctionController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $sanction = sanction::find($key);
+        $sanction = Sanction::find($key);
 
         return view('sales.sanction_payment.form')->with(compact('sanction'));
     }
@@ -85,7 +85,7 @@ class sanctionController extends Controller
         
         $data = $request->all();
 
-        $sanction = sanction::find($key)->update($data);
+        $sanction = Sanction::find($key)->update($data);
 
         return to_route('sanction')->with('success', 'Record updated successfully');
     }
@@ -98,7 +98,7 @@ class sanctionController extends Controller
     {
         $key = $request->key;
 
-        $sanction = sanction::destroy($key);
+        $sanction = Sanction::destroy($key);
 
         return to_route('sanction')->with('success', 'Record deleted successfully');
     }
@@ -110,7 +110,7 @@ class sanctionController extends Controller
 
      public function sanctionStatus(Request $request)
      {
-         $user = sanction::find($request->key);
+         $user = Sanction::find($request->key);
          $user->status = $request->status;
          $user->save();
    

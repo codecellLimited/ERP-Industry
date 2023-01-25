@@ -35,8 +35,8 @@
                         <td><img src="{{ asset($item->image) }}" alt="" class="img-fluid rounded-circle m-auto d-block" style="width:50px;heigth:50px;"></td>
                         <td>{{$item->id_no}}</td>
                         <td>{{$item->name}}</td>
-                        <td>{{ \App\Models\department::find($item->department_id)->name }}</td>
-                        <td>{{ \App\Models\designation::find($item->designation_id)->name }}</td>
+                        <td>{{ \App\Models\Department::find($item->department_id)->name }}</td>
+                        <td>{{ \App\Models\Designation::find($item->designation_id)->name }}</td>
                         <td>{{$item->phone}}</td>
                         
                         <td>{{$item->date_of_joining}}</td>

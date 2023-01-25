@@ -85,7 +85,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
                         <a class="collapse-item" href="{{ route('suppliers') }}">Profile</a>
-                        <a class="collapse-item" href="{{ route('materialForSupplier') }}">Materials</a>
                         <a class="collapse-item" href="{{ route('purchase') }}">Material Purchase</a>
                         
                     </div>
@@ -251,7 +250,7 @@
                 <div id="bank" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         {{-- <h6 class="collapse-header">Custom Components:</h6> --}}
-                        <a class="collapse-item" href="{{route('transection')}}">Bank transections</a>
+                        <a class="collapse-item" href="{{route('banktransection')}}">Bank transections</a>
                         <a class="collapse-item" href="{{route('expense')}}">Expenses</a>
                         <a class="collapse-item" href="{{route('transection')}}">Transection</a>
                         <a class="collapse-item" href="{{route('partyreceive')}}">Party Receive</a>
@@ -327,8 +326,8 @@
                     <span>Material Production</span>
                 </a>
             </li>
-@endif
-@if(auth()->user()->role != 3)
+            @endif
+            @if(auth()->user()->role != 3)
             <li class="nav-item"> 
                 <a href="{{route('totalProduction')}}" class="nav-link collapsed">
                     <i class="fa fa-industry"></i>

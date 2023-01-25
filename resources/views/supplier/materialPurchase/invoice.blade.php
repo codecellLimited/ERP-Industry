@@ -51,8 +51,8 @@
 
                             @foreach($abc as $row)
                             <tr>
-                                <td>{{\App\Models\material::find($row->product_id)->name}}</td>
-                                <td>{{$row->quantity}} {{\App\Models\unit::find($row->unit)->name}} </td>
+                                <td>{{\App\Models\Material::find($row->name)->name}}</td>
+                                <td>{{$row->quantity}} {{\App\Models\Unit::find($row->unit)->name}} </td>
                                 <td>{{$row->unit_price}} </td>
                                 <td>{{$row->discount}} </td>
                                 <td>{{$row->sub_total}} </td>
@@ -83,15 +83,60 @@
                                 <td>{{$record->total_paid}}</td>
                             </tr>
 
+                            
+                        </tbody>
+                    </table>
+
+                    <br><br><br>
+                    {{-- table for order transection --}}
+
+
+                    <table class="table table-striped table-hover" style="color:black;">
+                    
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Transection By</th>
+                                <th>Account/ Received By</th>
+                                <th>Amount</th>
+                                <th>Due</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach($transection as $item)
+                            <tr>
+                                <td>{{date('d-m-Y',strtotime($item->date))}} </td>
+                                <td>@if( $item->payment_method == 1) Hand Cash
+                                    @else Bank Transection 
+                                    @endif
+                                </td>
+                                <td>{{ \App\Models\Bankadd::find($item->account)->account_number ?? $item->bearer }}</td>
+                                <td>{{$item->amount}}</td>
+                                <td>{{$item->due}}</td>
+                            </tr>
+                            @endforeach
+                            
+                            
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td><b>Total Due :</b></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Current Due :</b></td>
                                 <td>{{$record->due}}</td>
                             </tr>
                         </tbody>
                     </table>
+
 
                     
                 </div>

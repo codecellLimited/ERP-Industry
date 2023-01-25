@@ -5,97 +5,40 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\supplierpayment;
+use App\Models\Transection;
+use App\Models\Supplier;
+use App\Models\Party;
+use App\Models\Order;
+use App\Models\Purchase;
 
-class supplierpaymentController extends Controller
+class SupplierPaymentController extends Controller
 {
     /** --------------- supplierpayment data table
      * =============================================*/
     public function show()
     { 
-        $supplierpayment = supplierpayment::where('status', true)->latest()->get();
+        $transection = Transection::where('status', true)->where('purpose', 2)->latest()->get();
 
-        return view('account.bankcash.supplier_payment.table')->with(compact('supplierpayment'));
+
+        return view('account.bankcash.supplier_payment.table')->with(compact('transection'));
     }
-
-
-    /** --------------- supplierpayment data table
-     * =============================================*/
-    public function create()
-    {
-        return view('account.bankcash.supplier_payment.form');
-    }
-
-
-
-    /** --------------- Store supplierpayment
-     * =============================================*/
-    public function store(Request $request)
-    {
-        $request->validate([
-           
-            'date'  => 'required',
-            'amount'  => 'required | integer',
-            'name'  => 'required',
-            'method' => 'required'
-
-           
-        ]);
-
-        $data = $request->all();
-
-        $supplierpayment = supplierpayment::create($data);
-
-        return to_route('supplierpayment')->with('success', 'Record created successfully');
-    }
-
-
     
-    /** --------------- supplierpayment data edit
+
+    /** --------------- invoice 
      * =============================================*/
-    public function edit(Request $request)
-    {
-        $key = $request->key;
-        $supplierpayment = supplierpayment::find($key);
-
-        return view('account.bankcash.supplier_payment.form')->with(compact('supplierpayment'));
-    }
-
-
-
-
-    /** --------------- Update supplierpayment
-     * =============================================*/
-    public function update(Request $request)
-    {
-        $key = $request->key;
-        $request->validate([
-           
-            'date'  => 'required',
-            'amount'  => 'required | integer',
-            'name'  => 'required',
-            'method' => 'required'
-
-           
-        ]);
-        $data = $request->all();
-
-        $supplierpayment = supplierpayment::find($key)->update($data);
-
-        return to_route('supplierpayment')->with('success', 'Record updated successfully');
-    }
-
-
-
-    /** --------------- Update supplierpayment
-     * =============================================*/
-    public function destroy(Request $request)
-    {
+    public function view(Request $request){
         $key = $request->key;
 
-        $supplierpayment = supplierpayment::destroy($key);
+        $companyId = auth()->user()->company_id;
+        $record = Transection::find($key);
+        $suppliers = Supplier::where('company_id', $companyId)->get();
+        $order = Order::find($record->order_id);
+        $purchase = Purchase::find($record->order_id);
+        
+        $supplier = Supplier:: find($record->supplier_id);
+        $party = Party:: find($record->party_id);
 
-        return to_route('supplierpayment')->with('success', 'Record deleted successfully');
+        return view('account.bankcash.supplier_payment.invoice')->with(compact('supplier','suppliers','record','purchase','order','party'));
     }
 
 }

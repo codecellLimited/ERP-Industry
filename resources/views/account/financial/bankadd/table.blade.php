@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-body" style="color:black;">
                     <div class="my-3 text-center">
-                        <h6><b>Bank Name: </b><br>{{ \App\Models\bank::find($item->id)->name }}</h6>
+                        <h6><b>Bank Name: </b><br>{{ \App\Models\Bank::find($item->id)->name }}</h6>
                         <h6><b>Branch: </b><br>{{ $item->branch}}</h6>
                         <h6><b>Account Holder: </b><br>{{ $item->account_holder}}</h6>
                         <h6><b>Account Type: </b><br>{{ $item->account_type}}</h6>

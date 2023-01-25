@@ -39,7 +39,7 @@
                             @endif
                         </td>
                         <td>{{$item->amount}}</td>
-                        <td>{{ \App\Models\bankadd::find($item->account)->account_number ?? "Hand Cash"}}</td>
+                        <td>{{ \App\Models\Bankadd::find($item->account)->account_number ?? "Hand Cash"}}</td>
                         <td>{{$item->remark}}</td>
                         <td class="text-nowrap">
                              <a href="{{ route('expense.edit', $item->id) }}" class="btn btn-sm btn-primary">

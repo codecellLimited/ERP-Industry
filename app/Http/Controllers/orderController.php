@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\party;
-use App\Models\order;
-use App\Models\product;
+use App\Models\Party;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Transection;
 
 class OrderController extends Controller
 {
@@ -16,7 +17,7 @@ class OrderController extends Controller
     {
         $companyId = auth()->user()->company_id;
 
-        $records = order::where([
+        $records = Order::where([
                         'company_id'    => $companyId,
                     ])
                     ->latest()
@@ -59,9 +60,9 @@ class OrderController extends Controller
     {
         $companyId = auth()->user()->company_id;
 
-        $order = order::where('company_id', $companyId)->get();
-        $parties = party:: where('company_id', $companyId)->where('status', true)->get();
-        $product = product:: where('company_id', $companyId)->where('status', true)->get();
+        $order = Order::where('company_id', $companyId)->get();
+        $parties = Party:: where('company_id', $companyId)->where('status', true)->get();
+        $product = Product:: where('company_id', $companyId)->where('status', true)->get();
 
         return view('party.order.form')->with(compact('order','parties','product'));
     }
@@ -77,7 +78,7 @@ class OrderController extends Controller
             'party_id'              => 'required',
             'order_date'            => 'required',
             'order_delivery_date'   => 'required|date|date_format:Y-m-d|after:order_date',
-            'image'                 => 'nullable|mimes:jpg,jpeg,png'
+            'image'                 => 'nullable|mimes:jpg,jpeg,png,webp'
         ]);
 
         $data = $request->all();
@@ -111,7 +112,7 @@ class OrderController extends Controller
         $data['data'] = json_encode($details);
         $data['company_id'] = auth()->user()->company_id;
         
-        $suppliers = order::create($data);
+        $suppliers = Order::create($data);
 
         return to_route('order')->with('success', 'Record created successfully');
     }
@@ -125,7 +126,7 @@ class OrderController extends Controller
         $companyId = auth()->user()->company_id;
 
         $parties = Party::where('company_id', $companyId)->get();
-        $record = order::where('company_id', $companyId)->find($key);
+        $record = Order::where('company_id', $companyId)->find($key);
 
         return view('party.order.form')->with(compact('record', 'parties'));
     }
@@ -142,7 +143,7 @@ class OrderController extends Controller
             'party_id'              => 'required',
             'order_date'            => 'required',
             'order_delivery_date'   => 'required',
-            'image'                 => 'nullable|mimes:jpg,jpeg,png'
+            'image'                 => 'nullable|mimes:jpg,jpeg,png,webp'
         ]);
 
         $data = $request->all();
@@ -245,11 +246,28 @@ class OrderController extends Controller
         $companyId = auth()->user()->company_id;
         $parties = Party::where('company_id', $companyId)->get();
         $record = order::find($key);
-        $party = party:: find($record->party_id);
+        $party = Party:: find($record->party_id);
+        $transection = Transection:: where('order_id',$record->id)->get();
 
-        return view('party.order.invoiceorder')->with(compact('party','parties','record'));
+        return view('party.order.invoiceorder')->with(compact('party','parties','record','transection'));
     }
 
+
+    /**---------get due in transection page --------
+     ===============================================*/
+    public function getOrderDue(Request $request)
+    {
+        $companyId = auth()->user()->company_id;
+        $key = $request->key;
+        $html = 0;
+
+        if($order = Order::find($key))
+        {
+            $html = $order->due;
+        }
+
+        return $html;
+    }
 
 
 

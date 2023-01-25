@@ -34,7 +34,7 @@
                     <th scope="row" >{{++$key}}</th>
                     <td> <img src="{{asset(\App\Models\Product::find($item->product_id)->image)}}" alt="" class="img-fluid rounded-circle m-auto d-block" width="50"></td>
                     <td>{{\App\Models\Product::find($item->product_id)->name}}</td>
-                    <td>{{\App\Models\party::find($item->party_id)->name}}</td>
+                    <td>{{\App\Models\Party::find($item->party_id)->name}}</td>
                     <td>{{$item->production}}</td>
                     <td>{{$item->production_date}}</td>
                     <td>{{$item->remark}}</td>

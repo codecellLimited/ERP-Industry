@@ -212,15 +212,15 @@
 
                 @if(isset($searchid))
                     @php 
-                        $checkValue= \App\models\attendance::wheremonth('date',$searchmonth) ->first()->attendance  ?? ' '
+                        $checkValue= \App\models\Attendance::wheremonth('date',$searchmonth) ->first()->attendance  ?? ' '
                     @endphp
                     @if($checkValue >= 1 && $checkValue <= 12)
                         <tr>
                             <td>{{$searchid}}</td>
-                            <td width="30%">{{\App\models\employee::where('id_no',$searchid )->first()->name}}</td>
+                            <td width="30%">{{\App\models\Employee::where('id_no',$searchid )->first()->name}}</td>
                             @for($day=1;$day<=31;$day++)
                             @php 
-                                $checkValue= \App\models\attendance::where('employee_id',$searchid) 
+                                $checkValue= \App\models\Attendance::where('employee_id',$searchid) 
                                                             ->whereday('date',$day)
                                                             ->wheremonth('date',$searchmonth)
                                                             ->first()->attendance  ?? ' '
@@ -258,7 +258,7 @@
                             <td width="30%">{{$item->name}}</td>
                             @for($day=1;$day<=31;$day++)
                             @php 
-                                $checkValue= \App\models\attendance::where('employee_id',$item->id_no) 
+                                $checkValue= \App\models\Attendance::where('employee_id',$item->id_no) 
                                                             ->whereday('date',$day)
                                                             ->wheremonth('date',$searchmonth)
                                                             ->first()->attendance  ?? ' '

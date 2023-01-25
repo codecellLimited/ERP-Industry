@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\quotation;
-use App\Models\party;
+use App\Models\Quotation;
+use App\Models\Party;
 
 
-class quotationController extends Controller
+class QuotationController extends Controller
 {
     /** --------------- quotation data table
      * =============================================*/
     public function show()
     {
-        $quotation = quotation::where('status', true)->latest()->get();
+        $quotation = Quotation::where('status', true)->latest()->get();
 
         return view('sales.quotation.table')->with(compact('quotation'));
     }
@@ -24,7 +24,7 @@ class quotationController extends Controller
      * =============================================*/
     public function create()
     {
-        $parties = party::where('status', true)->get();
+        $parties = Party::where('status', true)->get();
         return view('sales.quotation.form')->with(compact('parties'));
     }
 
@@ -59,7 +59,7 @@ class quotationController extends Controller
         
         $data['data'] = json_encode($details);
         $data['company_id'] = auth()->user()->company_id;
-        $quotation = quotation::create($data);
+        $quotation = Quotation::create($data);
 
         return to_route('quotation')->with('success', 'Record created successfully');
     }
@@ -71,7 +71,7 @@ class quotationController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $quotation = quotation::find($key);
+        $quotation = Quotation::find($key);
 
         return view('sales.quotation.form')->with(compact('quotation'));
     }
@@ -110,7 +110,7 @@ class quotationController extends Controller
 
         $data['data'] = json_encode($details);
         $data['company_id'] = auth()->user()->company_id;
-        $quotation = quotation::find($key)->update($data);
+        $quotation = Quotation::find($key)->update($data);
 
         return to_route('quotation')->with('success', 'Record updated successfully');
     }
@@ -123,7 +123,7 @@ class quotationController extends Controller
     {
         $key = $request->key;
 
-        $quotation = quotation::destroy($key);
+        $quotation = Quotation::destroy($key);
 
         return to_route('quotation')->with('success', 'Record deleted successfully');
     }

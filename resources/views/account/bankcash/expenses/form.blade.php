@@ -95,7 +95,7 @@
                                     <label for=""><b>Account</b></label>
                                     <select name="account" id="" class="form-control @error('account') is-invalid @enderror">
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\bankadd::get() as $item)
+                                        @foreach(\App\Models\Bankadd::get() as $item)
                                         <option value="{{ $item->id }}" 
                                             @if(isset($expense))
                                             {{($expense->account == $item->id)? 'selected':'' }}

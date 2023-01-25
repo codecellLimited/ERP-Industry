@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\bankadd;
+use App\Models\Bankadd;
 
-class bankaddController extends Controller
+class BankaddController extends Controller
 {
     /** --------------- bankadd data table
      * =============================================*/
     public function show()
     {
-        $bankadd = bankadd::where('status', true)->latest()->get();
+        $bankadd = Bankadd::where('status', true)->latest()->get();
 
         return view('account.financial.bankadd.table')->with(compact('bankadd'));
     }
@@ -43,7 +43,7 @@ class bankaddController extends Controller
 
         $data = $request->all();
 
-        $bankadd = bankadd::create($data);
+        $bankadd = Bankadd::create($data);
 
         return to_route('bankadd')->with('success', 'Record created successfully');
     }
@@ -55,7 +55,7 @@ class bankaddController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $bankadd = bankadd::find($key);
+        $bankadd = Bankadd::find($key);
 
         return view('account.financial.bankadd.form')->with(compact('bankadd'));
     }
@@ -79,7 +79,7 @@ class bankaddController extends Controller
         
         $data = $request->all();
 
-        $bankadd = bankadd::find($key)->update($data);
+        $bankadd = Bankadd::find($key)->update($data);
 
         return to_route('bankadd')->with('success', 'Record updated successfully');
     }
@@ -92,7 +92,7 @@ class bankaddController extends Controller
     {
         $key = $request->key;
 
-        $bankadd = bankadd::destroy($key);
+        $bankadd = Bankadd::destroy($key);
 
         return to_route('bankadd')->with('success', 'Record deleted successfully');
     }

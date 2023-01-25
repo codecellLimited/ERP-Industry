@@ -51,20 +51,36 @@
                                     @enderror
                                 </div>
 
-                                
                                 <div class="col-md">
-                                    <label for="">Supplier*</label>
-                                    <select name="supplierID" class="form-control @error('supplierID') is-invalid @enderror" required>
+                                    <label for="">Purchase Receive Date</label>
+                                    <input type="date" name="purchase_receive_date" 
+                                        class="form-control @error('purchase_receive_date') is-invalid @enderror"
+                                        @if(isset($record))
+                                        value="{{ date('Y-m-d', strtotime($record->purchase_receive_date)) }}"
+                                        @else
+                                        value="{{ old('purchase_receive_date') }}"
+                                        @endif>
+
+                                    @error('purchase_receive_date')
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md">
+                                    <label for="">Suppliers*</label>
+                                    <select name="supplier_id" class="form-control @error('supplier_id') is-invalid @enderror" required>
                                         <option value="" selected disabled>Select One</option>
                                         @foreach ($supplier as $item)
                                         <option value="{{ $item->id }}"
-                                            @if(isset($record)) {{ ($item->id == $record->supplierID) ? 'selected' : '' }} @endif>
+                                            @if(isset($record)) {{ ($item->id == $record->supplier_id) ? 'selected' : '' }} @endif>
                                             {{ $item->company }}</option>
                                         @endforeach
                                         
                                     </select>
 
-                                    @error('supplierID')
+                                    @error('supplier_id')
                                         <span class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -81,17 +97,17 @@
                                     
                                     <div class="col-md">
                                         <label for="">Product name*</label>
-                                        <select name="product_id[]" class="form-control @error('product_id') is-invalid @enderror" required>
+                                        <select name="name[]" class="form-control @error('name') is-invalid @enderror" required>
                                             <option value="" selected disabled>Select One</option>
-                                            @foreach (\App\Models\materialForSupplier::get() as $item)
+                                            @foreach (\App\Models\Material::get() as $item)
                                             <option value="{{ $item->id }}"
-                                                @if(isset($records)) {{ ($item->id == $records->product_id) ? 'selected' : '' }} @endif>
+                                                @if(isset($records)) {{ ($item->id == $records->name) ? 'selected' : '' }} @endif>
                                                 {{ $item->name }}</option>
                                             @endforeach
                                             
                                         </select>
 
-                                        @error('product_id')
+                                        @error('name')
                                             <span class="invalid-feedback">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -171,19 +187,19 @@
 
                                 <div class="col-md-3">
                                     <label for="">Product Name*</label>
-                                    <select name="product_id[]" id="productKey-0" class="form-control @error('product_id') is-invalid @enderror" required onchange="loadProductUnit('0')">
+                                    <select name="name[]" id="productKey-0" class="form-control @error('name') is-invalid @enderror" required onchange="loadProductUnit('0')">
                                         <option value="" selected disabled>Select One</option>
-                                        @foreach(\App\Models\materialForSupplier::get() as $item)
+                                        @foreach(\App\Models\Material::get() as $item)
                                         <option value="{{ $item->id }}"
                                             @if(isset($record))
-                                                {{($record->product_id == $item->id)? 'selected':''}}
+                                                {{($record->name == $item->id)? 'selected':''}}
                                             @else{{(old('name')?'selected':'')}}  
                                             @endif  >
                                         {{$item->name}}</option>
                                         @endforeach
                                     </select>
 
-                                    @error('product_id')
+                                    @error('name')
                                         <span class="invalid-feedback">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -201,7 +217,7 @@
 
                                 <div class="col-md" id="loadUnitFromAjax-0">
                                     <label for="">Unit*</label>
-                                    <select name="unit[]" id="productUnit-0" class="form-control @error('unit_id') is-invalid @enderror" required>
+                                    <select name="unit[]" id="productUnit-0" class="form-control @error('unit_id') is-invalid @enderror" >
                                         <option value="" selected disabled>Select One</option>
                                         @foreach(\App\Models\Unit::get() as $item)
                                             <option value="{{ $item->id }}"
@@ -349,7 +365,6 @@
                                     </span>
                                 @enderror
                             </div>
-                            
                             <div class="col-md">
                                 <label for=""><b>Choose Image</b></label>
                                 @if(isset($record))
@@ -369,7 +384,7 @@
                         <div class="form-group">
                             <label for=""><b>Purchase note*</b></label>
                             <textarea type="text" name="note" class="form-control @error('note') is-invalid @enderror"
-                            >@if(isset($record)){{ $record->note }}@else{{ old('note') }}@endif</textarea>
+                            >@if(isset($record)){{ $record->note }}@else{{ old('note')}}@endif</textarea>
 
                             @error('note')
                                 <span class="invalid-feedback">
@@ -392,39 +407,39 @@
 
     <script>
 
-        // const loadProductUnit = (index) => {
-        //     const key = $("#productKey-"+index).val();
-        //     // console.log(key);
-        //     $.ajax({
-        //         url: '{{route("product.unit")}}',
-        //         type: 'GET',
-        //         data:{
-        //             key: key
-        //         },
-        //         success: (res) => {
-        //             // console.log(res);
-        //             $("#loadUnitFromAjax-"+index).html(res);
-        //         },
-        //         error: (err) => {
-        //             console.log(err);
-        //         }
-        //     })
+        const loadProductUnit = (index) => {
+            const key = $("#productKey-"+index).val();
+            // console.log(key);
+            $.ajax({
+                url: '{{route("material.unit")}}',
+                type: 'GET',
+                data:{
+                    key: key
+                },
+                success: (res) => {
+                    // console.log(res);
+                    $("#loadUnitFromAjax-"+index).html(res);
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
 
-        //     $.ajax({
-        //         url: '{{route("product.price")}}',
-        //         type: 'GET',
-        //         data:{
-        //             key: key
-        //         },
-        //         success: (res) => {
-        //             console.log(res);
-        //             $("#unit_price-"+index).val(res);
-        //         },
-        //         error: (err) => {
-        //             console.log(err);
-        //         }
-        //     })
-        // }
+            $.ajax({
+                url: '{{route("material.price")}}',
+                type: 'GET',
+                data:{
+                    key: key
+                },
+                success: (res) => {
+                    console.log(res);
+                    $("#unit_price-"+index).val(res);
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+        }
 
         @if (isset($record))
         let x = {{ count(json_decode($record->data)) - 1 }};
@@ -435,19 +450,19 @@
             x++;
             var html = '<div class="row" id="material-row-'+ x +'">\
                                 <div class="col-md-3">\
-                                    <label for="">Product Name*</label>\
-                                    <select name="product_id[]" id="productKey-'+x+'" class="form-control @error('product_id') is-invalid @enderror" required onchange="loadProductUnit('+x+')">\
+                                    <label for="">Material Name*</label>\
+                                    <select name="name[]" id="productKey-'+x+'" class="form-control @error('name') is-invalid @enderror" required onchange="loadProductUnit('+x+')">\
                                         <option value="" selected disabled>Select One</option>\
-                                        @foreach(\App\Models\materialForSupplier::get() as $item)\
+                                        @foreach(\App\Models\Material::get() as $item)\
                                         <option value="{{ $item->id }}"\
                                             @if(isset($record))\
-                                                {{($record->product_id == $item->id)? 'selected':''}}\
-                                            @else{{(old('product_id')?'selected':'')}}  \
+                                                {{($record->name == $item->id)? 'selected':''}}\
+                                            @else{{(old('name')?'selected':'')}}  \
                                             @endif  >\
                                         {{$item->name}}</option>\
                                         @endforeach\
                                     </select>\
-                                    @error('product_id')\
+                                    @error('name')\
                                         <span class="invalid-feedback">\
                                             <strong>{{ $message }}</strong>\
                                         </span>\

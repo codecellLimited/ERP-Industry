@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\party;
-use App\Models\order;
+use App\Models\Party;
+use App\Models\Order;
 
-class partyController extends Controller
+class PartyController extends Controller
 {
     /** --------------- party data table
      * =============================================*/
     public function show()
     {
-        $parties = party::where('status', true)->latest()->get();
+        $parties = Party::where('status', true)->latest()->get();
 
         return view('party.party.table')->with(compact('parties'));
     }
@@ -55,7 +55,7 @@ class partyController extends Controller
             $data['image'] = $path;
         }
 
-        $partys = party::create($data);
+        $partys = Party::create($data);
 
         return to_route('party')->with('success', 'Record created successfully');
     }
@@ -67,7 +67,7 @@ class partyController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $parties = party::find($key);
+        $parties = Party::find($key);
 
         return view('party.party.form')->with(compact('parties'));
     }
@@ -75,9 +75,9 @@ class partyController extends Controller
     /**--view profile-- */
     public function profile(Request $request){
         $key = $request->key;
-        $parties = party:: find($key);
+        $parties = Party:: find($key);
 
-        $records = order:: where('party_id',$key)->get();
+        $records = Order:: where('party_id',$key)->get();
 
         return view('party.party.profile')->with(compact('parties','records'));
     }
@@ -112,7 +112,7 @@ class partyController extends Controller
             $data['image'] = $path;
         }
 
-        $parties = party::find($key)->update($data);
+        $parties = Party::find($key)->update($data);
 
         return to_route('party')->with('success', 'Record updated successfully');
     }
@@ -125,7 +125,7 @@ class partyController extends Controller
     {
         $key = $request->key;
 
-        $party = party::destroy($key);
+        $party = Party::destroy($key);
 
         return to_route('party')->with('success', 'Record deleted successfully');
     }

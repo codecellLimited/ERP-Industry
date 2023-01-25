@@ -68,7 +68,7 @@
                                     <table>
                                         @foreach($abc as $row)
                                         <tr>
-                                            <td>{{$row->quantity}} {{\App\Models\unit::find($row->unit)->name}} </td>
+                                            <td>{{$row->quantity}} {{\App\Models\Unit::find($row->unit)->name}} </td>
                                         </tr>
                                         @endforeach
                                     </table>

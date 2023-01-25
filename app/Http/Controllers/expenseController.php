@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\expense;
+use App\Models\Expense;
 
-class expenseController extends Controller
+class ExpenseController extends Controller
 {
     /** --------------- expense data table
      * =============================================*/
     public function show()
     { 
-        $expense = expense::where('status', true)->latest()->get();
+        $expense = Expense::where('status', true)->latest()->get();
 
         return view('account.bankcash.expenses.table')->with(compact('expense'));
     }
@@ -44,7 +44,7 @@ class expenseController extends Controller
 
         $data = $request->all();
 
-        $expense = expense::create($data);
+        $expense = Expense::create($data);
 
         return to_route('expense')->with('success', 'Record created successfully');
     }
@@ -56,7 +56,7 @@ class expenseController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $expense = expense::find($key);
+        $expense = Expense::find($key);
 
         return view('account.bankcash.expenses.form')->with(compact('expense'));
     }
@@ -83,7 +83,7 @@ class expenseController extends Controller
         
         $data = $request->all();
 
-        $expense = expense::find($key)->update($data);
+        $expense = Expense::find($key)->update($data);
 
         return to_route('expense')->with('success', 'Record updated successfully');
     }
@@ -96,7 +96,7 @@ class expenseController extends Controller
     {
         $key = $request->key;
 
-        $expense = expense::destroy($key);
+        $expense = Expense::destroy($key);
 
         return to_route('expense')->with('success', 'Record deleted successfully');
     }

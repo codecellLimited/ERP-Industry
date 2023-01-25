@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /** Models */
-use App\Models\department;
+use App\Models\Department;
 
-class departmentController extends Controller
+class DepartmentController extends Controller
 {
     /** --------------- departments data table
      * =============================================*/
     public function show()
     {
-        $departments = department::where('status', true)->latest()->get();
+        $departments = Department::where('status', true)->latest()->get();
 
         return view('HR.department.table')->with(compact('departments'));
     }
@@ -39,7 +39,7 @@ class departmentController extends Controller
         $data = $request->all();
 
         
-        $department = department::create($data);
+        $department = Department::create($data);
 
         return to_route('department')->with('success', 'Record created successfully');
     }
@@ -51,7 +51,7 @@ class departmentController extends Controller
     public function edit(Request $request)
     {
         $key = $request->key;
-        $department = department::find($key);
+        $department = Department::find($key);
 
         return view('HR.department.form')->with(compact('department'));
     }
@@ -73,7 +73,7 @@ class departmentController extends Controller
         $data = $request->all();
 
         
-        $department = department::find($key)->update($data);
+        $department = Department::find($key)->update($data);
 
         return to_route('department')->with('success', 'Record updated successfully');
     }
@@ -86,7 +86,7 @@ class departmentController extends Controller
     {
         $key = $request->key;
 
-        $department = department::destroy($key);
+        $department = Department::destroy($key);
 
         return to_route('department')->with('success', 'Record deleted successfully');
     }

@@ -39,10 +39,10 @@
                 <tr>
                     <th scope="row" >{{++$key}}</th>
                     <td>{{$item->id}}</td>
-                    <td><img src="{{ asset(\App\Models\party::find($item->party_id)->image) }}" alt="" class="img-fluid m-auto d-block" width="70"></td>
-                    <td>{{\App\Models\party::find($item->party_id)->company}}</td>
+                    <td><img src="{{ asset(\App\Models\Party::find($item->party_id)->image) }}" alt="" class="img-fluid m-auto d-block" width="70"></td>
+                    <td>{{\App\Models\Party::find($item->party_id)->company}}</td>
                     
-                    <td>{{Str::upper( \App\Models\party::find($item->party_id)->name)}}</td>
+                    <td>{{Str::upper( \App\Models\Party::find($item->party_id)->name)}}</td>
                     <td>{{$item->total_price}}</td>
                     <td>{{$item->total_paid}}</td>
                     <td>{{$item->due}}</td>
