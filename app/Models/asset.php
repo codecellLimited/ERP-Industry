@@ -16,3 +16,8 @@ class asset extends Model
         'quantity'
     ];
 }
+/*
+<?php
+echo 'Code from somthing';
+?>
+*/
